@@ -159,9 +159,7 @@ header .user {
     margin: 2em;
 }
 
-.hidden {
-    display: none;
-}
+
 
 .bg-black-wall {
     width: 100%;
@@ -252,4 +250,955 @@ header .user {
 
 .form span:active {
     color: #614BC3;
+}
+
+
+/*---------------------- PAGINA PRODUCTOS ------------------------------------------------------------*/
+
+.main-productos {
+    font-family: 'Baloo Chettan';
+}
+
+.categorias {
+    background-color: #614BC3;
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+    font-family: 'Average Sans';
+    margin-bottom: 0.5em;
+}
+
+.categorias button {
+    font-family: inherit;
+    font-size: 0.5rem;
+    color: white;
+    font-weight: lighter;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.categorias button:active {
+    color: #dddddd;
+}
+
+.main-productos h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.catalogo {
+    margin: 1em 3em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+
+    .producto {
+        width: 300px;
+
+        & .imagen {
+            height: 300px;
+            background-color: #f0efed;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5em;
+
+            & img {
+                width: 250px;
+            }
+        }
+
+        & p {
+            margin: 0;
+            font-size: 0.857rem;
+            margin-left: 0.5em;
+        }
+
+        & .marca {
+            color: #9a9a9a;
+        }
+
+        & .precio {
+            color: #33BBC5;
+            font-size: 1.14rem;
+        }
+
+        & .btn-agregar {
+            background-color: #614BC3;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 0.5em 1.5em;
+            display: block;
+            margin: 1em auto;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        & .btn-agregar:hover {
+            background-color: #503ea1;
+        }
+
+        & .btn-agregar:active {
+            background-color: #493891;
+            color: #dbdbdb;
+        }
+    }
+}
+
+.popup-agregar-producto {
+    border-radius: 5px;
+    background-color: #33BBC5;
+    width: 270px;
+    position: fixed;
+    top: 3em;
+    right: 1em;
+    padding: 0.5em;
+    opacity: 90%;
+
+    & p {
+        margin: 0;
+        font-size: 0.6rem;
+        color: #232323;
+
+        & i {
+            margin-right: 0.3em;
+        }
+
+        & span {
+            font-weight: bold;
+        }
+    }
+}
+
+
+/*---------------------- PAGINA CARRITO ------------------------------------------------------------*/
+
+.main-carrito {
+
+    & .categorias {
+
+        & a {
+            font-family: inherit;
+            font-size: 0.5rem;
+            color: white;
+            font-weight: lighter;
+            text-decoration: none;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
+
+    & h1 {
+        font-family: 'Baloo Chettan';
+        margin-left: 1em;
+    }
+
+    & .paneles {
+        display: flex;
+        justify-content: space-around;
+
+        & .productos {
+            border: 1px solid #f0efed;
+            border-radius: 15px;
+            width: 40vw;
+            min-height: 400px;
+
+            & .producto {
+                display: flex;
+                margin: 0.8em;
+                padding-bottom: 0.8em;
+                border-bottom: 1px solid #f0efed;
+                
+                & .imagen {
+                    background-color: #f0efed;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 7px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 1em;
+        
+                    & img {
+                        width: 80px;
+                    }
+                }
+        
+                & .info {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+
+                    & p {
+                        margin: 0;
+                        font-size: 0.7rem;
+                    }
+        
+                    & .precio {
+                        color: #33BBC5;
+                        margin: auto auto 0 0;
+                    }
+                }
+
+                & .ux {
+                    display: flex;
+                    flex-direction: column;
+                    width: 12vw;
+
+                    & .btn-remove {
+                        border: none;
+                        background-color: transparent;
+                        color: #614BC3;
+                        font-size: 0.8rem;
+                        cursor: pointer;
+                        align-self: flex-end;
+                    }
+
+                    & .btn-remove:active {
+                        color: #2a2053;
+                    }
+
+                    & .quantity {
+                        margin: auto 0 0 0;
+                        display: flex;
+                        justify-content: end;
+                        
+                        & button {
+                            width: 40px;
+                            font-size: 0.8rem;
+                            border: none;
+                            background-color: #f0efed;
+                            cursor: pointer;
+                        }
+
+                        & button:active {
+                            background-color: #d8d8d8;
+                        }
+
+                        & .btn-sub {
+                            border-top-left-radius: 15px;
+                            border-bottom-left-radius: 15px;
+                        }
+
+                        & .btn-add {
+                            border-top-right-radius: 15px;
+                            border-bottom-right-radius: 15px;
+                        }
+
+                        & p {
+                            margin: 0;
+                            background-color: #f0efed;
+                            padding: 0 0.5em;
+                            width: 30px;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+
+        & .resumen {
+            border: 1px solid #f0efed;
+            border-radius: 15px;
+            width: 30vw;
+            font-size: 0.7rem;
+            align-self: flex-start;
+
+            & .info {
+
+                & p {
+                    margin: 1em;
+                }
+
+                & .titulo {
+                    font-weight: bold;
+                }
+
+                & .subtotal {
+                    color: #aaaaaa;
+                    display: flex;
+
+                    & span {
+                        margin-left: auto;
+                        font-weight: bold;
+                    }
+                }
+
+                & .descuento {
+                    color: #aaaaaa;
+                    display: flex;
+
+                    & span {
+                        margin-left: auto;
+                        font-weight: bold;
+                        color: #614BC3;
+                    }
+                }
+
+                & .total {
+                    font-weight: bold;
+                    border-top: 1px solid #f0efed;
+                    padding-top: 0.8em;
+                    display: flex;
+                    font-size: 0.8rem;
+
+                    & span {
+                        margin-left: auto;
+                    }
+                }
+            }
+
+            & .ux {
+                padding: 0.4em 1em 3em 1em;
+
+                & a {
+                    width: 100%;
+                    background-color: #614BC3;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 50px;
+                    padding: 0.5em 0;
+                    margin-top: 1em;
+                    font-size: 0.7rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+
+                    & i {
+                        margin-left: 0.2em;
+                        font-size: 1rem;
+                    }
+                }
+
+                & a:active {
+                    background-color:#493891;
+                }
+            }
+        }
+    }
+}
+
+
+/*---------------------- PAGINA PEDIDO ------------------------------------------------------------*/
+
+.main-pedido {
+
+    & .categorias {
+
+        & a {
+            font-family: inherit;
+            font-size: 0.5rem;
+            color: white;
+            font-weight: lighter;
+            text-decoration: none;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
+
+    & h1 {
+        font-family: 'Baloo Chettan';
+        margin-left: 1em;
+    }
+
+    & .paneles {
+        margin: 0 3em 1em 3em;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        justify-content: center;
+        font-family: 'Average Sans';
+
+        & .usuario {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            width: 855px;
+
+            & .titulo {
+                display: flex;
+                gap: 0.5em;
+                align-items: center;
+                
+
+                & .icono {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #614BC3;
+
+                    & i {
+                        color: white;
+                        font-size: 0.8rem;
+                    }
+                }
+
+                & h1 {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    font-family: inherit;
+                    color: #614BC3;
+                }
+            }
+
+            & .identificacion {
+                width: 400px;
+                border-radius: 15px;
+                background-color: #F0EFED;
+                padding: 0.7em;
+                box-sizing: border-box;
+                align-self: flex-start;
+
+                & p {
+                    margin: 0.5em;
+                    font-size: 0.6rem;
+                    color: #848484;
+                }
+
+                & .ux {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 13px;
+                
+                    & .dato-input {
+                        display: flex;
+                        flex-direction: column;
+                        font-size: 0.6rem;
+                        color: #b4b4b4;
+                        margin: 0.5em 0;
+                        width: 48%;
+
+                        & input {
+                            padding: 0.5em;
+                            border: 1px solid #b4b4b4;
+                            border-radius: 7px;
+                            color: #848484;
+                        }
+
+                        & input:focus {
+                            outline: none;
+                            box-shadow: 0 0 10px #614BC3;
+                        }
+
+                        & select {
+                            padding: 0.45em;
+                            border: 1px solid #b4b4b4;
+                            border-radius: 7px;
+                            color: #848484;
+                        }
+
+                        & select:focus {
+                            outline: none;
+                            box-shadow: 0 0 10px #614BC3;
+                        }
+                    }
+
+                    & .whole {
+                        width: 100%;
+                    }
+                }
+
+                & button {
+                    color: #614BC3;
+                    font-size: 0.7rem;
+                    width: 100%;
+                    border: none;
+                    background-color: transparent;
+                    margin: 1.5em 0 0.5em 0;
+                    cursor: pointer;
+                }
+
+                & button:active {
+                    color: #2a2053;
+                }
+            }
+
+            & .envio {
+                width: 400px;
+                border-radius: 15px;
+                background-color: #F0EFED;
+                padding: 0.7em;
+                box-sizing: border-box;
+
+                & p {
+                    margin: 0.5em 0;
+                    text-align: center;
+                    font-size: 0.7rem;
+                    color: #848484;
+                }
+
+                & .metodos {
+                    display: flex;
+                    justify-content: space-evenly;
+    
+                    & .metodo {
+                        border-radius: 5px;
+                        width: 47%;
+                        background-color: white;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 0.6em 0 0.3em 0;
+                        cursor: pointer;
+    
+                        & p {
+                            font-size: 0.57rem;
+                            color: #9a9a9a;
+                        }
+                    }
+    
+                    & .metodo:active {
+                        box-shadow: 0 0 10px #614BC3;
+                    }
+                }
+
+                & .ui-envio {
+
+                    & p {
+                        text-align: start;
+                        font-size: 0.57rem;
+                        word-spacing: 5px;
+                        margin: 1em 0;
+                    }
+
+                    & .direccion {
+                        display: flex;
+                        background-color: white;
+                        padding: 0.5em 0;
+                        border-radius: 5px;
+
+                        & i {
+                            color: #614BC3;
+                            font-size: 1.5rem;
+                            margin-left: 1em;
+                        }
+
+                        & .info {
+                            display: flex;
+                            flex-direction: column;
+                            margin-left: 0.5em;
+
+                            & .titulo {
+                                font-weight: bold;
+                                color: #232323;
+                            }
+
+                            & p {
+                                margin: 0;
+                                word-spacing: 0;
+                            }
+
+                            & button {
+                                color: #614BC3;
+                                background-color: transparent;
+                                font-family: inherit;
+                                text-align: start;
+                                margin-top: 0.5em;
+                                border: none;
+                                cursor: pointer;
+                                margin-right: auto;
+                            }
+
+                            & button:active {
+                                color: #2a2053;
+                            }
+                        }
+                    }
+
+                    & .fecha {
+                        height: 100px;
+                        border-radius: 5px;
+                        margin: 0.5em 0;
+                        background-color: white;
+                        padding: 0.5em 0;
+
+                        & button {
+                            color: #614BC3;
+                            border: 1px solid #614BC3;
+                            border-radius: 5px;
+                            font-size: 0.6rem;
+                            background-color: transparent;
+                            padding: 0.4em 1.1em;
+                            display: block;
+                            margin: 0 auto;
+                            cursor: pointer;
+
+                            & i {
+                                margin-left: 0.5em;
+                            }
+                        }
+
+                        & button:active {
+                            color: #2a2053;
+                            border: 1px solid #2a2053;
+                        }
+                    }
+                }
+
+                & .recojo {
+
+                    & p {
+                        color: #232323;
+                        font-size: 0.6rem;
+                        text-align: start;
+                    }
+
+                    & .datos {
+                        color: #9a9a9a;
+                        font-size: 0.5rem;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #cecece;
+                        border-radius: 5px;
+                        padding: 0.3em 0.7em;
+
+                        & i {
+                            font-size: 0.8rem;
+                            color: #614BC3;
+                        }
+
+                        & .cambiar {
+                            color: #614BC3;
+                            cursor: pointer;
+                            margin-left: 0.5em;
+                        }
+
+                        & .cambiar:active {
+                            color: #2a2053;
+                        }
+                    }
+                }
+
+                & .btn-pago {
+                    background-color: #614BC3;
+                    width: 100%;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 0.7rem;
+                    padding: 0.55em 0;
+                    margin: 1em 0;
+                    cursor: pointer;
+    
+                    & i {
+                        margin-left: 0.5em;
+                    }
+                }
+    
+                & .btn-pago:active {
+                    background-color: #503ea1;
+                    color:#F0EFED;
+                }
+            }
+
+            & .pago {
+                width: 855px;
+                border-radius: 15px;
+                background-color: #F0EFED;
+                padding: 0.7em;
+                box-sizing: border-box;
+            
+                & .secciones {
+                    display: flex;
+                    justify-content: center;
+                    gap: 2em;
+                    padding: 1em 0;
+
+                    & .metodo {
+                        width: 25%;
+                        display: flex;
+                        background-color: #e7e7e7;
+                        justify-content: center;
+                        padding: 0.3em 0.5em;
+                        border-radius: 5px;
+                        gap: 0.5em;
+                        align-self: flex-start;
+
+                        & p {
+                            margin: 0;
+                            font-size: 0.71rem;
+                            color: #8a8a8a;
+                        }
+
+                        & .icono {
+                            background-color: #cecece;
+                            width: 30px;
+                            height: 30px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+
+                            & i {
+                                font-size: 0.65rem;
+                            }
+                        }
+                    }
+
+                    & .info {
+                        border-radius: 5px;
+                        width: 55%;
+                        background-color: #e7e7e7;
+                        padding: 0.5em;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5em;
+
+                        & .dato-input {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.3em;
+
+                            & label {
+                                font-size: 0.5rem;
+                                color: #848484;
+                            }
+
+                            & p {
+                                margin: 0;
+                                font-size: 0.5rem;
+                                color: #848484;
+                            }
+
+                            & input {
+                                border-radius: 5px;
+                                border: 1px solid #9a9a9a;
+                                padding: 0.5em 1em;
+                                color: #9a9a9a;
+                            }
+
+                            & input:focus {
+                                outline: none;
+                                box-shadow: 0 0 10px #614BC3;
+                            }
+
+                            & .small {
+                                width: 13.5%;
+                            }
+                            
+                            & .tipo-tarjeta {
+                                display: flex;
+                                align-items: center;
+                                gap: 0.5em;
+                                margin-left: 0.5em;
+                            }
+
+                            & .listas {
+                                display: flex;
+                                gap: 0.5em;
+
+                                & select {
+                                    border-radius: 5px;
+                                    border: 1px solid #9a9a9a;
+                                    padding: 0.5em 1em;
+                                    color: #9a9a9a;
+                                    width: 20%;
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            
+        }
+
+        & .resumen {
+            min-width: 400px;
+            width: 400px;
+            align-self: flex-start;
+
+            & .titulo {
+                display: flex;
+                gap: 0.5em;
+                align-items: center;
+                margin-bottom: 0.5em;
+                
+
+                & .icono {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #614BC3;
+
+                    & i {
+                        color: white;
+                        font-size: 0.8rem;
+                    }
+                }
+
+                & h1 {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    font-family: inherit;
+                    font-weight: lighter;
+                    color: #848484;
+                }
+            }
+
+            & .productos {
+                
+                & .producto {
+                    display: flex;
+                    margin: 0 1em;
+                    padding-bottom: 0.8em;
+                    align-items: center;
+                    
+                    & .imagen {
+                        background-color: #f0efed;
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 7px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-right: 1em;
+            
+                        & img {
+                            width: 50px;
+                        }
+                    }
+            
+                    & .info {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.1em;
+    
+                        & p {
+                            margin: 0;
+                            font-size: 0.7rem;
+                        }
+
+                        & .nombre {
+                            color: #8a8a8a;
+                        }
+
+                        & .cantidad {
+                            background-color: #614BC3;
+                            color: white;
+                            margin: 0 auto 0 0;
+                            padding: 0.1em 2em;
+                            border-radius: 5px;
+                        }
+            
+                        & .precio {
+                            color: #614BC3;
+                            margin: auto auto 0 0;
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+            }
+
+            & .total-resumen {
+                border-radius: 5px;
+                padding: 0.6em;
+                margin: 1em 0 1.5em 0;
+                box-shadow: 0 0 10px #bbbbbb;
+
+                & p{
+                    margin: 0;
+                    font-family: 'Baloo Chettan';
+                    font-weight: bold;
+                    font-size: 0.75rem;
+                    color: #aaaaaa;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 0.3em;
+
+                    & span {
+                        font-weight: lighter;
+                    }
+
+                    & .color {
+                        color: #614BC3;
+                    }
+                }
+
+                & .total {
+                    border-top: 1px solid #aaaaaa;
+                    padding-top: 0.5em;
+                    & span {
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            & button {
+                width: 100%;
+                border-radius: 5px;
+                font-size: 0.7rem;
+                padding: 0.55em 0;
+                margin: 0.5em 0;
+                cursor: pointer;
+
+                & i {
+                    margin-right: 0.5em;
+                }
+            }
+
+            & .btn-finalizar {
+                background-color: #614BC3;
+                color: white;
+                border: none;
+            }
+
+            & .btn-finalizar:active {
+                background-color: #503ea1;
+                color:#F0EFED;
+            }
+
+            & .btn-regresar {
+                background-color: transparent;
+                color: #614BC3;
+                border: 1px solid #dddddd;
+            }
+
+            & .btn-regresar:active {
+                color:#2a2053;
+            }
+        }
+    }
+}
+
+.popup-star {
+    font-family: 'Baloo Chettan';
+    color: #787878;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+
+    & h1 {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    & p {
+        margin: 0;
+        font-size: 0.7rem;
+    }
+}
+
+
+.hidden {
+    display: none;
 }

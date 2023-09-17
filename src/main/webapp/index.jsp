@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : Sep 8, 2023, 12:42:16 PM
-    Author     : aferz
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,71 +11,71 @@
     </head>
     <body>
         <header>
-        <div class="header-left">
-            <div class="logo-contenedor">
-                <img src="assets/img/Marisol_Logo.png" alt="logo Marisol">
+            <div class="header-left">
+                <div class="logo-contenedor">
+                    <a href="index.jsp" id="logo-header"><img src="assets/img/Marisol_Logo.png" alt="logo Marisol"></a>
+                </div>
+                <a href="productos.jsp">Productos<i class="bi bi-caret-down-fill"></i></a>
+                <a href="">Ofertas</a>
             </div>
-            <a href="">Productos<i class="bi bi-caret-down-fill"></i></a>
-            <a href="">Ofertas</a>
+            <div class="header-right">
+                <div class="buscador">
+                    <a href=""><i class="bi bi-search"></i></a>
+                    <input type="text" name="buscador-txt" placeholder="Buscar productos...">
+                </div>
+                <a href="carrito.jsp" class="carrito" id="carrito-header"><i class="bi bi-cart2"></i></a>
+                <a href="" class="user"><i class="bi bi-person-circle"></i></a>
+            </div>
+        </header>
+        <main>
+            <section class="landing">
+                <div class="titles">
+                    <h1>LOS MEJORES PRODUCTOS<br>MÁS CERCA DE TI</h1>
+                    <p>Olvídate de las colas y disfruta de adquirir todo lo que necesitas<br>desde la tranquilidad de tu hogar</p>
+                    <button class="btn-comprar" data-comprar="comprar">Comprar Ahora</button>
+                </div>
+                <img class="señora-imagen" src="assets/img/señora_alpha.png" alt="señora">
+                <div class="banner">
+                    <div class="banner-img">
+                        <img src="assets/img/pro_sanfernando.png" alt="logo san fernando">
+                    </div>
+                    <div class="banner-img">
+                        <img src="assets/img/pro_costeño.png" alt="logo costeño">
+                    </div>
+                    <div class="banner-img">
+                        <img src="assets/img/pro_gloria.png" alt="logo gloria">
+                    </div>
+                    <div class="banner-img">
+                        <img src="assets/img/pro_bimbo.png" alt="logo bimbo">
+                    </div>
+                    <div class="banner-img">
+                        <img src="assets/img/pro_donvittorio.png" alt="logo Don Vittorio">
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div class="bg-black-wall hidden" id="bg-black-wall" data-black="black">
+
         </div>
-        <div class="header-right">
-            <div class="buscador">
-                <a href=""><i class="bi bi-search"></i></a>
-                <input type="text" name="buscador-txt" placeholder="Buscar productos...">
-            </div>
-            <a href="" class="carrito"><i class="bi bi-cart2"></i></a>
-            <a href="" class="user"><i class="bi bi-person-circle"></i></a>
+        <div class="popup popup-login hidden" id="popup-login">
+            <form action="" class="form">
+                <h1>INICIO DE SESIÓN</h1>
+                <input type="text" placeholder="Correo">
+                <input type="password" placeholder="Contraseña">
+                <button>INGRESAR</button>
+                <p>¿No tienes cuenta? <span data-registrate="registrate">Regístrate</span></p>
+            </form>
         </div>
-    </header>
-    <main>
-        <section class="landing">
-            <div class="titles">
-                <h1>LOS MEJORES PRODUCTOS<br>MÁS CERCA DE TI</h1>
-                <p>Olvídate de las colas y disfruta de adquirir todo lo que necesitas<br>desde la tranquilidad de tu hogar</p>
-                <button class="btn-comprar" data-comprar="comprar">Comprar Ahora</button>
-            </div>
-            <img class="señora-imagen" src="assets/img/señora_alpha.png" alt="señora">
-            <div class="banner">
-                <div class="banner-img">
-                    <img src="assets/img/pro_sanfernando.png" alt="logo san fernando">
-                </div>
-                <div class="banner-img">
-                    <img src="assets/img/pro_costeño.png" alt="logo costeño">
-                </div>
-                <div class="banner-img">
-                    <img src="assets/img/pro_gloria.png" alt="logo gloria">
-                </div>
-                <div class="banner-img">
-                    <img src="assets/img/pro_bimbo.png" alt="logo bimbo">
-                </div>
-                <div class="banner-img">
-                    <img src="assets/img/pro_donvittorio.png" alt="logo Don Vittorio">
-                </div>
-            </div>
-        </section>
-    </main>
-    <div class="bg-black-wall hidden" id="bg-black-wall">
-        
-    </div>
-    <div class="popup popup-login hidden" id="popup-login">
-        <form action="" class="form">
-            <h1>INICIO DE SESIÓN</h1>
-            <input type="text" placeholder="Correo">
-            <input type="password" placeholder="Contraseña">
-            <button>INGRESAR</button>
-            <p>¿No tienes cuenta? <span data-registrate="registrate">Regístrate</span></p>
-        </form>
-    </div>
-    <div class="popup popup-registrate hidden" id="popup-registrate">
-        <form action="" class="form">
-            <h1>REGISTRO</h1>
-            <input type="text" placeholder="Ingrese su nombre">
-            <input type="text" placeholder="Ingrese apellido">
-            <input type="text" placeholder="Ingrese correo">
-            <input type="password" placeholder="Ingrese contraseña">
-            <button>REGISTRATE</button>
-        </form>
-    </div>
-    <script src="script.js"></script>
+        <div class="popup popup-registrate hidden" id="popup-registrate">
+            <form action="" class="form">
+                <h1>REGISTRO</h1>
+                <input type="text" placeholder="Ingrese su nombre">
+                <input type="text" placeholder="Ingrese apellido">
+                <input type="text" placeholder="Ingrese correo">
+                <input type="password" placeholder="Ingrese contraseña">
+                <button>REGISTRATE</button>
+            </form>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>
