@@ -1,0 +1,10 @@
+com\utp\bodegajavaweb\controlador\ProductoServlet.class
+com\utp\bodegajavaweb\controlador\Validar.class
+com\utp\bodegajavaweb\controlador\Controlador.class
+com\utp\bodegajavaweb\modelo\Usuario.class
+com\utp\bodegajavaweb\resources\JavaEE8Resource.class
+com\utp\bodegajavaweb\modelo\UsuarioDAO.class
+com\utp\bodegajavaweb\modelo\ProductoMemoryData.class
+com\utp\bodegajavaweb\config\Conexion.class
+com\utp\bodegajavaweb\JAXRSConfiguration.class
+com\utp\bodegajavaweb\entidades\Producto.class
