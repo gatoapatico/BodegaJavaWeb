@@ -35,4 +35,27 @@ public class UsuarioModel {
         }
         return usuario;
     }
+    
+    public boolean registrar(String nombre, String apellido, String correo, String password) {
+        String sqlValidation = "SELECT * FROM usuarios WHERE correo = ? LIMIT 1";
+        try {
+            PreparedStatement validacion = connection.prepareStatement(sqlValidation);
+            validacion.setString(1, correo);
+            ResultSet validationResult = validacion.executeQuery();
+            if (validationResult.next()) {
+                return false;
+            } else {
+                String sql = "INSERT INTO usuarios VALUES (null, ?, ?, ?, ?)";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, nombre);
+                statement.setString(2, apellido);
+                statement.setString(3, correo);
+                statement.setString(4, password);
+                return statement.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
