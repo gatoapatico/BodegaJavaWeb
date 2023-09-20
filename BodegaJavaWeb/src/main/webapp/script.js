@@ -1,8 +1,8 @@
 document.addEventListener('click', function(e){
     if(e.target.dataset.black){
-        document.getElementById('logo-header').click();
+        document.getElementById('productos-header').click();
     }
-    else if(e.target.dataset.comprar){
+    else if(e.target.dataset.login){
         document.getElementById('bg-black-wall').classList.toggle('hidden');
         document.getElementById('popup-login').classList.toggle('hidden');
     }

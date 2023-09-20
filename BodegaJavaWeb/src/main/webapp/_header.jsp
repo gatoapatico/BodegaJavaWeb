@@ -7,9 +7,14 @@
         <div class="logo-contenedor">
             <a href="index.jsp" id="logo-header"><img src="assets/img/Marisol_Logo.png" alt="logo Marisol"></a>
         </div>
-        <a href="ProductoController">Productos<i class="bi bi-caret-down-fill"></i></a>
+        <a href="ProductoController" id="productos-header">Productos<i class="bi bi-caret-down-fill"></i></a>
         <% if(usuario != null) {%>
-            <a>Bienvenido <%=usuario.getNombre()%>!</a>
+            <% if(usuario.getCorreo().equals("admin@gmail.com")) {%>
+                <a href="adminHome.jsp">Ir a pagina de Administración</a>
+            <% } else{ %>
+                <a class="nombre-usuario">Bienvenido <%=usuario.getNombre()%>!</a>
+            <% } %>
+            <a href="UsuarioController?action=logout">Cerrar Sesión</a>
         <% } %>
     </div>
     <div class="header-right">

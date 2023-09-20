@@ -17,7 +17,7 @@
                 <div class="titles">
                     <h1>LOS MEJORES PRODUCTOS<br>MÁS CERCA DE TI</h1>
                     <p>Olvídate de las colas y disfruta de adquirir todo lo que necesitas<br>desde la tranquilidad de tu hogar</p>
-                    <button class="btn-comprar" data-comprar="comprar">Comprar Ahora</button>
+                    <a href="ProductoController"><button class="btn-comprar">Comprar Ahora</button></a>
                 </div>
                 <img class="señora-imagen" src="assets/img/señora_alpha.png" alt="señora">
                 <div class="banner">
@@ -46,8 +46,8 @@
             <form action="UsuarioController" class="form" method="POST">
                 <input hidden type="text" name="action" value="login">
                 <h1>INICIO DE SESIÓN</h1>
-                <input type="text" placeholder="Correo" name="correo">
-                <input type="password" placeholder="Contraseña" name="password">
+                <input type="email" placeholder="Correo" name="correo" required>
+                <input type="password" placeholder="Contraseña" name="password" required>
                 <button type="submit">INGRESAR</button>
                 <p>¿No tienes cuenta? <span data-registrate="registrate">Regístrate</span></p>
             </form>
@@ -55,12 +55,12 @@
         <div class="popup popup-registrate hidden" id="popup-registrate">
             <form action="" class="form">
                 <h1>REGISTRO</h1>
-                <input type="text" placeholder="Ingrese su nombre">
-                <input type="text" placeholder="Ingrese apellido">
-                <input type="text" placeholder="Ingrese correo">
-                <input type="password" placeholder="Ingrese contraseña">
+                <input type="text" placeholder="Ingrese su nombre" required>
+                <input type="text" placeholder="Ingrese apellido" required>
+                <input type="email" placeholder="Ingrese correo" required>
+                <input type="password" placeholder="Ingrese contraseña" required>
                 <button>REGISTRATE</button>
             </form>
-        </div>      
+        </div>   
 <%@include file="_footer.jsp" %>
         
