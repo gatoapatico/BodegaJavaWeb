@@ -54,6 +54,7 @@
                     <p>El usuario ingresado <span>no existe!</span></p>
                 </div>
             <% } %>
+            
         </div>
         <div class="bg-black-wall hidden" id="bg-black-wall" data-black="black">
 
@@ -69,12 +70,13 @@
             </form>
         </div>
         <div class="popup popup-registrate hidden" id="popup-registrate">
-            <form action="" class="form">
+            <form action="UsuarioController" class="form" method="POST">
+                <input hidden type="text" name="action" value="register">
                 <h1>REGISTRO</h1>
-                <input type="text" placeholder="Ingrese su nombre" required>
-                <input type="text" placeholder="Ingrese apellido" required>
-                <input type="email" placeholder="Ingrese correo" required>
-                <input type="password" placeholder="Ingrese contraseña" required>
+                <input type="text" placeholder="Ingrese su nombre" name="nombre" required>
+                <input type="text" placeholder="Ingrese apellido" name="apellido" required>
+                <input type="email" placeholder="Ingrese correo" name="correo" required>
+                <input type="password" placeholder="Ingrese contraseña" name="password" required>
                 <button>REGISTRATE</button>
             </form>
         </div>

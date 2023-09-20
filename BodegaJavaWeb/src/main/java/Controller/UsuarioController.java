@@ -41,10 +41,11 @@ public class UsuarioController extends HttpServlet {
         
         String action = request.getParameter("action");
         
+        String correo = request.getParameter("correo");
+        String pass = request.getParameter("password");
+        
         switch(action){
             case "login":
-                String correo = request.getParameter("correo");
-                String pass = request.getParameter("password");
                 Usuario usuario = model.login(correo, pass);
 
                 if(usuario.getCorreo() != null){
@@ -54,6 +55,16 @@ public class UsuarioController extends HttpServlet {
                 }
                 else {
                     request.getRequestDispatcher("productos.jsp?login=fail").forward(request, response);
+                }
+                break;
+            case "register":
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
+                if(model.registrar(nombre, apellido, correo, pass)){
+                    request.getRequestDispatcher("productos.jsp").forward(request, response);
+                }
+                else{
+                    request.getRequestDispatcher("productos.jsp").forward(request, response);
                 }
                 break;
         }
