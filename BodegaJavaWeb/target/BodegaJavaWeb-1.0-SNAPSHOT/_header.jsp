@@ -1,14 +1,15 @@
+<%@page import="Entity.Usuario"%>
 <%
-    String nombre = "Alvaro";
+    Usuario usuario = (Usuario)session.getAttribute("usuario");
 %>
 <header>
     <div class="header-left">
         <div class="logo-contenedor">
             <a href="index.jsp" id="logo-header"><img src="assets/img/Marisol_Logo.png" alt="logo Marisol"></a>
         </div>
-        <a href="ProductoServlet">Productos<i class="bi bi-caret-down-fill"></i></a>
-        <% if(nombre != null) {%>
-            <a>Bienvenido <%=nombre%></a>
+        <a href="ProductoController">Productos<i class="bi bi-caret-down-fill"></i></a>
+        <% if(usuario != null) {%>
+            <a>Bienvenido <%=usuario.getNombre()%>!</a>
         <% } %>
     </div>
     <div class="header-right">
