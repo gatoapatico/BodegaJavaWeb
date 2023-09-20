@@ -1,6 +1,6 @@
 
+<%@page import="Entity.Producto"%>
 <%@page import="java.util.List"%>
-<%@page import="com.utp.bodegajavaweb.entidades.Producto"%>
 <%
     List<Producto> productos = (List<Producto>) request.getSession().getAttribute("listaProductos");
 %>
@@ -32,7 +32,7 @@
                 <% for(Producto producto : productos) {%>
                     <div class="producto">
                         <div class="imagen">
-                            <img src="assets/img/productos/<%=producto.getRutaImagen()%>" alt="<%=producto.getDescripcion()%>">
+                            <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
                         </div>
                         <p class="hidden" id="categoria"><%=producto.getCategoria()%></p>
                         <p class="nombre"><%=producto.getNombre()%></p>

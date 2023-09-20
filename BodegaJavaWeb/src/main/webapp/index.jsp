@@ -12,8 +12,6 @@
     <body>
         <%@include file="_header.jsp" %>
         
-        <% out.println("Hola!!"); %>
-        
         <main>
             <section class="landing">
                 <div class="titles">
@@ -45,7 +43,8 @@
 
         </div>
         <div class="popup popup-login hidden" id="popup-login">
-            <form action="Validar" class="form" method="POST">
+            <form action="UsuarioController" class="form" method="POST">
+                <input hidden type="text" name="action" value="login">
                 <h1>INICIO DE SESIÓN</h1>
                 <input type="text" placeholder="Correo" name="correo">
                 <input type="password" placeholder="Contraseña" name="password">
