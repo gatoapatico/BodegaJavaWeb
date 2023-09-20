@@ -12,14 +12,14 @@
         <%@include file="_header.jsp" %>
         <main class="main-carrito">
             <nav class="categorias">
-                <a href="ProductoServlet">CARNES, AVES Y PESCADOS</a>
-                <a href="ProductoServlet">CONGELADOS</a>
-                <a href="ProductoServlet">LACTEOS</a>
-                <a href="ProductoServlet">FRUTAS Y VERDURAS</a>
-                <a href="ProductoServlet">PANADERIA Y PASTELERIA</a>
-                <a href="ProductoServlet">BEBIDAS</a>
-                <a href="ProductoServlet">CUIDADO PERSONAL</a>
-                <a href="ProductoServlet">LIMPIEZA</a>
+                <a href="ProductoController">CARNES, AVES Y PESCADOS</a>
+                <a href="ProductoController">CONGELADOS</a>
+                <a href="ProductoController">LACTEOS</a>
+                <a href="ProductoController">FRUTAS Y VERDURAS</a>
+                <a href="ProductoController">PANADERIA Y PASTELERIA</a>
+                <a href="ProductoController">BEBIDAS</a>
+                <a href="ProductoController">CUIDADO PERSONAL</a>
+                <a href="ProductoController">LIMPIEZA</a>
             </nav>
             <h1>TU CARRITO</h1>
             <div class="paneles">

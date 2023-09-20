@@ -24,7 +24,15 @@ public class UsuarioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String action = (String)request.getParameter("action");
+        
+        switch(action){
+            case "logout":
+                request.getSession().removeAttribute("usuario");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
+        }
     }
 
     @Override
@@ -42,10 +50,10 @@ public class UsuarioController extends HttpServlet {
                 if(usuario.getCorreo() != null){
                     HttpSession misesion = request.getSession();
                     misesion.setAttribute("usuario", usuario);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("productos.jsp").forward(request, response);
                 }
                 else {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("productos.jsp?login=fail").forward(request, response);
                 }
                 break;
         }

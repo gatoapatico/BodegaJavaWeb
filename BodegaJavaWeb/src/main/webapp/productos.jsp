@@ -38,13 +38,45 @@
                         <p class="nombre"><%=producto.getNombre()%></p>
                         <p class="marca"><%=producto.getProveedor()%></p>
                         <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
+                        <%if(usuario != null) {%>
                         <button class="btn-agregar" data-agregar="agregar" data-productoid="<%=producto.getId()%>">AGREGAR</button>
+                        <% } else{ %>
+                        <button class="btn-agregar" data-login="login" data-productoid="<%=producto.getId()%>">AGREGAR</button>
+                        <% } %>
                     </div>
                 <% } %>
             </div>
         </main>
         <div class="fixed" id="fixed">
             <!-- AQUÍ VAN LOS POPUPS CUANDO SE AGREGA UN PRODUCTO AL CARRITO -->
-        </div>       
+            <% if(request.getParameter("login") != null) { %>
+                <div class="popup-login-fail">
+                    <p>El usuario ingresado <span>no existe!</span></p>
+                </div>
+            <% } %>
+        </div>
+        <div class="bg-black-wall hidden" id="bg-black-wall" data-black="black">
+
+        </div>
+        <div class="popup popup-login hidden" id="popup-login">
+            <form action="UsuarioController" class="form" method="POST">
+                <input hidden type="text" name="action" value="login">
+                <h1>INICIO DE SESIÓN</h1>
+                <input type="email" placeholder="Correo" name="correo" required>
+                <input type="password" placeholder="Contraseña" name="password" required>
+                <button type="submit">INGRESAR</button>
+                <p>¿No tienes cuenta? <span data-registrate="registrate">Regístrate</span></p>
+            </form>
+        </div>
+        <div class="popup popup-registrate hidden" id="popup-registrate">
+            <form action="" class="form">
+                <h1>REGISTRO</h1>
+                <input type="text" placeholder="Ingrese su nombre" required>
+                <input type="text" placeholder="Ingrese apellido" required>
+                <input type="email" placeholder="Ingrese correo" required>
+                <input type="password" placeholder="Ingrese contraseña" required>
+                <button>REGISTRATE</button>
+            </form>
+        </div>
             
 <%@include file="_footer.jsp" %>
