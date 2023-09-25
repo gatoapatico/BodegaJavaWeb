@@ -42,4 +42,7 @@ public class ProductoController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public Producto obtenerProducto(int id) {
+        return (model.obtenerProducto(id) != null) ? model.obtenerProducto(id) : null;
+    }
 }

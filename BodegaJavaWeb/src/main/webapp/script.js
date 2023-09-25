@@ -18,22 +18,37 @@ document.addEventListener('click', function(e){
         document.getElementById('carrito-header').click();
     }
     else if(e.target.dataset.agregar){
-        const nombre = e.target.parentNode.querySelector('.nombre').textContent;
-        const precio = e.target.parentNode.querySelector('.precio').textContent;
 
-        const newEl = document.createElement('div');
-        newEl.classList.add('popup-agregar-producto');
-        newEl.innerHTML = `
-            <p>
-                <i class="bi bi-cart-check-fill"></i>
-                Se agrego <span>${nombre}</span><br>(<span>${precio}</span>) al carrito de compras!
-            </p>
-        `;
-        document.getElementById('fixed').append(newEl);
+        const idProducto = e.target.dataset.productoid;
 
-        setTimeout(function(){
-            newEl.remove();
-        }, 3000);
+        $.ajax({
+            url: 'CarritoController',
+            type: 'POST',
+            data: { id: idProducto },
+            success: function() {
+                const nombre = e.target.parentNode.querySelector('.nombre').textContent;
+                const precio = e.target.parentNode.querySelector('.precio').textContent;
+
+                const newEl = document.createElement('div');
+                newEl.classList.add('popup-agregar-producto');
+                newEl.innerHTML = `
+                    <p>
+                        <i class="bi bi-cart-check-fill"></i>
+                        Se agrego <span>${nombre}</span><br>(<span>${precio}</span>) al carrito de compras!
+                    </p>
+                `;
+                document.getElementById('fixed').append(newEl);
+
+                setTimeout(function(){
+                    newEl.remove();
+                }, 3000);
+
+            },
+            error: function() {
+                console.log("No se agregó nada al carrito!");
+            }
+        });
+
     }
     else if(e.target.dataset.categoria){
         const categoria = e.target.dataset.categoria;

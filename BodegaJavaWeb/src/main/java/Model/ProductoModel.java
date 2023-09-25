@@ -43,4 +43,29 @@ public class ProductoModel {
         }
         return productos;
     }
+
+    public Producto obtenerProducto(int id) {
+        String sql = "SELECT * FROM productos WHERE id = ? LIMIT 1";
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, Integer.toString(id));
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                Producto producto = new Producto();
+                producto.setId(resultSet.getInt("id"));
+                producto.setNombre(resultSet.getString("nombre"));
+                producto.setCategoria(resultSet.getString("categoria"));
+                producto.setImagen(resultSet.getString("imagen"));
+                producto.setDescripcion(resultSet.getString("descripcion"));
+                producto.setProveedor(resultSet.getString("proveedor"));
+                producto.setPrecio(resultSet.getDouble("precio"));
+                producto.setStock(resultSet.getInt("stock"));
+                return producto;
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
