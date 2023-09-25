@@ -24,7 +24,7 @@ document.addEventListener('click', function(e){
         $.ajax({
             url: 'CarritoController',
             type: 'POST',
-            data: { id: idProducto },
+            data: { action: "agregar", id: idProducto },
             success: function() {
                 const nombre = e.target.parentNode.querySelector('.nombre').textContent;
                 const precio = e.target.parentNode.querySelector('.precio').textContent;
@@ -66,14 +66,44 @@ document.addEventListener('click', function(e){
     else if(e.target.dataset.sub){
         const quantityValue = e.target.parentNode.querySelector('.num').textContent;
         if(quantityValue > 1){
-            e.target.parentNode.querySelector('.num').textContent = quantityValue - 1;
+            $.ajax({
+                url: 'CarritoController',
+                type: 'POST',
+                data: { action: "sub", id: e.target.dataset.id },
+                success: function() {
+                    e.target.parentNode.querySelector('.num').textContent = quantityValue - 1;
+                },
+                error: function() {
+                    console.log("Sucedió un error!");
+                }
+            });
         }
     }
     else if(e.target.dataset.add){
-        const quantityValue = e.target.parentNode.querySelector('.num').textContent;
-        e.target.parentNode.querySelector('.num').textContent = parseInt(quantityValue) + 1;
+        $.ajax({
+            url: 'CarritoController',
+            type: 'POST',
+            data: { action: "add", id: e.target.dataset.id },
+            success: function () {
+                const quantityValue = e.target.parentNode.querySelector('.num').textContent;
+                e.target.parentNode.querySelector('.num').textContent = parseInt(quantityValue) + 1;
+            },
+            error: function () {
+                console.log("Sucedió un error!");
+            }
+        });
     }
     else if(e.target.dataset.remove){
-        e.target.parentNode.parentNode.parentNode.remove();
+        $.ajax({
+            url: 'CarritoController',
+            type: 'POST',
+            data: { action: "remove", id: e.target.dataset.id },
+            success: function() {
+                e.target.parentNode.parentNode.parentNode.remove();
+            },
+            error: function() {
+                console.log("Sucedió un error!");
+            }
+        });
     }
 });
