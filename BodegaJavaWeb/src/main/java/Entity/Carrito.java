@@ -24,7 +24,7 @@ public class Carrito {
         return -1;
     }
 
-    public void add(CarritoItem item) {
+    public void agregar(CarritoItem item) {
         int currentIndex = contieneItem(item.getId());
         if(currentIndex >= 0){
             int currentCantidad = items.get(currentIndex).getCantidad();
@@ -35,12 +35,26 @@ public class Carrito {
         }
     }
 
-    public void sub(CarritoItem item) {
-        int currentIndex = contieneItem(item.getId());
-        if(currentIndex > 0){
-            int currentCantidad = items.get(currentIndex).getCantidad();
-            if(currentCantidad > 0) {
-                items.get(currentIndex).setCantidad(currentCantidad - 1);
+    public void add(int idProducto) {
+        for(CarritoItem item : items) {
+            if(item.getId() == idProducto){
+                item.setCantidad(item.getCantidad() + 1);
+            }
+        }
+    }
+
+    public void sub(int idProducto) {
+        for(CarritoItem item : items) {
+            if(item.getId() == idProducto){
+                item.setCantidad(item.getCantidad() - 1);
+            }
+        }
+    }
+
+    public void remove(int idProducto) {
+        for(int i = 0; i < items.size(); i++) {
+            if(items.get(i).getId() == idProducto){
+                items.remove(i);
             }
         }
     }

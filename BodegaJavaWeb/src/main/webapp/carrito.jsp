@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="styles.css">
         <!-- ICON CDN (BOOTSTRAP ICON) -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <%-- LIBRERÍA JQUERY PARA USO DE AJAX --%>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="_header.jsp" %>
@@ -45,11 +47,11 @@
                                     <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
                                 </div>
                                 <div class="ux">
-                                    <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove"></i></button>
+                                    <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove" data-id="<%=producto.getId()%>"></i></button>
                                     <div class="quantity">
-                                        <button class="btn-sub" data-sub="sub">-</button>
+                                        <button class="btn-sub" data-sub="sub" data-id="<%=producto.getId()%>">-</button>
                                         <p class="num"><%=item.getCantidad()%></p>
-                                        <button class="btn-add" data-add="add">+</button>
+                                        <button class="btn-add" data-add="add" data-id="<%=producto.getId()%>">+</button>
                                     </div>
                                 </div>
                             </div>
