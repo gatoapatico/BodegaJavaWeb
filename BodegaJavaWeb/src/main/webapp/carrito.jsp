@@ -1,4 +1,12 @@
+<%@ page import="Entity.Carrito" %>
+<%@ page import="Entity.CarritoItem" %>
+<%@ page import="Controller.ProductoController" %>
+<%@ page import="Entity.Producto" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Carrito carrito = (Carrito) request.getSession().getAttribute("carrito");
+    ProductoController cProductos = new ProductoController();
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,63 +32,29 @@
             <h1>TU CARRITO</h1>
             <div class="paneles">
                 <div class="productos">
-                    <div class="producto">
-                        <div class="imagen">
-                            <img src="assets/img/productos/bisteck.png" alt="bisteck">
-                        </div>
-                        <div class="info">
-                            <p class="nombre">Bisteck de Tapa x Kg.</p>
-                            <p class="marca">San Fernando</p>
-                            <p class="precio">S/13.90</p>
-                        </div>
-                        <div class="ux">
-                            <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove"></i></button>
-                            <div class="quantity">
-                                <button class="btn-sub" data-sub="sub">-</button>
-                                <p class="num">1</p>
-                                <button class="btn-add" data-add="add">+</button>
+                    <% if(carrito != null) { %>
+                        <% for(CarritoItem item : carrito.obtenerItems()) { %>
+                            <% Producto producto = cProductos.obtenerProducto(item.getId()); %>
+                            <div class="producto">
+                                <div class="imagen">
+                                    <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
+                                </div>
+                                <div class="info">
+                                    <p class="nombre"><%=producto.getNombre()%></p>
+                                    <p class="marca"><%=producto.getProveedor()%></p>
+                                    <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
+                                </div>
+                                <div class="ux">
+                                    <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove"></i></button>
+                                    <div class="quantity">
+                                        <button class="btn-sub" data-sub="sub">-</button>
+                                        <p class="num"><%=item.getCantidad()%></p>
+                                        <button class="btn-add" data-add="add">+</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="producto">
-                        <div class="imagen">
-                            <img src="assets/img/productos/crema_leche.png" alt="bisteck">
-                        </div>
-                        <div class="info">
-                            <p class="nombre">Crema de Leche</p>
-                            <p class="marca">Nestle</p>
-                            <p class="precio">S/8.90</p>
-                        </div>
-                        <div class="ux">
-                            <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove"></i></button>
-                            <div class="quantity">
-                                <button class="btn-sub" data-sub="sub">-</button>
-                                <p class="num">1</p>
-                                <button class="btn-add" data-add="add">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="producto">
-                        <div class="imagen">
-                            <img src="assets/img/productos/queso_fresco.png" alt="bisteck">
-                        </div>
-                        <div class="info">
-                            <p class="nombre">Queso Fresco</p>
-                            <p class="marca">Bonle</p>
-                            <p class="precio">S/34.50</p>
-                        </div>
-                        <div class="ux">
-                            <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove"></i></button>
-                            <div class="quantity">
-                                <button class="btn-sub" data-sub="sub">-</button>
-                                <p class="num">1</p>
-                                <button class="btn-add" data-add="add">+</button>
-                            </div>
-                        </div>
-                    </div>
-
+                        <% } %>
+                    <% } %>
                 </div>
                 <div class="resumen">
                     <div class="info">

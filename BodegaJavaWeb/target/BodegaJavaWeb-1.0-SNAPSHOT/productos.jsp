@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="styles.css">
         <!-- ICON CDN (BOOTSTRAP ICON) -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <%-- LIBRERÍA JQUERY PARA USO DE AJAX --%>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="_header.jsp" %>
@@ -39,9 +41,9 @@
                         <p class="marca"><%=producto.getProveedor()%></p>
                         <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
                         <%if(usuario != null) {%>
-                        <button class="btn-agregar" data-agregar="agregar" data-productoid="<%=producto.getId()%>">AGREGAR</button>
+                            <button class="btn-agregar" data-agregar="agregar" data-productoid="<%=producto.getId()%>">AGREGAR</button>
                         <% } else{ %>
-                        <button class="btn-agregar" data-login="login" data-productoid="<%=producto.getId()%>">AGREGAR</button>
+                            <button class="btn-agregar" data-login="login">AGREGAR</button>
                         <% } %>
                     </div>
                 <% } %>
