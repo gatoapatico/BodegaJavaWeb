@@ -71,7 +71,12 @@ document.addEventListener('click', function(e){
                 type: 'POST',
                 data: { action: "sub", id: e.target.dataset.id },
                 success: function() {
-                    e.target.parentNode.querySelector('.num').textContent = quantityValue - 1;
+                    const quantityValue = e.target.parentNode.querySelector('.num').textContent;
+                    const quantityNewValue = parseInt(quantityValue) - 1;
+                    const price = parseFloat(e.target.parentNode.parentNode.parentNode.querySelector('.unidad').querySelector('span').textContent);
+
+                    e.target.parentNode.querySelector('.num').textContent = quantityNewValue;
+                    e.target.parentNode.parentNode.parentNode.querySelector('.subtotal').querySelector('span').textContent = (quantityNewValue * price).toFixed(2);
                 },
                 error: function() {
                     console.log("Sucedió un error!");
@@ -86,7 +91,11 @@ document.addEventListener('click', function(e){
             data: { action: "add", id: e.target.dataset.id },
             success: function () {
                 const quantityValue = e.target.parentNode.querySelector('.num').textContent;
-                e.target.parentNode.querySelector('.num').textContent = parseInt(quantityValue) + 1;
+                const quantityNewValue = parseInt(quantityValue) + 1;
+                const price = parseFloat(e.target.parentNode.parentNode.parentNode.querySelector('.unidad').querySelector('span').textContent);
+
+                e.target.parentNode.querySelector('.num').textContent = quantityNewValue;
+                e.target.parentNode.parentNode.parentNode.querySelector('.subtotal').querySelector('span').textContent = (quantityNewValue * price).toFixed(2);
             },
             error: function () {
                 console.log("Sucedió un error!");

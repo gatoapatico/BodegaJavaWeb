@@ -44,7 +44,13 @@
                                 <div class="info">
                                     <p class="nombre"><%=producto.getNombre()%></p>
                                     <p class="marca"><%=producto.getProveedor()%></p>
-                                    <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
+                                    <div class="precio">
+                                        <p class="unidad">S/<span><%=String.format("%.2f", producto.getPrecio())%></span></p>
+                                        <div class="acumulado">
+                                            <p class="subtitulo">subtotal:</p>
+                                            <p class="subtotal">S/<span><%=String.format("%.2f", producto.getPrecio() * item.getCantidad())%></span></p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="ux">
                                     <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove" data-id="<%=producto.getId()%>"></i></button>
