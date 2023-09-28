@@ -77,6 +77,8 @@ document.addEventListener('click', function(e){
 
                     e.target.parentNode.querySelector('.num').textContent = quantityNewValue;
                     e.target.parentNode.parentNode.parentNode.querySelector('.subtotal').querySelector('span').textContent = (quantityNewValue * price).toFixed(2);
+
+                    calcularTotal();
                 },
                 error: function() {
                     console.log("Sucedió un error!");
@@ -96,6 +98,9 @@ document.addEventListener('click', function(e){
 
                 e.target.parentNode.querySelector('.num').textContent = quantityNewValue;
                 e.target.parentNode.parentNode.parentNode.querySelector('.subtotal').querySelector('span').textContent = (quantityNewValue * price).toFixed(2);
+
+                calcularTotal();
+
             },
             error: function () {
                 console.log("Sucedió un error!");
@@ -109,6 +114,7 @@ document.addEventListener('click', function(e){
             data: { action: "remove", id: e.target.dataset.id },
             success: function() {
                 e.target.parentNode.parentNode.parentNode.remove();
+                calcularTotal();
             },
             error: function() {
                 console.log("Sucedió un error!");
@@ -116,3 +122,13 @@ document.addEventListener('click', function(e){
         });
     }
 });
+
+function calcularTotal() {
+    const productos = document.getElementsByClassName('producto');
+    let totalPrecio = 0;
+    for(let i = 0; i < productos.length; i++){
+        totalPrecio += parseFloat(productos.item(i).querySelector('.subtotal').querySelector('span').textContent);
+    }
+    document.getElementById('subtotal').textContent = `S/${totalPrecio.toFixed(2)}`;
+    document.getElementById('total').textContent = `S/${totalPrecio.toFixed(2)}`;
+}
