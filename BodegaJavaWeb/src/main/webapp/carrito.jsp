@@ -6,6 +6,7 @@
 <%
     Carrito carrito = (Carrito) request.getSession().getAttribute("carrito");
     ProductoController cProductos = new ProductoController();
+    double precioTotal = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -37,6 +38,8 @@
                     <% if(carrito != null) { %>
                         <% for(CarritoItem item : carrito.obtenerItems()) { %>
                             <% Producto producto = cProductos.obtenerProducto(item.getId()); %>
+                            <% double currentSubtotal =  producto.getPrecio() * item.getCantidad(); %>
+                            <% precioTotal += currentSubtotal; %>
                             <div class="producto">
                                 <div class="imagen">
                                     <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
@@ -48,7 +51,7 @@
                                         <p class="unidad">S/<span><%=String.format("%.2f", producto.getPrecio())%></span></p>
                                         <div class="acumulado">
                                             <p class="subtitulo">subtotal:</p>
-                                            <p class="subtotal">S/<span><%=String.format("%.2f", producto.getPrecio() * item.getCantidad())%></span></p>
+                                            <p class="subtotal">S/<span><%=String.format("%.2f", currentSubtotal)%></span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -67,9 +70,9 @@
                 <div class="resumen">
                     <div class="info">
                         <p class="titulo">Resumen de Compra</p>
-                        <p class="subtotal">Subtotal<span>S/57.30</span></p>
-                        <p class="descuento">Descuento (-20%)<span>-S/11.46</span></p>
-                        <p class="total">Total<span>-S/11.46</span></p>
+                        <p class="subtotal">Subtotal<span id="subtotal">S/<%=String.format("%.2f", precioTotal)%></span></p>
+<%--                        <p class="descuento">Descuento (-20%)<span>-S/11.46</span></p>--%>
+                        <p class="total">Total<span id="total">S/<%=String.format("%.2f", precioTotal)%></span></p>
                     </div>
                     <div class="ux">
                         <a href="pedido.jsp">IR A PAGAR<i class="bi bi-arrow-right"></i></a>

@@ -77,6 +77,8 @@ document.addEventListener('click', function(e){
 
                     e.target.parentNode.querySelector('.num').textContent = quantityNewValue;
                     e.target.parentNode.parentNode.parentNode.querySelector('.subtotal').querySelector('span').textContent = (quantityNewValue * price).toFixed(2);
+
+                    calcularTotal();
                 },
                 error: function() {
                     console.log("Sucedió un error!");
@@ -96,6 +98,9 @@ document.addEventListener('click', function(e){
 
                 e.target.parentNode.querySelector('.num').textContent = quantityNewValue;
                 e.target.parentNode.parentNode.parentNode.querySelector('.subtotal').querySelector('span').textContent = (quantityNewValue * price).toFixed(2);
+
+                calcularTotal();
+
             },
             error: function () {
                 console.log("Sucedió un error!");
@@ -109,10 +114,68 @@ document.addEventListener('click', function(e){
             data: { action: "remove", id: e.target.dataset.id },
             success: function() {
                 e.target.parentNode.parentNode.parentNode.remove();
+                calcularTotal();
             },
             error: function() {
                 console.log("Sucedió un error!");
             }
         });
     }
+    else if(e.target.dataset.envio) {
+        const datos = document.getElementById('ux-identificacion');
+        const inputs = datos.querySelectorAll('input');
+        let cont = 0;
+
+        const correo = inputs.item(0).value;
+        const nombre = inputs.item(1).value;
+        const apellidos = inputs.item(2).value;
+        const documento = inputs.item(3).value;
+        const telefono = inputs.item(4).value;
+
+        inputs.forEach(input => {
+            if(input.value === ''){
+                input.parentNode.querySelector('b').classList.remove('hidden');
+            }
+            else {
+                input.parentNode.querySelector('b').classList.add('hidden');
+                cont++;
+            }
+        });
+
+        if(cont == inputs.length){
+            document.getElementById('correo-resumen').textContent = correo;
+            document.getElementById('nombre-resumen').textContent = nombre;
+            document.getElementById('apellidos-resumen').textContent = apellidos;
+            document.getElementById('documento-resumen').textContent = documento;
+            document.getElementById('telefono-resumen').textContent = telefono;
+
+            document.getElementById('identificacion').querySelector('.contenido1').classList.add('hidden');
+            document.getElementById('identificacion').querySelector('.contenido2').classList.remove('hidden');
+
+            document.getElementById('envio').querySelector('.contenido1').classList.remove('hidden');
+        }
+    }
+    else if(e.target.dataset.metodo){
+        const metodo = e.target.dataset.metodo;
+        switch(metodo){
+            case "domicilio":
+                document.getElementById('metodo-domicilio').classList.add('metodo-activo');
+                document.getElementById('metodo-tienda').classList.remove('metodo-activo');
+                break;
+            case "tienda":
+                document.getElementById('metodo-tienda').classList.add('metodo-activo');
+                document.getElementById('metodo-domicilio').classList.remove('metodo-activo');
+                break;
+        }
+    }
 });
+
+function calcularTotal() {
+    const productos = document.getElementsByClassName('producto');
+    let totalPrecio = 0;
+    for(let i = 0; i < productos.length; i++){
+        totalPrecio += parseFloat(productos.item(i).querySelector('.subtotal').querySelector('span').textContent);
+    }
+    document.getElementById('subtotal').textContent = `S/${totalPrecio.toFixed(2)}`;
+    document.getElementById('total').textContent = `S/${totalPrecio.toFixed(2)}`;
+}
