@@ -97,22 +97,32 @@
                                     </div>
                                 </div>
                                 <div class="ui-envio">
-                                    <p>
-                                        Los despachos a domicilio solo son válidos para direcciones que
-                                        se encuentran en la misma urbanización de la bodega MARISOL
-                                    </p>
-                                    <div class="direccion">
-                                        <i class="bi bi-geo-alt-fill"></i>
-                                        <div class="info">
-                                            <p class="titulo">bodega MARISOL</p>
-                                            <p>Calle García Rada 341</p>
-                                            <p>Lima</p>
-                                            <p>Lima, Lima</p>
-                                            <button type="button">Ver más detalles</button>
+                                    <div class="contenido-domicilio hidden" id="contenido-domicilio">
+                                        <p>
+                                            Los despachos a domicilio solo son válidos para direcciones que
+                                            se encuentran en la misma urbanización de la bodega MARISOL
+                                        </p>
+                                        <div class="dato-input whole">
+                                            <label for="direccion-domicilio">Ingresar dirección de entrega a domicilio*</label>
+                                            <input type="text" id="direccion-domicilio">
+                                            <b class="campo-fail hidden">*Es obligatorio este campo</b>
+                                        </div>
+                                    </div>
+                                    <div class="contenido-tienda hidden" id="contenido-tienda">
+                                        <div class="direccion">
+                                            <i class="bi bi-geo-alt-fill"></i>
+                                            <div class="info">
+                                                <p class="titulo">bodega MARISOL</p>
+                                                <p>Calle García Rada 341</p>
+                                                <p>Lima</p>
+                                                <p>Lima, Lima</p>
+                                                <button data-mapa="mapa">Ver más detalles</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="fecha">
-                                        <button type="button">ELIJA UNA FECHA DE ENTREGA<i class="bi bi-calendar-week-fill"></i></button>
+                                        <button type="button" data-fecha="fecha">ELIJA UNA FECHA DE ENTREGA<i class="bi bi-calendar-week-fill" data-fecha="fecha"></i></button>
+                                        <input type="date" class="input-fecha-entrega" id="input-fecha-entrega" data-inputfecha="inputfecha">
                                     </div>
                                 </div>
                                 <div class="recojo">
@@ -274,6 +284,9 @@
             <img src="assets/img/pedido/Star.png" alt="star">
             <h1>¡Muchas gracias!</h1>
             <p>tu pedido está siendo procesado</p>
+        </div>
+        <div class="popup popup-mapa hidden" id="popup-mapa">
+            <img src="assets/img/pedido/mapa.png" alt="mapa-marisol">
         </div>
 
 <%@include file="_footer.jsp" %>
