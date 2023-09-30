@@ -23,56 +23,64 @@
 
             <h1 class="heading">Añadir Producto</h1>
 
-            <form action="" method="post" enctype="multipart/form-data">
-                <input type="text" class="box" required maxlength="100" placeholder="Ingresa el nombre del producto" name="nombre">
-                <input type="number" min="0" class="box" required max="9999999999" placeholder="Ingresa el precio del producto" onkeypress="if (this.value.length == 10)
-                            return false;" name="precio">
-                <select name="categoria" class="box">
-                    <option value="">Selecciona la categoria</option>
-                    <option value="CARNES, AVES Y PESCADOS">CARNES, AVES Y PESCADOS</option>
-                    <option value="CONGELADOS">CONGELADOS</option>
-                    <option value="LACTEOS">LACTEOS</option>
-                    <option value="FRUTAS Y VERDURAS">FRUTAS Y VERDURAS</option>
-                    <option value="PANADERIA Y PASTELERIA">PANADERIA Y PASTELERIA</option>
-                    <option value="BEBIDAS">BEBIDAS</option>
-                    <option value="CUIDADO PERSONAL">CUIDADO PERSONAL</option>
-                    <option value="LIMPIEZA">LIMPIEZA</option>
-                </select>
-                <input type="number" min="0" class="box" required max="9999999999" placeholder="Cantidad" onkeypress="if (this.value.length == 10)
-                            return false;" name="stock">
+            <form action="AdminController" method="POST">
+                        <input type="text" class="box" required maxlength="100" placeholder="Ingresa el nombre del producto" name="nombre">
+                        <input type="text" class="box" required maxlength="100" placeholder="Ingresa la descripcion del producto" name="descripcion">
+                        <input type="text" class="box" required maxlength="100" placeholder="Ingresa el proovedor del producto" name="proveedor">
+                        <input type="number" class="box" placeholder="Ingresa el precio del producto" onkeypress="if (!/^[0-9]+(\.[0-9]+)?$/.test(this.value)) {
+                                  return false;" name="precio">
+                        <select name="categoria" class="box">
+                              <option value="">Selecciona la categoria</option>
+                              <option value="CARNES, AVES Y PESCADOS">CARNES, AVES Y PESCADOS</option>
+                              <option value="CONGELADOS">CONGELADOS</option>
+                              <option value="LACTEOS">LACTEOS</option>
+                              <option value="FRUTAS Y VERDURAS">FRUTAS Y VERDURAS</option>
+                              <option value="PANADERIA Y PASTELERIA">PANADERIA Y PASTELERIA</option>
+                              <option value="BEBIDAS">BEBIDAS</option>
+                              <option value="CUIDADO PERSONAL">CUIDADO PERSONAL</option>
+                              <option value="LIMPIEZA">LIMPIEZA</option>
+                            </select>
+                        <input type="number" min="0" class="box" required max="9999999999" placeholder="Cantidad" onkeypress="if (this.value.length == 10)
+                                                  return false;" name="stock">
+                        <input type="file" name="imagen" accept="image/jpg, image/jpeg, image/png" class="box" required>
+                        <input type="submit" value="Agregar producto" class="btn" name="add_product">
+                      </form>
 
-                <input type="file" name="image" accept="image/jpg, image/jpeg, image/png" class="box" required>
-                <input type="submit" value="Agregar producto" class="btn" name="add_product">
-            </form>
 
         </section>
 
 
-        <main class="main-productos">
 
-            <h1>PRODUCTOS</h1>
+
+        <section class="show-products">
+
+            <h1 class="heading">Productos Añadidos</h1>
+
             <div class="box-container">
-                <div class="box">
-                    <% for (Producto producto : productos) {%>
-                    <div class="producto">
-                        <div class="imagen">
-                            <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
-                        </div>
-                        <p class="hidden" id="categoria"><%=producto.getCategoria()%></p>
-                        <p class="nombre"><%=producto.getNombre()%></p>
-                        <p class="marca"><%=producto.getProveedor()%></p>
-                        <p class="stock">Stock: <%=producto.getStock()%></p>
-                        <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
-                        <% if (usuario != null) {; %>
-                        <div >
-                            <button type="submit" class="option-btn">Editar</button>
-                            <button type="button" class="delete-btn" >Eliminar</button>
-                        </div>
-                        <% } else { %>
-                        <% } %>
-                    </div>
-                    <% }%>
-                </div>
-            </div>
-        </main>
 
+                <% for (Producto producto : productos) {%>
+                <div class="box">
+                    <div class="imagen">
+                        <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
+                    </div>
+                    <p class="hidden" id="categoria"><%=producto.getCategoria()%></p>
+                    <p class="nombre"><%=producto.getNombre()%></p>
+                    <p class="marca"><%=producto.getProveedor()%></p>
+                    <p class="stock">Stock: <%=producto.getStock()%></p>
+                    <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
+                    <% if (usuario != null) {; %>
+                    <div class="flex-btn">
+                        <button type="submit" class="option-btn">Editar</button>
+                        <button type="button" class="delete-btn" >Eliminar</button>
+                    </div>
+                    <% } else { %>
+                    <% } %>
+                </div>
+                <% }%>
+
+            </div>
+
+        </section>
+
+    </body>
+</html>

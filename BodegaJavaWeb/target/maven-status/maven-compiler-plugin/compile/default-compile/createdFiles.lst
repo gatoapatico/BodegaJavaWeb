@@ -3,6 +3,7 @@ Model\UsuarioModel.class
 Controller\ProductoController.class
 Config\db.class
 com\utp\bodegajavaweb\JAXRSConfiguration.class
+Controller\AdminController.class
 Model\ProductoModel.class
 Entity\Producto.class
 Controller\UsuarioController.class
