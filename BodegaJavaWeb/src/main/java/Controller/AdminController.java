@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
+    
+    ProductoModel model = new ProductoModel();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,40 +29,29 @@ public class AdminController extends HttpServlet {
 
         // Get the product data from the request
         String nombre = request.getParameter("nombre");
-        int precio = Integer.parseInt(request.getParameter("precio"));
+        double precio = Integer.parseInt(request.getParameter("precio"));
         String categoria = request.getParameter("categoria");
         String descripcion = request.getParameter("descripcion");
+        String imagen = request.getParameter("imagen");
         String proveedor = request.getParameter("proveedor");
         int stock = Integer.parseInt(request.getParameter("stock"));
 
-        // Create a new product object
-        Producto producto = new Producto();
-        producto.setNombre(nombre);
-        producto.setPrecio(precio);
-        producto.setCategoria(categoria);
-        producto.setDescripcion(descripcion);
-        producto.setProveedor(proveedor);
-        producto.setStock(stock);
-
         // Create a product model object
-        ProductoModel model = new ProductoModel();
+        List<Producto> productos = model.obtenerProductos();
+        // Add the products to the session
+        HttpSession session = request.getSession();
+        session.setAttribute("productos", productos);
 
         try {
             // Add the new product to the database
-            model.addProducto(producto);
+            model.addProducto(nombre, descripcion, proveedor, precio, categoria, stock, imagen);
+            request.getRequestDispatcher("admin_productos.jsp").forward(request, response);
+            
 
-            // Get the products from the database
-            List<Producto> productos = model.obtenerProductos();
-
-            // Add the products to the session
-            HttpSession session = request.getSession();
-            session.setAttribute("productos", productos);
+            
         } catch (SQLException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        // Redirect the user to the products page
-        response.sendRedirect("admin_productos.jsp");
     }
 
 
