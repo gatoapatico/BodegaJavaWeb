@@ -42,9 +42,7 @@
                         <input type="number" min="0" class="box" required max="9999999999" placeholder="Cantidad" name="stock">
                         <input type="file" name="imagen" class="box" required>
                         <input type="submit" value="Agregar producto" class="btn" name="add_product">
-                      </form>
-
-
+            </form>
         </section>
 
 

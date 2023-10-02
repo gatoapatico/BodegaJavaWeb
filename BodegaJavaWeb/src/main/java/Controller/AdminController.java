@@ -43,7 +43,6 @@ public class AdminController extends HttpServlet {
 
         List<Producto> productos = model.obtenerProductos();
         HttpSession session = request.getSession();
-        session.setAttribute("productos", productos);
         
         
         Part file = request.getPart("imagen");
@@ -58,7 +57,16 @@ public class AdminController extends HttpServlet {
         int stock = Integer.parseInt(request.getParameter("stock"));
         String imagen = file.getSubmittedFileName();
         String imagenPath = "C:/Users/PC/Documents/GitHub/BodegaJavaWeb/BodegaJavaWeb/src/main/webapp/assets/img/productos/"+imagen;
-        System.out.println("Path"+imagenPath);
+        
+        try {
+            // Add the new product to the database
+            model.addProducto(nombre, descripcion, proveedor, precio, categoria, stock, imagen);
+            session.setAttribute("productos", productos);
+            request.getRequestDispatcher("admin_productos.jsp").forward(request, response);            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         try{
         
         FileOutputStream fos = new FileOutputStream(imagenPath);
@@ -71,17 +79,5 @@ public class AdminController extends HttpServlet {
         }catch (Exception e){
         e.printStackTrace();
         }
-
-        try {
-            // Add the new product to the database
-            model.addProducto(nombre, descripcion, proveedor, precio, categoria, stock, imagen);
-            productos=model.obtenerProductos();
-            session.setAttribute("productos", productos);
-            request.getRequestDispatcher("admin_productos.jsp").forward(request, response);            
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
-
-
 }
