@@ -23,12 +23,11 @@
 
             <h1 class="heading">Añadir Producto</h1>
 
-            <form action="AdminController" method="POST">
+            <form action="AdminController" method="POST" enctype="multipart/form-data">
                         <input type="text" class="box" required maxlength="100" placeholder="Ingresa el nombre del producto" name="nombre">
                         <input type="text" class="box" required maxlength="100" placeholder="Ingresa la descripcion del producto" name="descripcion">
                         <input type="text" class="box" required maxlength="100" placeholder="Ingresa el proovedor del producto" name="proveedor">
-                        <input type="number" class="box" placeholder="Ingresa el precio del producto" onkeypress="if (!/^[0-9]+(\.[0-9]+)?$/.test(this.value)) {
-                                  return false;" name="precio">
+                        <input type="number" class="box" placeholder="Ingresa el precio del producto" name="precio">
                         <select name="categoria" class="box">
                               <option value="">Selecciona la categoria</option>
                               <option value="CARNES, AVES Y PESCADOS">CARNES, AVES Y PESCADOS</option>
@@ -40,9 +39,8 @@
                               <option value="CUIDADO PERSONAL">CUIDADO PERSONAL</option>
                               <option value="LIMPIEZA">LIMPIEZA</option>
                             </select>
-                        <input type="number" min="0" class="box" required max="9999999999" placeholder="Cantidad" onkeypress="if (this.value.length == 10)
-                                                  return false;" name="stock">
-                        <input type="file" name="imagen" accept="image/jpg, image/jpeg, image/png" class="box" required>
+                        <input type="number" min="0" class="box" required max="9999999999" placeholder="Cantidad" name="stock">
+                        <input type="file" name="imagen" class="box" required>
                         <input type="submit" value="Agregar producto" class="btn" name="add_product">
                       </form>
 
