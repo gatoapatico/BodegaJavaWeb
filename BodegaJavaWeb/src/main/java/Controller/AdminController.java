@@ -62,6 +62,7 @@ public class AdminController extends HttpServlet {
             // Add the new product to the database
             model.addProducto(nombre, descripcion, proveedor, precio, categoria, stock, imagen);
             session.setAttribute("productos", productos);
+            response.setHeader("Refresh", "1.5");
             request.getRequestDispatcher("admin_productos.jsp").forward(request, response);            
         } catch (SQLException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);

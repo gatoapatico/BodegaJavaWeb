@@ -64,13 +64,11 @@
                     <p class="marca"><%=producto.getProveedor()%></p>
                     <p class="stock">Stock: <%=producto.getStock()%></p>
                     <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
-                    <% if (usuario != null) {; %>
+                    
                     <div class="flex-btn">
                         <button type="submit" class="option-btn">Editar</button>
                         <button type="button" class="delete-btn" >Eliminar</button>
                     </div>
-                    <% } else { %>
-                    <% } %>
                 </div>
                 <% }%>
 
