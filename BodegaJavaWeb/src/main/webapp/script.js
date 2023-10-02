@@ -159,12 +159,16 @@ document.addEventListener('click', function(e){
                 document.getElementById('metodo-tienda').classList.remove('metodo-activo');
                 document.getElementById('contenido-domicilio').classList.remove('hidden');
                 document.getElementById('contenido-tienda').classList.add('hidden');
+                document.getElementById('costo-monto-pedido').textContent = '5.00';
+                calcultarTotalPedido();
                 break;
             case "tienda":
                 document.getElementById('metodo-tienda').classList.add('metodo-activo');
                 document.getElementById('metodo-domicilio').classList.remove('metodo-activo');
                 document.getElementById('contenido-tienda').classList.remove('hidden');
                 document.getElementById('contenido-domicilio').classList.add('hidden');
+                document.getElementById('costo-monto-pedido').textContent = '0.00';
+                calcultarTotalPedido();
                 break;
         }
     }
@@ -277,13 +281,13 @@ document.addEventListener('click', function(e){
                 input.parentNode.querySelector('b').classList.add('hidden');
             }
         });
-
-        console.log(inputs);
-
-        /* document.getElementById('bg-black-wall').classList.toggle('hidden');
-        document.getElementById('popup-star').classList.toggle('hidden'); */
+    }
+    else if(e.target.dataset.compraexito) {
+        cerrarPopups();
     }
 });
+
+
 
 function calcularTotal() {
     const productos = document.getElementsByClassName('producto');
@@ -293,6 +297,15 @@ function calcularTotal() {
     }
     document.getElementById('subtotal').textContent = `S/${totalPrecio.toFixed(2)}`;
     document.getElementById('total').textContent = `S/${totalPrecio.toFixed(2)}`;
+}
+
+function calcultarTotalPedido() {
+    const subtotal = parseFloat(document.getElementById('subtotal-monto-pedido').textContent);
+    const envio = parseFloat(document.getElementById('costo-monto-pedido').textContent);
+    console.log(subtotal);
+    console.log(envio);
+    console.log(subtotal + envio);
+    document.getElementById('total-monto-pedido').textContent = `${(subtotal + envio).toFixed(2)}`;
 }
 
 function seteoFechaMinima() {
@@ -316,11 +329,20 @@ function calcularFechaEntrega(element) {
 }
 
 function cerrarPopups() {
-    document.getElementById('bg-black-wall').classList.add('hidden');
+    (document.getElementById('bg-black-wall')) ? document.getElementById('bg-black-wall').classList.add('hidden') : '';
+    (document.getElementById('bg-black-wall-finalizacion')) ? document.getElementById('bg-black-wall-finalizacion').classList.add('hidden') : '';
 
     [...document.getElementsByClassName('popup')].forEach(popup => {
         popup.classList.add('hidden');
     });
 }
 
-seteoFechaMinima();
+if(document.getElementById('main-pedido')){
+    seteoFechaMinima();
+
+    window.addEventListener("beforeunload", function(event) {
+        const mensaje = "¿Seguro que deseas abandonar esta página? Todos los datos no guardados se perderán.";
+        event.returnValue = mensaje;
+        return mensaje;
+    });
+}

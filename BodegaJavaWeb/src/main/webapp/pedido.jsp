@@ -1,4 +1,13 @@
+<%@ page import="Entity.Carrito" %>
+<%@ page import="Controller.ProductoController" %>
+<%@ page import="Entity.CarritoItem" %>
+<%@ page import="Entity.Producto" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Carrito carrito = (Carrito) request.getSession().getAttribute("carrito");
+    ProductoController cProductos = new ProductoController();
+    double precioTotal = 0;
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +19,7 @@
     </head>
     <body>
         <%@include file="_header.jsp" %>
-        <main class="main-pedido">
+        <main class="main-pedido" id="main-pedido">
             <nav class="categorias">
                 <a href="">CARNES, AVES Y PESCADOS</a>
                 <a href="">CONGELADOS</a>
@@ -22,7 +31,7 @@
                 <a href="">LIMPIEZA</a>
             </nav>
             <h1>PROCESO DE PEDIDO</h1>
-            <form>
+            <form action="success.jsp" method="POST">
                 <div class="paneles">
                     <div class="usuario">
                         <div class="identificacion" id="identificacion">
@@ -237,7 +246,7 @@
                                         </div>
                                         <div class="dato-input">
                                             <label for="codigo-tarjeta">Código de seguridad</label>
-                                            <input class="small" type="text" pattern="[0-9]{3,4}" id="codigo-tarjeta">
+                                            <input class="small" type="text" pattern="[0-9]{3,4}" id="codigo-tarjeta" required>
                                             <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                         </div>
                                     </div>
@@ -256,45 +265,29 @@
                             <h1>Resumen de la compra</h1>
                         </div>
                         <div class="productos">
-
-                            <div class="producto">
-                                <div class="imagen">
-                                    <img src="assets/img/productos/bisteck.png" alt="bisteck">
-                                </div>
-                                <div class="info">
-                                    <p class="nombre">Bisteck de Tapa x Kg.</p>
-                                    <p class="cantidad">1</p>
-                                    <p class="precio">S/13.90</p>
-                                </div>
-                            </div>
-                            <div class="producto">
-                                <div class="imagen">
-                                    <img src="assets/img/productos/crema_leche.png" alt="crema de leche">
-                                </div>
-                                <div class="info">
-                                    <p class="nombre">Crema de Leche</p>
-                                    <p class="cantidad">1</p>
-                                    <p class="precio">S/8.90</p>
-                                </div>
-                            </div>
-                            <div class="producto">
-                                <div class="imagen">
-                                    <img src="assets/img/productos/queso_fresco.png" alt="queso freco">
-                                </div>
-                                <div class="info">
-                                    <p class="nombre">Queso Fresco</p>
-                                    <p class="cantidad">1</p>
-                                    <p class="precio">S/34.50</p>
-                                </div>
-                            </div>
-
+                            <% if(carrito != null) { %>
+                                <% for(CarritoItem item : carrito.obtenerItems()) { %>
+                                    <% Producto producto = cProductos.obtenerProducto(item.getId()); %>
+                                    <% double currentSubtotal =  producto.getPrecio() * item.getCantidad(); %>
+                                    <% precioTotal += currentSubtotal; %>
+                                    <div class="producto">
+                                        <div class="imagen">
+                                            <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
+                                        </div>
+                                        <div class="info">
+                                            <p class="nombre"><%=producto.getNombre()%></p>
+                                            <p class="cantidad"><%=item.getCantidad()%></p>
+                                            <p class="precio">S/<%=String.format("%.2f", producto.getPrecio() * item.getCantidad())%></p>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>
                         </div>
-
                         <div class="total-resumen">
-                            <p>Subtotal<span>S/ 57.30</span></p>
-                            <p>Descuento (-20%)<span class="color">-S/ 11.46</span></p>
-                            <p>Costo de envío<span>Gratis</span></p>
-                            <p class="total">Total<span>S/ 45.84</span></p>
+                            <p>Subtotal<span>S/ <span id="subtotal-monto-pedido"><%=String.format("%.2f", precioTotal)%></span></span></p>
+                            <%--<p>Descuento (-20%)<span class="color">-S/ 11.46</span></p>--%>
+                            <p>Costo de envío<span class="color">S/ <span id="costo-monto-pedido">0.00</span></span></p>
+                            <p class="total">Total<span>S/ <span id="total-monto-pedido"><%=String.format("%.2f", precioTotal)%></span></span></p>
                         </div>
 
                         <button type="submit" id="btn-finalizar" class="btn-finalizar hidden" data-finalizar="finalizar"><i class="bi bi-cart-fill"></i>FINALIZAR PEDIDO</button>
@@ -304,6 +297,9 @@
             </form>
         </main>
         <div class="bg-black-wall hidden" id="bg-black-wall" data-black="black">
+
+        </div>
+        <div class="bg-black-wall hidden" id="bg-black-wall-finalizacion" data-compraexito="compraexito">
 
         </div>
         <div class="popup popup-star hidden" id="popup-star">
