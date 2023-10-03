@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoModel {
-    
+
     private Connection connection;
-    
+
     public ProductoModel() {
         db con = new db();
         connection = con.Conexion();
     }
-    
+
     public List<Producto> obtenerProductos() {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT * FROM productos";
-        
-        try{
+
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 Producto producto = new Producto();
                 producto.setId(resultSet.getInt("id"));
                 producto.setNombre(resultSet.getString("nombre"));
@@ -37,8 +37,7 @@ public class ProductoModel {
                 producto.setStock(resultSet.getInt("stock"));
                 productos.add(producto);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return productos;
@@ -46,11 +45,11 @@ public class ProductoModel {
 
     public Producto obtenerProducto(int id) {
         String sql = "SELECT * FROM productos WHERE id = ? LIMIT 1";
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, Integer.toString(id));
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 Producto producto = new Producto();
                 producto.setId(resultSet.getInt("id"));
                 producto.setNombre(resultSet.getString("nombre"));
@@ -62,10 +61,25 @@ public class ProductoModel {
                 producto.setStock(resultSet.getInt("stock"));
                 return producto;
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void addProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock, String imagen) 
+            throws SQLException {
+
+        String sql = "INSERT INTO productos (nombre, descripcion, proveedor, precio, categoria, stock, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setString(3, proveedor);
+        statement.setDouble(4, precio);
+        statement.setString(5, categoria);
+        statement.setInt(6, stock);
+        statement.setString(7, imagen);
+        statement.executeUpdate();
+
     }
 }

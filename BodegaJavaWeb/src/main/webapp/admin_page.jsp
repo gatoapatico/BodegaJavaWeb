@@ -16,7 +16,6 @@
 <body>
 
 
-
 <section class="dashboard">
    <h1 class="heading">dashboard</h1>
 
@@ -25,7 +24,7 @@
       <div class="box">
          <h3><!-- Box 1 Text Here --></h3>
          <p>Usuarios</p>
-         <a href="admin_users.jsp" class="btn">Ver usuarios</a>
+         <a href="admin_user.jsp" class="btn">Ver usuarios</a>
       </div>
 
       <div class="box">
@@ -43,6 +42,8 @@
    </div>
 </section>
 
+<!-- Include your JavaScript -->
+<script src="../js/admin_script.js"></script>
 
 </body>
 </html>
