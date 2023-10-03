@@ -285,6 +285,7 @@ document.addEventListener('click', function(e){
     else if(e.target.dataset.compraexito) {
         cerrarPopups();
     }
+
 });
 
 
