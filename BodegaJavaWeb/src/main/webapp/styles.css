@@ -1039,6 +1039,26 @@ header .user {
                             color: #614BC3;
                         }
 
+                        & input {
+                            background-color: transparent;
+                            border: none;
+                            color: #9a9a9a;
+                            font-size: 0.5rem;
+                            font-family: inherit;
+                        }
+
+                        & input:focus {
+                            outline: none;
+                        }
+
+                        & input:nth-child(1) {
+                            width: 70px;
+                        }
+
+                        & input:nth-child(2) {
+                            width: 120px;
+                        }
+
                         & .cambiar {
                             color: #614BC3;
                             cursor: pointer;
@@ -1173,6 +1193,10 @@ header .user {
                                 margin: 0;
                                 font-size: 0.5rem;
                                 color: #848484;
+
+                                & input {
+                                    width: 50px;
+                                }
                             }
 
                             & input {

@@ -47,7 +47,7 @@ public class UsuarioModel {
             if (validationResult.next()) {
                 return false;
             } else {
-                String sql = "INSERT INTO usuarios VALUES (null, ?, ?, ?, ?)";
+                String sql = "INSERT INTO usuarios VALUES (null, ?, ?, ?, ?, null, null, null)";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, nombre);
                 statement.setString(2, apellido);

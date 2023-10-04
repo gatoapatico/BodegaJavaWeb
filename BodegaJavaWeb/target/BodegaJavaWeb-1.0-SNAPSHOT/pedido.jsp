@@ -32,6 +32,7 @@
             </nav>
             <h1>PROCESO DE PEDIDO</h1>
             <form action="success.jsp" method="POST">
+                <input class="hidden" type="text" name="usuario-id" value="<%=usuario.getId()%>" readonly>
                 <div class="paneles">
                     <div class="usuario">
                         <div class="identificacion" id="identificacion">
@@ -46,34 +47,34 @@
                                 <div class="ux" id="ux-identificacion">
                                     <div class="dato-input whole">
                                         <label for="correo">Correo*</label>
-                                        <input type="email" id="correo" required>
+                                        <input type="email" name="usuario-correo" id="correo" value="<%=usuario.getCorreo()%>" readonly required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                     <div class="dato-input">
                                         <label for="nombre">Nombre*</label>
-                                        <input type="text" id="nombre" required>
+                                        <input type="text" name="usuario-nombre" id="nombre" value="<%=usuario.getNombre()%>" readonly required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                     <div class="dato-input">
                                         <label for="apellidos">Apellidos*</label>
-                                        <input type="text" id="apellidos" required>
+                                        <input type="text" name="usuario-apellido" id="apellidos" value="<%=usuario.getApellido()%>" readonly required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                     <div class="dato-input">
                                         <label for="tipo-documento">Tipo del documento</label>
-                                        <select name="" id="tipo-documento" required>
-                                            <option selected value="dni">dni</option>
-                                            <option value="pasaporte">pasaporte</option>
+                                        <select name="usuario-documento-tipo" id="tipo-documento" required>
+                                            <option selected value="1">dni</option>
+                                            <option value="2">pasaporte</option>
                                         </select>
                                     </div>
                                     <div class="dato-input">
                                         <label for="documento">Documento</label>
-                                        <input type="text" pattern="[0-9]{8,10}" id="documento" required>
+                                        <input type="text" name="usuario-documento-numero" pattern="[0-9]{8,10}" id="documento" required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                     <div class="dato-input">
                                         <label for="telefono">Telefono celular*</label>
-                                        <input type="text" pattern="[0-9]{7,}" id="telefono" required>
+                                        <input type="text" name="usuario-telefono" pattern="[0-9]{7,}" id="telefono" required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                 </div>
@@ -97,6 +98,7 @@
                                 <p>Indicanos tu modo de entrega:</p>
                                 <b class="campo-fail hidden" id="campo-fail-metodos">*Es obligatorio este campo</b>
                                 <div class="metodos" id="envio-metodos">
+                                    <input class="hidden" type="text" name="metodo-envio" id="metodo-envio" value="">
                                     <div class="metodo" id="metodo-domicilio" data-metodo="domicilio">
                                         <img src="assets/img/pedido/img_delivery.png" alt="delivery" data-metodo="domicilio">
                                         <p data-metodo="domicilio">Despacho a domicilio</p>
@@ -114,7 +116,7 @@
                                         </p>
                                         <div class="dato-input whole">
                                             <label for="direccion-domicilio">Ingresar dirección de entrega a domicilio*</label>
-                                            <input type="text" id="direccion-domicilio">
+                                            <input type="text" name="direccion-entrega" id="direccion-domicilio">
                                             <b class="campo-fail hidden" id="direccion-domicilio-fail">*Es obligatorio este campo</b>
                                         </div>
                                     </div>
@@ -132,27 +134,27 @@
                                     </div>
                                     <div class="fecha" id="fecha">
                                         <button type="button" data-fecha="fecha">ELIJA UNA FECHA DE ENTREGA<i class="bi bi-calendar-week-fill" data-fecha="fecha"></i></button>
-                                        <input type="date" class="input-fecha-entrega" id="input-fecha-entrega" data-inputfecha="inputfecha" required>
+                                        <input type="date" name="fecha-entrega" class="input-fecha-entrega" id="input-fecha-entrega" data-inputfecha="inputfecha" required>
                                         <b class="campo-fail hidden" id="fecha-entrega-fail">*Debes elegir una fecha de entrega</b>
                                     </div>
                                     <div class="fecha-resumen hidden" id="fecha-resumen">
                                         <b>Fecha de entrega</b>
                                         <p><span id="fecha-formateada">Domingo, 27 de agosto del 2023</span> - <span class="btn-cambiar-fecha" data-cambiarfecha="cambiarfecha">Cambiar</span></p>
                                         <b>Horario de entrega</b>
-                                        <select class="hora" name="hora" id="hora">
-                                            <option value="de 09:00 a 10:00">De 09:00 AM a 10:00 AM - Gratis</option>
-                                            <option value="de 10:00 a 11:00">De 10:00 AM a 11:00 AM - Gratis</option>
-                                            <option value="de 11:00 a 12:00">De 11:00 AM a 12:00 PM - Gratis</option>
-                                            <option value="de 12:00 a 13:00">De 12:00 PM a 13:00 PM - Gratis</option>
-                                            <option value="de 13:00 a 14:00">De 13:00 PM a 14:00 PM - Gratis</option>
-                                            <option value="de 14:00 a 15:00">De 14:00 PM a 15:00 PM - Gratis</option>
-                                            <option value="de 15:00 a 16:00">De 15:00 PM a 16:00 PM - Gratis</option>
-                                            <option value="de 16:00 a 17:00">De 16:00 PM a 17:00 PM - Gratis</option>
-                                            <option value="de 17:00 a 18:00">De 17:00 PM a 18:00 PM - Gratis</option>
-                                            <option value="de 18:00 a 19:00">De 18:00 PM a 19:00 PM - Gratis</option>
-                                            <option value="de 19:00 a 20:00">De 19:00 PM a 20:00 PM - Gratis</option>
-                                            <option value="de 20:00 a 21:00">De 20:00 PM a 21:00 PM - Gratis</option>
-                                            <option value="de 21:00 a 22:00">De 21:00 PM a 22:00 PM - Gratis</option>
+                                        <select class="hora" name="hora-entrega" id="hora">
+                                            <option value="09:00:00">De 09:00 AM a 10:00 AM - Gratis</option>
+                                            <option value="10:00:00">De 10:00 AM a 11:00 AM - Gratis</option>
+                                            <option value="11:00:00">De 11:00 AM a 12:00 PM - Gratis</option>
+                                            <option value="12:00:00">De 12:00 PM a 13:00 PM - Gratis</option>
+                                            <option value="13:00:00">De 13:00 PM a 14:00 PM - Gratis</option>
+                                            <option value="14:00:00">De 14:00 PM a 15:00 PM - Gratis</option>
+                                            <option value="15:00:00">De 15:00 PM a 16:00 PM - Gratis</option>
+                                            <option value="16:00:00">De 16:00 PM a 17:00 PM - Gratis</option>
+                                            <option value="17:00:00">De 17:00 PM a 18:00 PM - Gratis</option>
+                                            <option value="18:00:00">De 18:00 PM a 19:00 PM - Gratis</option>
+                                            <option value="19:00:00">De 19:00 PM a 20:00 PM - Gratis</option>
+                                            <option value="20:00:00">De 20:00 PM a 21:00 PM - Gratis</option>
+                                            <option value="21:00:00">De 21:00 PM a 22:00 PM - Gratis</option>
                                         </select>
                                     </div>
                                 </div>
@@ -160,7 +162,7 @@
                                     <p>Responsable de recoger</p>
                                     <p class="datos">
                                         <i class="bi bi-person-fill"></i>
-                                        <span><span id="dni-responsable-actual">48527293</span> - <span id="nombre-responsable-actual">Álvaro Fernández</span> - </span>
+                                        <span><input type="text" name="responsable-documento" id="dni-responsable-actual" value="" readonly> - <input type="text" name="responsable-nombre" id="nombre-responsable-actual" value="" readonly> - </span>
                                         <span class="cambiar" data-abrircambioresponsable="abrircambioresponsable">CAMBIAR</span>
                                     </p>
                                 </div>
@@ -193,7 +195,7 @@
                                     <div class="info">
                                         <div class="dato-input">
                                             <label for="numero">Número</label>
-                                            <input type="text" pattern="[0-9]+" id="numero" required>
+                                            <input type="text" name="numero-tarjeta-pago" pattern="[0-9]+" id="numero" required>
                                             <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                         </div>
                                         <div class="dato-input">
@@ -201,8 +203,10 @@
                                                 <img src="assets/img/pedido/visa.png" alt="visa">
                                                 <img src="assets/img/pedido/mastercard.png" alt="mastercard">
                                             </div>
-                                            <input type="text" id="total" value="Total - S/ 45.84" readonly>
-                                            <b class="campo-fail hidden">*Es obligatorio este campo</b>
+                                            <p>Total - S/
+                                                <input type="text" name="total-pago" id="precio-pago" value="20.00" readonly>
+                                                <b class="campo-fail hidden">*Es obligatorio este campo</b>
+                                            </p>
                                         </div>
                                         <div class="dato-input">
                                             <label for="nombre-tarjeta">Nombre y Apellido como figura en la tarjeta</label>
