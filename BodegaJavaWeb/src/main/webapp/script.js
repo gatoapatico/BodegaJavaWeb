@@ -145,6 +145,10 @@ document.addEventListener('click', function(e){
             document.getElementById('documento-resumen').textContent = documento;
             document.getElementById('telefono-resumen').textContent = telefono;
 
+            document.getElementById('dni-responsable-actual').value = document.getElementById('documento').value;
+            document.getElementById('nombre-responsable-actual').value =
+                document.getElementById('nombre').value + " " + document.getElementById('apellidos').value;
+
             document.getElementById('identificacion').querySelector('.contenido1').classList.add('hidden');
             document.getElementById('identificacion').querySelector('.contenido2').classList.remove('hidden');
 
@@ -160,6 +164,7 @@ document.addEventListener('click', function(e){
                 document.getElementById('contenido-domicilio').classList.remove('hidden');
                 document.getElementById('contenido-tienda').classList.add('hidden');
                 document.getElementById('costo-monto-pedido').textContent = '5.00';
+                document.getElementById('metodo-envio').value = 2;
                 calcultarTotalPedido();
                 break;
             case "tienda":
@@ -168,6 +173,7 @@ document.addEventListener('click', function(e){
                 document.getElementById('contenido-tienda').classList.remove('hidden');
                 document.getElementById('contenido-domicilio').classList.add('hidden');
                 document.getElementById('costo-monto-pedido').textContent = '0.00';
+                document.getElementById('metodo-envio').value = 1;
                 calcultarTotalPedido();
                 break;
         }
@@ -198,8 +204,8 @@ document.addEventListener('click', function(e){
     else if(e.target.dataset.cambiarresponsable) {
         const nuevoNombre = document.getElementById('nombre-responsable-nuevo').value;
         const nuevoDNI = document.getElementById('dni-responsable-nuevo').value;
-        document.getElementById('dni-responsable-actual').textContent = nuevoDNI;
-        document.getElementById('nombre-responsable-actual').textContent = nuevoNombre;
+        document.getElementById('dni-responsable-actual').value = nuevoDNI;
+        document.getElementById('nombre-responsable-actual').value = nuevoNombre;
         cerrarPopups();
     }
     else if(e.target.dataset.pago) {
@@ -256,6 +262,8 @@ document.addEventListener('click', function(e){
         }
 
         if(contadorCampos === 3) {
+            document.getElementById('precio-pago').value = document.getElementById('total-monto-pedido').textContent;
+
             document.getElementById('envio').querySelector('.contenido1').classList.add('hidden');
             document.getElementById('envio').querySelector('.contenido2').classList.remove('hidden');
             document.getElementById('pago').querySelector('.contenido1').classList.remove('hidden');
@@ -274,6 +282,7 @@ document.addEventListener('click', function(e){
         const inputs = document.getElementById('pago').querySelectorAll('input');
 
         [...inputs].forEach(input => {
+            console.log(input);
             if(input.value === ''){
                 input.parentNode.querySelector('b').classList.remove('hidden');
             }
@@ -303,9 +312,6 @@ function calcularTotal() {
 function calcultarTotalPedido() {
     const subtotal = parseFloat(document.getElementById('subtotal-monto-pedido').textContent);
     const envio = parseFloat(document.getElementById('costo-monto-pedido').textContent);
-    console.log(subtotal);
-    console.log(envio);
-    console.log(subtotal + envio);
     document.getElementById('total-monto-pedido').textContent = `${(subtotal + envio).toFixed(2)}`;
 }
 
