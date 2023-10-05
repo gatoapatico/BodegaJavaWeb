@@ -10,11 +10,11 @@
         <a href="ProductoController" id="productos-header">Productos<i class="bi bi-caret-down-fill"></i></a>
         <% if(usuario != null) {%>
             <% if(usuario.getCorreo().equals("admin@gmail.com")) {%>
-                <a href="adminHome.jsp">Ir a pagina de Administración</a>
+                <a href="adminHome.jsp">Ir a pagina de Administraciï¿½n</a>
             <% } else{ %>
                 <a class="nombre-usuario">Bienvenido <%=usuario.getNombre()%>!</a>
             <% } %>
-            <a href="UsuarioController?action=logout">Cerrar Sesión</a>
+            <a href="UsuarioController?action=logout">Cerrar Sesiï¿½n</a>
         <% } %>
     </div>
     <div class="header-right">
@@ -23,6 +23,6 @@
             <input type="text" name="buscador-txt" placeholder="Buscar productos...">
         </div>
         <a href="carrito.jsp" class="carrito" id="carrito-header"><i class="bi bi-cart2"></i></a>
-        <a href="" class="user"><i class="bi bi-person-circle"></i></a>
+        <a href="perfil.jsp" class="user"><i class="bi bi-person-circle"></i></a>
     </div>
 </header>
