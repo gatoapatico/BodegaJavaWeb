@@ -294,6 +294,19 @@ document.addEventListener('click', function(e){
     else if(e.target.dataset.compraexito) {
         cerrarPopups();
     }
+    else if(e.target.dataset.abrireditardatos) {
+        document.getElementById('bg-black-wall').classList.remove('hidden');
+        document.getElementById('popup-editar-datos').classList.remove('hidden');
+    }
+    else if(e.target.dataset.editardatos) {
+        const password = e.target.parentNode.querySelector('#password-editar-datos').value;
+        if(password !== '') {
+            console.log("Hay algo");
+        }
+        else {
+            console.log("No hay nadaaaaaa!");
+        }
+    }
 
 });
 
