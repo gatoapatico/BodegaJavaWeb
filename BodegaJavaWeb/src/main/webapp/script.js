@@ -10,9 +10,6 @@ document.addEventListener('click', function(e){
         document.getElementById('popup-login').classList.toggle('hidden');
         document.getElementById('popup-registrate').classList.toggle('hidden');
     }
-    else if(e.target.dataset.carrito){
-        document.getElementById('carrito-header').click();
-    }
     else if(e.target.dataset.agregar){
 
         const idProducto = e.target.dataset.productoid;
@@ -299,12 +296,37 @@ document.addEventListener('click', function(e){
         document.getElementById('popup-editar-datos').classList.remove('hidden');
     }
     else if(e.target.dataset.editardatos) {
-        const password = e.target.parentNode.querySelector('#password-editar-datos').value;
+        const idUsuario = document.getElementById('id-editar-datos').value;
+        const correo = document.getElementById('correo-editar-datos').value;
+        const documento = document.getElementById('documento-editar-datos').value;
+        const telefono = document.getElementById('telefono-editar-datos').value;
+        const password = document.getElementById('password-editar-datos').value;
+
         if(password !== '') {
-            console.log("Hay algo");
+            $.ajax({
+                url: 'UsuarioController',
+                type: 'POST',
+                data: { action:"editar-datos", id: idUsuario, correo: correo, documento: documento, telefono: telefono, password: password},
+                success: function(response) {
+                    switch (response) {
+                        case "success":
+                            e.target.parentNode.querySelector('.password-fail').classList.add('hidden');
+                            window.location.href = "perfil.jsp";
+                            break;
+                        case "fail":
+                            e.target.parentNode.querySelector('.password-editar-datos').focus();
+                            e.target.parentNode.querySelector('.password-fail').classList.remove('hidden');
+                            break;
+                    }
+                },
+                error: function() {
+                    console.log("Hubo un error!");
+                }
+            });
         }
         else {
-            console.log("No hay nadaaaaaa!");
+            e.target.parentNode.querySelector('.password-editar-datos').focus();
+            e.target.parentNode.querySelector('.ad-editar-datos').classList.add('spot');
         }
     }
 

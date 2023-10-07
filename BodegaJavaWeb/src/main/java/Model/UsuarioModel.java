@@ -31,6 +31,8 @@ public class UsuarioModel {
                 usuario.setApellido(resultSet.getString("apellido"));
                 usuario.setCorreo(resultSet.getString("correo"));
                 usuario.setPassword(resultSet.getString("password"));
+                usuario.setDocumento(resultSet.getString("documento_numero"));
+                usuario.setTelefono(resultSet.getString("telefono"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,6 +58,37 @@ public class UsuarioModel {
                 return statement.executeUpdate() > 0;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean editarDatosPerfil(int id, String documento, String telefono, String password) {
+        String sql = "UPDATE usuarios SET documento_tipo = 1, documento_numero = ?, telefono = ? WHERE id = ? AND password = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,(documento.isEmpty()) ? null : documento);
+            statement.setString(2,(telefono.isEmpty()) ? null : telefono);
+            statement.setInt(3,id);
+            statement.setString(4,password);
+            return statement.executeUpdate() > 0;
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean passValidation(int id, String password) {
+        String sql = "SELECT * FROM usuarios WHERE id = ? AND password = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            statement.setString(2,password);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
             return false;
         }

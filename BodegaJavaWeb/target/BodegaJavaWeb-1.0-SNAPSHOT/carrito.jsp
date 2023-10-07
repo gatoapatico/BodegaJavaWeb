@@ -35,6 +35,7 @@
             <h1>TU CARRITO</h1>
             <div class="paneles">
                 <div class="productos">
+                    <p class="mensaje-carrito-vacio <%=(carrito != null) ? "hidden" : ""%>">Aún no agregaste ningún producto al carrito!</p>
                     <% if(carrito != null) { %>
                         <% for(CarritoItem item : carrito.obtenerItems()) { %>
                             <% Producto producto = cProductos.obtenerProducto(item.getId()); %>
@@ -67,11 +68,10 @@
                         <% } %>
                     <% } %>
                 </div>
-                <div class="resumen">
+                <div class="resumen <%=(carrito != null) ? "" : "hidden"%>">
                     <div class="info">
                         <p class="titulo">Resumen de Compra</p>
                         <p class="subtotal">Subtotal<span id="subtotal">S/<%=String.format("%.2f", precioTotal)%></span></p>
-<%--                        <p class="descuento">Descuento (-20%)<span>-S/11.46</span></p>--%>
                         <p class="total">Total<span id="total">S/<%=String.format("%.2f", precioTotal)%></span></p>
                     </div>
                     <div class="ux">

@@ -69,12 +69,12 @@
                                     </div>
                                     <div class="dato-input">
                                         <label for="documento">Documento</label>
-                                        <input type="text" name="usuario-documento-numero" pattern="[0-9]{8,10}" id="documento" required>
+                                        <input type="text" name="usuario-documento-numero" pattern="[0-9]{8,10}" id="documento" value="<%=(usuario.getDocumento() != null) ? usuario.getDocumento() : ""%>" required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                     <div class="dato-input">
                                         <label for="telefono">Telefono celular*</label>
-                                        <input type="text" name="usuario-telefono" pattern="[0-9]{7,}" id="telefono" required>
+                                        <input type="text" name="usuario-telefono" pattern="[0-9]{7,}" id="telefono" value="<%=(usuario.getTelefono() != null) ? usuario.getTelefono() : ""%>" required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                 </div>
@@ -289,13 +289,12 @@
                         </div>
                         <div class="total-resumen">
                             <p>Subtotal<span>S/ <span id="subtotal-monto-pedido"><%=String.format("%.2f", precioTotal)%></span></span></p>
-                            <%--<p>Descuento (-20%)<span class="color">-S/ 11.46</span></p>--%>
                             <p>Costo de envío<span class="color">S/ <span id="costo-monto-pedido">0.00</span></span></p>
                             <p class="total">Total<span>S/ <span id="total-monto-pedido"><%=String.format("%.2f", precioTotal)%></span></span></p>
                         </div>
 
                         <button type="submit" id="btn-finalizar" class="btn-finalizar hidden" data-finalizar="finalizar"><i class="bi bi-cart-fill"></i>FINALIZAR PEDIDO</button>
-                        <button type="button" class="btn-regresar" data-carrito="carrito"><i class="bi bi-arrow-left"></i>VOLVER AL CARRITO</button>
+                        <a href="carrito.jsp" class="btn-regresar"><i class="bi bi-arrow-left"></i>VOLVER AL CARRITO</a>
                     </div>
                 </div>
             </form>

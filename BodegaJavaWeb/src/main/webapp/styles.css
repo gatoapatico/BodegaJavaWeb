@@ -85,10 +85,16 @@ header a {
 
 header .carrito {
     font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
 }
 
 header .user {
     font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
 }
 
 .landing {
@@ -439,6 +445,14 @@ header .user {
             border-radius: 15px;
             width: 40vw;
             min-height: 400px;
+
+            & .mensaje-carrito-vacio {
+                font-family: 'Baloo Chettan';
+                font-size: 0.7rem;
+                font-weight: bold;
+                text-align: center;
+                color: #9a9a9a;
+            }
 
             & .producto {
                 display: flex;
@@ -1388,6 +1402,24 @@ header .user {
                 }
             }
 
+            & a {
+                font-family: 'Average Sans';
+                color: #614BC3;
+                display: block;
+                width: 100%;
+                border-radius: 5px;
+                font-size: 0.8rem;
+                padding: 0.55em 0;
+                margin: 0.5em 0;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+
+                & i {
+                    margin-right: 0.5em;
+                }
+            }
+
             & .btn-finalizar {
                 background-color: #614BC3;
                 color: white;
@@ -1921,11 +1953,27 @@ header .user {
         padding: 0.5em 1em;
     }
 
+    & .password-editar-datos:focus {
+        outline: none;
+        box-shadow: 0 0 10px #614BC3;
+    }
+
+    & .password-fail {
+        margin: 0 0 0 1em;
+        font-size: 0.5rem;
+        color: red;
+    }
+
     & .ad-editar-datos {
         margin: 0.3em 0 0 0;
         text-align: center;
         font-size: 0.5rem;
         color: #232323;
+    }
+
+    & .spot {
+        text-decoration: underline;
+        color: #614BC3;
     }
 }
 
