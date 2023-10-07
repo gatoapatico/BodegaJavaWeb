@@ -30,6 +30,7 @@ public class UsuarioController extends HttpServlet {
         switch(action){
             case "logout":
                 request.getSession().removeAttribute("usuario");
+                request.getSession().removeAttribute("carrito");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
         }
@@ -40,16 +41,20 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        
+
+        String id = request.getParameter("id");
         String correo = request.getParameter("correo");
         String pass = request.getParameter("password");
-        
+        String documento = request.getParameter("documento");
+        String telefono = request.getParameter("telefono");
+
+        HttpSession misesion = request.getSession();
+
         switch(action){
             case "login":
                 Usuario usuario = model.login(correo, pass);
 
                 if(usuario.getCorreo() != null){
-                    HttpSession misesion = request.getSession();
                     misesion.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("productos.jsp").forward(request, response);
                 }
@@ -65,6 +70,19 @@ public class UsuarioController extends HttpServlet {
                 }
                 else{
                     request.getRequestDispatcher("productos.jsp").forward(request, response);
+                }
+                break;
+            case "editar-datos":
+                response.setContentType("text/plain");
+                if (model.passValidation(Integer.parseInt(id), pass)) {
+                    response.getWriter().write("success");
+                    if(model.editarDatosPerfil(Integer.parseInt(id), documento, telefono, pass)) {
+                        Usuario usuarioEditar = model.login(correo, pass);
+                        misesion.setAttribute("usuario", usuarioEditar);
+                    }
+                }
+                else {
+                    response.getWriter().write("fail");
                 }
                 break;
         }

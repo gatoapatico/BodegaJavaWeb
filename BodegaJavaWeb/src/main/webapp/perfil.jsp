@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="styles.css">
         <!-- ICON CDN (BOOTSTRAP ICON) -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <%-- LIBRERÍA JQUERY PARA USO DE AJAX --%>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="_header.jsp" %>
@@ -25,23 +27,23 @@
             <div class="perfil-campos">
                 <div class="perfil-campo">
                     <label for="perfil-nombre">NOMBRE</label>
-                    <p class="perfil-input" id="perfil-nombre">Alvaro</p>
+                    <p class="perfil-input" id="perfil-nombre"><%=usuario.getNombre()%></p>
                 </div>
                 <div class="perfil-campo">
                     <label for="perfil-apellido">APELLIDO</label>
-                    <p class="perfil-input" id="perfil-apellido">Fernandez</p>
+                    <p class="perfil-input" id="perfil-apellido"><%=usuario.getApellido()%></p>
                 </div>
                 <div class="perfil-campo">
                     <label for="perfil-correo">CORREO</label>
-                    <p class="perfil-input" id="perfil-correo">afernandez@gmail.com</p>
+                    <p class="perfil-input" id="perfil-correo"><%=usuario.getCorreo()%></p>
                 </div>
                 <div class="perfil-campo">
                     <label for="perfil-documento">DOCUMENTO</label>
-                    <p class="perfil-input" id="perfil-documento">48527293</p>
+                    <p class="perfil-input" id="perfil-documento"><%=(usuario.getDocumento() != null) ? usuario.getDocumento() : ""%></p>
                 </div>
                 <div class="perfil-campo">
                     <label for="perfil-telefono">TELEFONO</label>
-                    <p class="perfil-input" id="perfil-telefono">943802609</p>
+                    <p class="perfil-input" id="perfil-telefono"><%=(usuario.getTelefono() != null) ? usuario.getTelefono() : ""%></p>
                 </div>
                 <div class="perfil-campo">
                     <button class="btn-editar-datos" data-abrireditardatos="abrireditardatos">EDITAR DATOS</button>
@@ -100,9 +102,12 @@
         </div>
         <div class="popup popup-editar-datos hidden" id="popup-editar-datos">
             <h1>Datos de Usuario</h1>
-            <input id="documento-editar-datos" type="text" placeholder="Número de DNI">
-            <input id="telefono-editar-datos" type="text" placeholder="Número de Teléfono">
+            <input class="hidden" id="id-editar-datos" type="text" value="<%=usuario.getId()%>">
+            <input class="hidden" id="correo-editar-datos" type="text" value="<%=usuario.getCorreo()%>">
+            <input id="documento-editar-datos" type="text" placeholder="Número de DNI" value="<%=(usuario.getDocumento() != null) ? usuario.getDocumento() : ""%>">
+            <input id="telefono-editar-datos" type="text" placeholder="Número de Teléfono" value="<%=(usuario.getTelefono() != null) ? usuario.getTelefono() : ""%>">
             <input class="password-editar-datos" id="password-editar-datos" type="password" placeholder="Contraseña">
+            <p class="password-fail hidden">*Contraseña incorrecta</p>
             <button data-editardatos="editardatos">EDITAR DATOS</button>
             <p class="ad-editar-datos">*Para editar tus datos es necesario que ingreses tu contraseña</p>
         </div>

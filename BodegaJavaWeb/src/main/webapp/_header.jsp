@@ -10,11 +10,11 @@
         <a href="ProductoController" id="productos-header">Productos<i class="bi bi-caret-down-fill"></i></a>
         <% if(usuario != null) {%>
             <% if(usuario.getCorreo().equals("admin@gmail.com")) {%>
-                <a href="adminHome.jsp">Ir a pagina de Administraci�n</a>
+                <a href="adminHome.jsp">Ir a pagina de Administracion</a>
             <% } else{ %>
                 <a class="nombre-usuario">Bienvenido <%=usuario.getNombre()%>!</a>
             <% } %>
-            <a href="UsuarioController?action=logout">Cerrar Sesi�n</a>
+            <a href="UsuarioController?action=logout">Cerrar Sesion</a>
         <% } %>
     </div>
     <div class="header-right">
@@ -22,7 +22,14 @@
             <a href=""><i class="bi bi-search"></i></a>
             <input type="text" name="buscador-txt" placeholder="Buscar productos...">
         </div>
-        <a href="carrito.jsp" class="carrito" id="carrito-header"><i class="bi bi-cart2"></i></a>
-        <a href="perfil.jsp" class="user"><i class="bi bi-person-circle"></i></a>
+        <% if(usuario != null) {%>
+            <a href="carrito.jsp" class="carrito" id="carrito-header" ><i class="bi bi-cart2"></i></a>
+            <a href="perfil.jsp" class="user"><i class="bi bi-person-circle"></i></a>
+        <% } else { %>
+            <button class="carrito" id="carrito-header" data-login="login"><i class="bi bi-cart2" data-login="login"></i></button>
+            <button class="user" data-login="login"><i class="bi bi-person-circle" data-login="login"></i></button>
+        <% } %>
+
+
     </div>
 </header>
