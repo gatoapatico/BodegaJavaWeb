@@ -119,6 +119,8 @@ document.addEventListener('click', function(e){
         const inputs = datos.querySelectorAll('input');
         let cont = 0;
 
+        const id = document.getElementById('usuario-id').value;
+        const password = document.getElementById('usuario-password').value;
         const correo = inputs.item(0).value;
         const nombre = inputs.item(1).value;
         const apellidos = inputs.item(2).value;
@@ -150,6 +152,26 @@ document.addEventListener('click', function(e){
             document.getElementById('identificacion').querySelector('.contenido2').classList.remove('hidden');
 
             document.getElementById('envio').querySelector('.contenido1').classList.remove('hidden');
+
+            //ACTUALIZACIÓN DE DOCUMENTO Y/O TELEFONO DE USUARIO
+            $.ajax({
+                url: 'UsuarioController',
+                type: 'POST',
+                data: { action:"editar-datos", id: id, correo: correo, documento: documento, telefono: telefono, password: password},
+                success: function(response) {
+                    switch (response) {
+                        case "success":
+                            console.log("Todo bien con la actualización de datos!");
+                            break;
+                        case "fail":
+                            console.log("Hubo un error!");
+                            break;
+                    }
+                },
+                error: function() {
+                    console.log("Hubo un error!");
+                }
+            });
         }
     }
     else if(e.target.dataset.metodo){
@@ -290,6 +312,7 @@ document.addEventListener('click', function(e){
     }
     else if(e.target.dataset.compraexito) {
         cerrarPopups();
+        window.location.href = "resumencompra.jsp";
     }
     else if(e.target.dataset.abrireditardatos) {
         document.getElementById('bg-black-wall').classList.remove('hidden');

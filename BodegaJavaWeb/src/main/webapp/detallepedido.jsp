@@ -76,7 +76,7 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="" class="btn-volver-perfil"><i class="bi bi-arrow-left"></i>VOLVER AL PERFIL</a>
+                <a href="perfil.jsp" class="btn-volver-perfil"><i class="bi bi-arrow-left"></i>VOLVER AL PERFIL</a>
             </div>
         </main>
 

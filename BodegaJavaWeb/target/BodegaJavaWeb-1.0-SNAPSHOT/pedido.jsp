@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="styles.css">
         <!-- ICON CDN (BOOTSTRAP ICON) -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <%-- LIBRERÍA JQUERY PARA USO DE AJAX --%>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="_header.jsp" %>
@@ -31,8 +33,9 @@
                 <a href="">LIMPIEZA</a>
             </nav>
             <h1>PROCESO DE PEDIDO</h1>
-            <form action="success.jsp" method="POST">
-                <input class="hidden" type="text" name="usuario-id" value="<%=usuario.getId()%>" readonly>
+            <form action="PedidoController" method="POST">
+                <input class="hidden" type="text" name="usuario-id" id="usuario-id" value="<%=usuario.getId()%>" readonly>
+                <input class="hidden" type="text" id="usuario-password" value="<%=usuario.getPassword()%>" readonly>
                 <div class="paneles">
                     <div class="usuario">
                         <div class="identificacion" id="identificacion">

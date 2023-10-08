@@ -68,7 +68,7 @@
                     <td>afpqqqnf5</td>
                     <td>S/ 70.50</td>
                     <td>ENTREGADO</td>
-                    <td><a href=""><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
+                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -76,7 +76,7 @@
                     <td>eee8789q</td>
                     <td>S/ 34.00</td>
                     <td>LISTO PARA RECOJER</td>
-                    <td><a href=""><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
+                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
                 </tr>
                 <tr>
                     <td>3</td>
@@ -84,7 +84,7 @@
                     <td>sdg556gs</td>
                     <td>S/ 15.49</td>
                     <td>EN PROCESO</td>
-                    <td><a href=""><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
+                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
                 </tr>
                 <tr>
                     <td>4</td>
@@ -92,7 +92,7 @@
                     <td>qwer1234</td>
                     <td>S/ 25.15</td>
                     <td>ENTREGADO</td>
-                    <td><a href=""><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
+                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
                 </tr>
                 </tbody>
             </table>
