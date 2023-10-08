@@ -1,4 +1,10 @@
+<%@ page import="Entity.Pedido" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Controller.PedidoController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    PedidoController cPedido = new PedidoController();
+%>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -52,48 +58,27 @@
             <h2>PEDIDOS REALIZADOS</h2>
             <table class="tabla-pedidos-perfil">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Fecha</th>
-                    <th>Codigo</th>
-                    <th>Pago Total</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Codigo</th>
+                        <th>Pago Total</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2023-10-15</td>
-                    <td>afpqqqnf5</td>
-                    <td>S/ 70.50</td>
-                    <td>ENTREGADO</td>
-                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2023-10-17</td>
-                    <td>eee8789q</td>
-                    <td>S/ 34.00</td>
-                    <td>LISTO PARA RECOJER</td>
-                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>2023-11-01</td>
-                    <td>sdg556gs</td>
-                    <td>S/ 15.49</td>
-                    <td>EN PROCESO</td>
-                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>2023-12-09</td>
-                    <td>qwer1234</td>
-                    <td>S/ 25.15</td>
-                    <td>ENTREGADO</td>
-                    <td><a href="detallepedido.jsp"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
-                </tr>
+                    <% List<Pedido> pedidos = cPedido.obtenerPedidos(usuario.getId()); %>
+                    <% for(int i = 0; i < pedidos.size(); i++) { %>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%=pedidos.get(i).getFecha()%></td>
+                            <td><%=pedidos.get(i).getCodigoUnico()%></td>
+                            <td>S/ <%=String.format("%.2f", pedidos.get(i).getTotalPago())%></td>
+                            <td>ENTREGADO</td>
+                            <td><a href="PedidoController?pedidoid=<%=pedidos.get(i).getId()%>"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
         </main>

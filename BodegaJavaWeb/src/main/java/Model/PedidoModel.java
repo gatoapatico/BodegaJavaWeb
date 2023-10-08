@@ -2,6 +2,7 @@ package Model;
 
 import Config.db;
 import Entity.DetallePedido;
+import Entity.Pedido;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,6 +44,65 @@ public class PedidoModel {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public Pedido obtenerPedido(int pedidoId) {
+        String sql = "SELECT * FROM pedido WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, pedidoId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setId(resultSet.getInt("id"));
+                pedido.setFecha(resultSet.getString("fecha_pedido"));
+                pedido.setUsuarioId(resultSet.getInt("usuario_id"));
+                pedido.setMetodoEnvio(resultSet.getInt("metodoenvio_id"));
+                pedido.setDireccionEntrega(resultSet.getString("direccion_entrega"));
+                pedido.setFechaEntrega(resultSet.getString("fecha_entrega"));
+                pedido.setHoraEntrega(resultSet.getString("hora_entrega"));
+                pedido.setResponsableDni(resultSet.getString("responsable_dni"));
+                pedido.setResponsableNombre(resultSet.getString("responsable_nombre"));
+                pedido.setNumeroTarjetaPago(resultSet.getString("numero_tarjeta_pago"));
+                pedido.setTotalPago(resultSet.getDouble("total_pago"));
+                pedido.setCodigoUnico(resultSet.getString("codigo_recojo"));
+                return pedido;
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Pedido> obtenerPedidos(int usuarioId) {
+        List<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT * FROM pedido WHERE usuario_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, usuarioId);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setId(resultSet.getInt("id"));
+                pedido.setFecha(resultSet.getString("fecha_pedido"));
+                pedido.setUsuarioId(resultSet.getInt("usuario_id"));
+                pedido.setMetodoEnvio(resultSet.getInt("metodoenvio_id"));
+                pedido.setDireccionEntrega(resultSet.getString("direccion_entrega"));
+                pedido.setFechaEntrega(resultSet.getString("fecha_entrega"));
+                pedido.setHoraEntrega(resultSet.getString("hora_entrega"));
+                pedido.setResponsableDni(resultSet.getString("responsable_dni"));
+                pedido.setResponsableNombre(resultSet.getString("responsable_nombre"));
+                pedido.setNumeroTarjetaPago(resultSet.getString("numero_tarjeta_pago"));
+                pedido.setTotalPago(resultSet.getDouble("total_pago"));
+                pedido.setCodigoUnico(resultSet.getString("codigo_recojo"));
+                pedidos.add(pedido);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pedidos;
     }
 
     public boolean crearDetallePedido(int pedidoId, int productoId, int cantidad, double precio, double subtotal) {
