@@ -20,6 +20,11 @@ public class PedidoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int pedidoId = Integer.parseInt((String)request.getParameter("pedidoid"));
+        Pedido pedido = model.obtenerPedido(pedidoId);
+        HttpSession session = request.getSession();
+        session.setAttribute("pedido", pedido);
+        request.getRequestDispatcher("detallepedido.jsp").forward(request, response);
     }
 
     @Override
@@ -67,6 +72,10 @@ public class PedidoController extends HttpServlet {
         else {
             request.getRequestDispatcher("pedido.jsp").forward(request, response);
         }
+    }
+
+    public List<Pedido> obtenerPedidos(int usuarioId) {
+        return model.obtenerPedidos(usuarioId);
     }
 
     public List<DetallePedido> obtenerDetalles(int pedidoId) {

@@ -1697,6 +1697,15 @@ header .user {
                     width: 20%;
                 }
 
+                & .fila-comision {
+                    background-color: #f0f0f0;
+
+                    & td {
+                        padding: 0.5em 0;
+                        border-radius: 5px;
+                    }
+                }
+
                 & tr {
 
                     & .tabla-precio {
@@ -2092,6 +2101,15 @@ header .user {
 
                 & .big-space {
                     width: 20%;
+                }
+
+                & .fila-comision {
+                    background-color: #f0f0f0;
+
+                    & td {
+                        padding: 0.5em 0;
+                        border-radius: 5px;
+                    }
                 }
 
                 & tr {

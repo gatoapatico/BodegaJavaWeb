@@ -59,8 +59,8 @@
                         </div>
                         <div class="tarjeta info-resumen">
                             <b>RESUMEN</b>
-                            <p class="no-bold">Subtotal <span>S/ <span><%=String.format("%.2f", pedido.getTotalPago())%></span></span></p>
-                            <p class="no-bold">Envío <span>S/ <span>0.00</span></span></p>
+                            <p class="no-bold">Subtotal <span>S/ <span><%=String.format("%.2f", pedido.getTotalPago() - 5)%></span></span></p>
+                            <p class="no-bold">Envío <span>S/ <span><%=(pedido.getMetodoEnvio() == 1) ? "0.00" : "5.00"%></span></span></p>
                             <p class="no-bold tarjeta-total">Total <span>S/ <span><%=String.format("%.2f", pedido.getTotalPago())%></span></span></p>
                         </div>
                     </div>
@@ -93,6 +93,12 @@
                                     <td class="tabla-cantidad"><div class="cuadro-cantidad"><%=detalle.getCantidad()%></div></td>
                                     <td class="tabla-precio">S/ <%=String.format("%.2f", detalle.getSubtotal())%></td>
                                 </tr>
+                            <% } %>
+                            <% if(pedido.getMetodoEnvio() == 2) {%>
+                            <tr class="fila-comision">
+                                <td colspan="4">Comision de envio a domicilio</td>
+                                <td class="tabla-precio">S/ 5.00</td>
+                            </tr>
                             <% } %>
                         </tbody>
                     </table>
