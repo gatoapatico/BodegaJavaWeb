@@ -43,7 +43,7 @@ public class ProductoModel {
         return productos;
     }
 
-    public void addProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock, String imagen) 
+    public void addProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock, String imagen)
             throws SQLException {
 
         String sql = "INSERT INTO productos (nombre, descripcion, proveedor, precio, categoria, stock, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -57,4 +57,45 @@ public class ProductoModel {
         statement.setString(7, imagen);
         statement.executeUpdate();
     }
+
+    public void deleteProducto(int id) throws SQLException {
+        String sql = "DELETE FROM productos WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        statement.executeUpdate();
+    }
+
+    public Producto getProductoById(int id) throws SQLException {
+        String sql = "SELECT * FROM productos WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            Producto producto = new Producto();
+            producto.setId(resultSet.getInt("id"));
+            producto.setNombre(resultSet.getString("nombre"));
+            producto.setCategoria(resultSet.getString("categoria"));
+            producto.setImagen(resultSet.getString("imagen"));
+            producto.setDescripcion(resultSet.getString("descripcion"));
+            producto.setProveedor(resultSet.getString("proveedor"));
+            producto.setPrecio(resultSet.getDouble("precio"));
+            producto.setStock(resultSet.getInt("stock"));
+            return producto;
+        } else {
+            return null;
+        }
+    }
+    
+    public void updateProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock) throws SQLException {
+    String sql = "UPDATE productos SET nombre = ?, descripcion = ?, proveedor = ?, precio = ?, categoria = ?, stock = ?";
+    PreparedStatement statement = connection.prepareStatement(sql);
+    statement.setString(1, nombre);
+    statement.setString(2, descripcion);
+    statement.setString(3, proveedor);
+    statement.setDouble(4, precio);
+    statement.setString(5, categoria);
+    statement.setInt(6, stock);
+    statement.executeUpdate();
+}
 }

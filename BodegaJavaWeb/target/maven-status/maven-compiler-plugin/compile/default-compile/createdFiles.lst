@@ -4,6 +4,7 @@ Controller\ProductoController.class
 Config\db.class
 com\utp\bodegajavaweb\JAXRSConfiguration.class
 Controller\AdminController.class
+Controller\EditarProductoController.class
 Model\ProductoModel.class
 Entity\Producto.class
 Controller\UsuarioController.class
