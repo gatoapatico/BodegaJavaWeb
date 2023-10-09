@@ -1,9 +1,11 @@
 package Controller;
 
+import Config.Encryptor;
 import Entity.Usuario;
 import Model.UsuarioModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public class UsuarioController extends HttpServlet {
 
     UsuarioModel model = new UsuarioModel();
+    Encryptor encryptor = new Encryptor();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,14 +48,22 @@ public class UsuarioController extends HttpServlet {
         String id = request.getParameter("id");
         String correo = request.getParameter("correo");
         String pass = request.getParameter("password");
+        String passEncode = "";
         String documento = request.getParameter("documento");
         String telefono = request.getParameter("telefono");
+
+        try {
+            passEncode = encryptor.encryptString(pass);
+        }
+        catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         HttpSession misesion = request.getSession();
 
         switch(action){
             case "login":
-                Usuario usuario = model.login(correo, pass);
+                Usuario usuario = model.login(correo, passEncode);
 
                 if(usuario.getCorreo() != null){
                     misesion.setAttribute("usuario", usuario);
@@ -65,7 +76,7 @@ public class UsuarioController extends HttpServlet {
             case "register":
                 String nombre = request.getParameter("nombre");
                 String apellido = request.getParameter("apellido");
-                if(model.registrar("CLIENTE", nombre, apellido, correo, pass)){
+                if(model.registrar("CLIENTE", nombre, apellido, correo, passEncode)){
                     request.getRequestDispatcher("productos.jsp").forward(request, response);
                 }
                 else{
@@ -74,10 +85,10 @@ public class UsuarioController extends HttpServlet {
                 break;
             case "editar-datos":
                 response.setContentType("text/plain");
-                if (model.passValidation(Integer.parseInt(id), pass)) {
+                if (model.passValidation(Integer.parseInt(id), passEncode)) {
                     response.getWriter().write("success");
-                    if(model.editarDatosPerfil(Integer.parseInt(id), documento, telefono, pass)) {
-                        Usuario usuarioEditar = model.login(correo, pass);
+                    if(model.editarDatosPerfil(Integer.parseInt(id), documento, telefono, passEncode)) {
+                        Usuario usuarioEditar = model.login(correo, passEncode);
                         misesion.setAttribute("usuario", usuarioEditar);
                     }
                 }
