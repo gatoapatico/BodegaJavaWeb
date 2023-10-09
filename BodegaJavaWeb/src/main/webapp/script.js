@@ -161,15 +161,14 @@ document.addEventListener('click', function(e){
                 success: function(response) {
                     switch (response) {
                         case "success":
-                            console.log("Todo bien con la actualización de datos!");
                             break;
                         case "fail":
-                            console.log("Hubo un error!");
+                            console.log("Hubo un error en la actualización de datos!");
                             break;
                     }
                 },
                 error: function() {
-                    console.log("Hubo un error!");
+                    console.log("Hubo un error en el Ajax de actualización de datos!");
                 }
             });
         }
@@ -206,6 +205,7 @@ document.addEventListener('click', function(e){
     }
     else if(e.target.dataset.inputfecha) {
         e.target.addEventListener('change', function(){
+            seteoHorarioMinimo();
             document.getElementById('fecha-formateada').textContent = calcularFechaEntrega(e.target);
             document.getElementById('fecha').classList.add('hidden');
             document.getElementById('fecha-resumen').classList.remove('hidden');
@@ -352,7 +352,24 @@ document.addEventListener('click', function(e){
             e.target.parentNode.querySelector('.ad-editar-datos').classList.add('spot');
         }
     }
-
+    else if(e.target.dataset.crearpdf) {
+        html2canvas(document.querySelector("#contenedor-boleta")).then(canvas => {
+            var img = canvas.toDataURL("image/png");
+            var doc = new jspdf();
+            //doc.addImage(img,'PNG',-63,15,335,210);
+            doc.addImage(img,'PNG',19,13,175,145);
+            doc.save(`marisolComprobante_${document.getElementById('comprobante-codigo-unico').textContent}.pdf`);
+        });
+    }
+    else if(e.target.dataset.crearpdfdetalle) {
+        html2canvas(document.querySelector("#paneles")).then(canvas => {
+            var img = canvas.toDataURL("image/png");
+            var doc = new jspdf();
+            //doc.addImage(img,'PNG',-63,15,335,210);
+            doc.addImage(img,'PNG',-32,13,275,115);
+            doc.save(`marisolComprobante_${document.getElementById('comprobante-codigo-unico').textContent}.pdf`);
+        });
+    }
 });
 
 
@@ -375,6 +392,43 @@ function calcultarTotalPedido() {
 
 function seteoFechaMinima() {
     document.getElementById('input-fecha-entrega').min = new Date().toISOString().split('T')[0];
+}
+
+function seteoHorarioMinimo() {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2,'0');
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const year = date.getUTCFullYear();
+
+    const fechaActual = `${year}-${month}-${day}`;
+    const inputFecha = document.getElementById('input-fecha-entrega').value;
+
+    const selectHorarios = document.getElementById('hora');
+    const horarioActual = new Date().toLocaleTimeString('es-PE', {hour12: false});
+
+
+    console.log(fechaActual);
+    console.log(inputFecha);
+
+    if(fechaActual === inputFecha) {
+        for(let i = 0; i < selectHorarios.options.length; i++) {
+            const option = selectHorarios.options[i];
+            if(option.value < horarioActual) {
+                option.disabled = true;
+            }
+            else {
+                option.selected = true;
+                return;
+            }
+        }
+    }
+    else {
+        for(let i = 0; i < selectHorarios.options.length; i++) {
+            const option = selectHorarios.options[i];
+            option.disabled = false;
+            if(i == 0) { option.selected = true; }
+        }
+    }
 }
 
 function calcularFechaEntrega(element) {

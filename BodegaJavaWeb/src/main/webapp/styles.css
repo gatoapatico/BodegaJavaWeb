@@ -1022,6 +1022,10 @@ header .user {
                             border-radius: 7px;
                             color: #848484;
                             width: 100%;
+
+                            & option:disabled {
+                                color: #e3e3e3;
+                            }
                         }
 
                         & select:focus {
@@ -1562,6 +1566,12 @@ header .user {
         gap: 1em;
         align-items: center;
 
+        & .contenedor-boleta {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
         & .panel {
             min-width: 900px;
             max-width: 1000px;
@@ -1582,11 +1592,61 @@ header .user {
 
             & .txt-envio-email {
                 margin: 0.3em 1em;
+
+                & button {
+                    font-size: 0.6rem;
+                    font-family: 'Baloo Chettan';
+                    font-weight: bold;
+                    border-radius: 5px;
+                    margin-left: 1em;
+                    padding: 0.2em 1em;
+                    background-color: #f0f0f0;
+                    border: none;
+                    cursor: pointer;
+                    box-shadow: 2px 2px 1px #232323;
+                }
+
+                & button:active {
+                    background-color: #d2d2d2;
+                }
             }
         }
 
         & .panel2 {
             height: auto;
+
+            & .comprobante-encabezado {
+                display: flex;
+                justify-content: space-between;
+
+                & .info-encabezado {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5em;
+                    justify-content: space-evenly;
+
+                    & .encabezado-titulo {
+                        font-size: 0.8rem;
+                        background-color: #614BC3;
+                        border-radius: 5px;
+                        color: white;
+                        padding: 0.5em 0 0.5em 1em;
+                        width: 565px;
+                    }
+
+                    & .tarjeta-pedido {
+                        align-self: center;
+                        width: 547px;
+                    }
+                }
+
+                & .codigo-barras {
+
+                    & img {
+                        width: 270px;
+                    }
+                }
+            }
 
             & .tarjeta-pedido {
                 display: inline-block;
@@ -2040,6 +2100,14 @@ header .user {
                 flex-direction: column;
                 gap: 0.5em;;
 
+                & .comprobante-titulo {
+                    font-size: 0.7rem;
+                    background-color: #614BC3;
+                    border-radius: 5px;
+                    color: white;
+                    padding: 0.3em 1em;
+                }
+
                 & .tarjeta-pedido {
                     display: inline-block;
                     font-size: 0.7rem;
@@ -2142,29 +2210,55 @@ header .user {
             }
         }
 
-        & .btn-volver-perfil {
-            font-family: inherit;
-            font-size: 0.9rem;
-            color: #614BC3;
-            background-color: #fafafa;
-            margin-bottom: 5em;
-            margin-top: 1em;
-            border: 1px solid #d3d3d3;
-            border-radius: 5px;
-            padding: 0.2em 1em;
-            cursor: pointer;
-            text-decoration: none;
 
-            & i {
-                margin: 0 0.3em;
-            }
-        }
+    }
 
-        & .btn-volver-perfil:active {
-            color: #2a2053;
+    & .btn-descargar-comprobante {
+        display: block;
+        font-family: 'Baloo Chettan';
+        font-size: 0.7em;
+        margin: 1em auto;
+
+        padding: 0.2em 1em;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        background-color: #614BC3;
+        box-shadow: 3px 3px 1px #232323;
+        cursor: pointer;
+    }
+
+    & .btn-descargar-comprobante:active {
+        background-color: #503ea1;
+    }
+
+    & .btn-volver-perfil {
+
+        font-family: inherit;
+        font-size: 0.9rem;
+        color: #614BC3;
+        background-color: #fafafa;
+
+        /*margin-bottom: 5em;
+        margin-top: 0.5em;*/
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+        padding: 0.2em 1em;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+        width: 250px;
+        margin: 1.5em auto;
+        margin-bottom: 5em;
+
+        & i {
+            margin: 0 0.3em;
         }
     }
 
+    & .btn-volver-perfil:active {
+        color: #2a2053;
+    }
 }
 
 
