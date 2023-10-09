@@ -1942,10 +1942,11 @@ header .user {
     & .tabla-pedidos-perfil {
         border: 1px solid rgb(228, 228, 228);
         font-size: 0.7rem;
-        margin: 0 2em 3em 2em;
+        margin: 0 auto 3em auto;
         text-align: center;
         border-spacing: 10px;
         border-radius: 15px;
+        width: 90%;
 
         & tr:nth-of-type(odd) {
             background-color: white;
@@ -1993,6 +1994,13 @@ header .user {
                 margin-right: 0.3em;
                 color: #614BC3;
             }
+        }
+
+        & .txt-sinpedidos {
+            font-family: 'Baloo Chettan';
+            font-size: 1rem;
+            color: #9a9a9a;
+            font-weight: bold;
         }
     }
 }

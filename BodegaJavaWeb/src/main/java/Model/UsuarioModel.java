@@ -27,11 +27,13 @@ public class UsuarioModel {
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 usuario.setId(resultSet.getInt("id"));
+                usuario.setUsuarioTipo(resultSet.getString("usuario_tipo"));
                 usuario.setNombre(resultSet.getString("nombre"));
                 usuario.setApellido(resultSet.getString("apellido"));
                 usuario.setCorreo(resultSet.getString("correo"));
                 usuario.setPassword(resultSet.getString("password"));
-                usuario.setDocumento(resultSet.getString("documento_numero"));
+                usuario.setDocumentoTipo(resultSet.getInt("documento_tipo"));
+                usuario.setDocumentoNumero(resultSet.getString("documento_numero"));
                 usuario.setTelefono(resultSet.getString("telefono"));
             }
         } catch (SQLException e) {
@@ -40,7 +42,7 @@ public class UsuarioModel {
         return usuario;
     }
     
-    public boolean registrar(String nombre, String apellido, String correo, String password) {
+    public boolean registrar(String usuarioTipo, String nombre, String apellido, String correo, String password) {
         String sqlValidation = "SELECT * FROM usuarios WHERE correo = ? LIMIT 1";
         try {
             PreparedStatement validacion = connection.prepareStatement(sqlValidation);
@@ -49,12 +51,13 @@ public class UsuarioModel {
             if (validationResult.next()) {
                 return false;
             } else {
-                String sql = "INSERT INTO usuarios VALUES (null, ?, ?, ?, ?, null, null, null)";
+                String sql = "INSERT INTO usuarios VALUES (null, ?, ?, ?, ?, ?, null, null, null)";
                 PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setString(1, nombre);
-                statement.setString(2, apellido);
-                statement.setString(3, correo);
-                statement.setString(4, password);
+                statement.setString(1, usuarioTipo);
+                statement.setString(2, nombre);
+                statement.setString(3, apellido);
+                statement.setString(4, correo);
+                statement.setString(5, password);
                 return statement.executeUpdate() > 0;
             }
         } catch (SQLException e) {
@@ -104,10 +107,14 @@ public class UsuarioModel {
             while(resultSet.next()){
                 Usuario usuario = new Usuario();
                 usuario.setId(resultSet.getInt("id"));
+                usuario.setUsuarioTipo(resultSet.getString("usuario_tipo"));
                 usuario.setNombre(resultSet.getString("nombre"));
                 usuario.setApellido(resultSet.getString("apellido"));
                 usuario.setCorreo(resultSet.getString("correo"));
                 usuario.setPassword(resultSet.getString("password"));
+                usuario.setDocumentoTipo(resultSet.getInt("documento_tipo"));
+                usuario.setDocumentoNumero(resultSet.getString("documento_numero"));
+                usuario.setTelefono(resultSet.getString("telefono"));
                 usuarios.add(usuario);
             }
         }

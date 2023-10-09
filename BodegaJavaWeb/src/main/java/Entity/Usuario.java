@@ -2,23 +2,27 @@ package Entity;
 
 public class Usuario {
     private int id;
+    private String usuarioTipo;
     private String nombre;
     private String apellido;
     private String correo;
     private String password;
-    private String documento;
+    private int documentoTipo;
+    private String documentoNumero;
     private String telefono;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombre, String apellido, String correo, String password, String documento, String telefono) {
+    public Usuario(int id, String usuarioTipo, String nombre, String apellido, String correo, String password, int documentoTipo, String documentoNumero, String telefono) {
         this.id = id;
+        this.usuarioTipo = usuarioTipo;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.password = password;
-        this.documento = documento;
+        this.documentoTipo = documentoTipo;
+        this.documentoNumero = documentoNumero;
         this.telefono = telefono;
     }
 
@@ -28,6 +32,14 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUsuarioTipo() {
+        return usuarioTipo;
+    }
+
+    public void setUsuarioTipo(String usuarioTipo) {
+        this.usuarioTipo = usuarioTipo;
     }
 
     public String getNombre() {
@@ -62,12 +74,20 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getDocumento() {
-        return documento;
+    public int getDocumentoTipo() {
+        return documentoTipo;
     }
 
-    public void setDocumento(String documento) {
-        this.documento = documento;
+    public void setDocumentoTipo(int documentoTipo) {
+        this.documentoTipo = documentoTipo;
+    }
+
+    public String getDocumentoNumero() {
+        return documentoNumero;
+    }
+
+    public void setDocumentoNumero(String documentoNumero) {
+        this.documentoNumero = documentoNumero;
     }
 
     public String getTelefono() {

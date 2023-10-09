@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="dato-input">
                                         <label for="documento">Documento</label>
-                                        <input type="text" name="usuario-documento-numero" pattern="[0-9]{8,10}" id="documento" value="<%=(usuario.getDocumento() != null) ? usuario.getDocumento() : ""%>" required>
+                                        <input type="text" name="usuario-documento-numero" pattern="[0-9]{8,10}" id="documento" value="<%=(usuario.getDocumentoNumero() != null) ? usuario.getDocumentoNumero() : ""%>" required>
                                         <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                     </div>
                                     <div class="dato-input">
