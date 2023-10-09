@@ -56,7 +56,7 @@
                             <div class="tarjeta datos-personales">
                                 <b>DATOS PERSONALES</b>
                                 <p>NOMBRE: <span class="tarjeta-nombre"><%=usuario.getNombre() + " " + usuario.getApellido()%></span></p>
-                                <p>DNI: <span class="tarjeta-dni"><%=usuario.getDocumento()%></span></p>
+                                <p>DNI: <span class="tarjeta-dni"><%=usuario.getDocumentoNumero()%></span></p>
                                 <p>CORREO: <span class="tarjeta-correo"><%=usuario.getCorreo()%></span></p>
                                 <p>TELÉFONO: <span class="tarjeta-telefono"><%=usuario.getTelefono()%></span></p>
                             </div>

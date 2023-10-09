@@ -45,7 +45,7 @@
                 </div>
                 <div class="perfil-campo">
                     <label for="perfil-documento">DOCUMENTO</label>
-                    <p class="perfil-input" id="perfil-documento"><%=(usuario.getDocumento() != null) ? usuario.getDocumento() : ""%></p>
+                    <p class="perfil-input" id="perfil-documento"><%=(usuario.getDocumentoNumero() != null) ? usuario.getDocumentoNumero() : ""%></p>
                 </div>
                 <div class="perfil-campo">
                     <label for="perfil-telefono">TELEFONO</label>
@@ -61,6 +61,7 @@
                     <tr>
                         <th>#</th>
                         <th>Fecha</th>
+                        <th>Hora</th>
                         <th>Codigo</th>
                         <th>Pago Total</th>
                         <th>Estado</th>
@@ -72,11 +73,17 @@
                     <% for(int i = 0; i < pedidos.size(); i++) { %>
                         <tr>
                             <td><%=i+1%></td>
-                            <td><%=pedidos.get(i).getFecha()%></td>
+                            <td><%=pedidos.get(i).getFecha().split(" ")[0]%></td>
+                            <td><%=pedidos.get(i).getFecha().split(" ")[1]%></td>
                             <td><%=pedidos.get(i).getCodigoUnico()%></td>
                             <td>S/ <%=String.format("%.2f", pedidos.get(i).getTotalPago())%></td>
                             <td>ENTREGADO</td>
                             <td><a href="PedidoController?pedidoid=<%=pedidos.get(i).getId()%>"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
+                        </tr>
+                    <% } %>
+                    <% if(pedidos.size() == 0) {%>
+                        <tr>
+                            <td class="txt-sinpedidos" colspan="6">Aún no has realizado ningún pedido!</td>
                         </tr>
                     <% } %>
                 </tbody>
@@ -89,7 +96,7 @@
             <h1>Datos de Usuario</h1>
             <input class="hidden" id="id-editar-datos" type="text" value="<%=usuario.getId()%>">
             <input class="hidden" id="correo-editar-datos" type="text" value="<%=usuario.getCorreo()%>">
-            <input id="documento-editar-datos" type="text" placeholder="Número de DNI" value="<%=(usuario.getDocumento() != null) ? usuario.getDocumento() : ""%>">
+            <input id="documento-editar-datos" type="text" placeholder="Número de DNI" value="<%=(usuario.getDocumentoNumero() != null) ? usuario.getDocumentoNumero() : ""%>">
             <input id="telefono-editar-datos" type="text" placeholder="Número de Teléfono" value="<%=(usuario.getTelefono() != null) ? usuario.getTelefono() : ""%>">
             <input class="password-editar-datos" id="password-editar-datos" type="password" placeholder="Contraseña">
             <p class="password-fail hidden">*Contraseña incorrecta</p>

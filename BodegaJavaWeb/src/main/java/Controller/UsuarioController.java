@@ -65,7 +65,7 @@ public class UsuarioController extends HttpServlet {
             case "register":
                 String nombre = request.getParameter("nombre");
                 String apellido = request.getParameter("apellido");
-                if(model.registrar(nombre, apellido, correo, pass)){
+                if(model.registrar("CLIENTE", nombre, apellido, correo, pass)){
                     request.getRequestDispatcher("productos.jsp").forward(request, response);
                 }
                 else{

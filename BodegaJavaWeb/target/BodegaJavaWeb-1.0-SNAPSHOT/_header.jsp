@@ -9,7 +9,7 @@
         </div>
         <a href="ProductoController" id="productos-header">Productos<i class="bi bi-caret-down-fill"></i></a>
         <% if(usuario != null) {%>
-            <% if(usuario.getCorreo().equals("admin@gmail.com")) {%>
+            <% if(usuario.getUsuarioTipo().equals("ADMINISTRADOR")) {%>
                 <a href="adminHome.jsp">Ir a pagina de Administracion</a>
             <% } else{ %>
                 <a class="nombre-usuario">Bienvenido <%=usuario.getNombre()%>!</a>
