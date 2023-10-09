@@ -11,7 +11,12 @@ public class Pedido {
     private String horaEntrega;
     private String responsableDni;
     private String responsableNombre;
+    private String reciboTipo;
+    private String ruc;
     private String numeroTarjetaPago;
+    private double subTotalPago;
+    private double envioPago;
+    private double igvPago;
     private double totalPago;
     private String codigoUnico;
 
@@ -21,7 +26,9 @@ public class Pedido {
 
     public Pedido(int id, String fecha, int usuarioId, int metodoEnvio, String direccionEntrega,
                   String fechaEntrega, String horaEntrega, String responsableDni, String responsableNombre,
-                  String numeroTarjetaPago, double totalPago, String codigoUnico) {
+                  String reciboTipo, String ruc, String numeroTarjetaPago, double subTotalPago,
+                  double envioPago, double igvPago, double totalPago, String codigoUnico) {
+
         this.id = id;
         this.fecha = fecha;
         this.usuarioId = usuarioId;
@@ -31,7 +38,12 @@ public class Pedido {
         this.horaEntrega = horaEntrega;
         this.responsableDni = responsableDni;
         this.responsableNombre = responsableNombre;
+        this.reciboTipo = reciboTipo;
+        this.ruc = ruc;
         this.numeroTarjetaPago = numeroTarjetaPago;
+        this.subTotalPago = subTotalPago;
+        this.envioPago = envioPago;
+        this.igvPago = igvPago;
         this.totalPago = totalPago;
         this.codigoUnico = codigoUnico;
     }
@@ -108,12 +120,52 @@ public class Pedido {
         this.responsableNombre = responsableNombre;
     }
 
+    public String getReciboTipo() {
+        return reciboTipo;
+    }
+
+    public void setReciboTipo(String reciboTipo) {
+        this.reciboTipo = reciboTipo;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+
     public String getNumeroTarjetaPago() {
         return numeroTarjetaPago;
     }
 
     public void setNumeroTarjetaPago(String numeroTarjetaPago) {
         this.numeroTarjetaPago = numeroTarjetaPago;
+    }
+
+    public double getSubTotalPago() {
+        return subTotalPago;
+    }
+
+    public void setSubTotalPago(double subTotalPago) {
+        this.subTotalPago = subTotalPago;
+    }
+
+    public double getEnvioPago() {
+        return envioPago;
+    }
+
+    public void setEnvioPago(double envioPago) {
+        this.envioPago = envioPago;
+    }
+
+    public double getIgvPago() {
+        return igvPago;
+    }
+
+    public void setIgvPago(double igvPago) {
+        this.igvPago = igvPago;
     }
 
     public double getTotalPago() {

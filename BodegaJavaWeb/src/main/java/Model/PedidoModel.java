@@ -22,9 +22,10 @@ public class PedidoModel {
 
     public boolean crearPedido(String fechaPedido, int usuarioId, int metodoEnvio, String direccionEntrega,
                             String fechaEntrega, String horaEntrega, String responsableDocumento, String responsableNombre,
-                            String numeroTarjetaPago, double totalPago, String codigoUnico) {
+                            String reciboTipo, String ruc, String numeroTarjetaPago, double subtotalPago,
+                               double envioPago, double igvPago, double totalPago, String codigoUnico) {
 
-        String sql = "INSERT INTO pedido VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pedido VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, fechaPedido);
@@ -35,9 +36,14 @@ public class PedidoModel {
             statement.setString(6, horaEntrega);
             statement.setString(7, responsableDocumento);
             statement.setString(8, responsableNombre);
-            statement.setString(9, numeroTarjetaPago);
-            statement.setDouble(10, totalPago);
-            statement.setString(11, codigoUnico);
+            statement.setString(9, reciboTipo);
+            statement.setString(10, ruc);
+            statement.setString(11, numeroTarjetaPago);
+            statement.setDouble(12, subtotalPago);
+            statement.setDouble(13, envioPago);
+            statement.setDouble(14, igvPago);
+            statement.setDouble(15, totalPago);
+            statement.setString(16, codigoUnico);
             return statement.executeUpdate() > 0;
         }
         catch (SQLException e) {
@@ -63,7 +69,12 @@ public class PedidoModel {
                 pedido.setHoraEntrega(resultSet.getString("hora_entrega"));
                 pedido.setResponsableDni(resultSet.getString("responsable_dni"));
                 pedido.setResponsableNombre(resultSet.getString("responsable_nombre"));
+                pedido.setReciboTipo(resultSet.getString("recibo_tipo"));
+                pedido.setRuc(resultSet.getString("ruc"));
                 pedido.setNumeroTarjetaPago(resultSet.getString("numero_tarjeta_pago"));
+                pedido.setSubTotalPago(resultSet.getDouble("subtotal_pago"));
+                pedido.setEnvioPago(resultSet.getDouble("envio_pago"));
+                pedido.setIgvPago(resultSet.getDouble("igv_pago"));
                 pedido.setTotalPago(resultSet.getDouble("total_pago"));
                 pedido.setCodigoUnico(resultSet.getString("codigo_recojo"));
                 return pedido;
@@ -93,7 +104,12 @@ public class PedidoModel {
                 pedido.setHoraEntrega(resultSet.getString("hora_entrega"));
                 pedido.setResponsableDni(resultSet.getString("responsable_dni"));
                 pedido.setResponsableNombre(resultSet.getString("responsable_nombre"));
+                pedido.setReciboTipo(resultSet.getString("recibo_tipo"));
+                pedido.setRuc(resultSet.getString("ruc"));
                 pedido.setNumeroTarjetaPago(resultSet.getString("numero_tarjeta_pago"));
+                pedido.setSubTotalPago(resultSet.getDouble("subtotal_pago"));
+                pedido.setEnvioPago(resultSet.getDouble("envio_pago"));
+                pedido.setIgvPago(resultSet.getDouble("igv_pago"));
                 pedido.setTotalPago(resultSet.getDouble("total_pago"));
                 pedido.setCodigoUnico(resultSet.getString("codigo_recojo"));
                 pedidos.add(pedido);

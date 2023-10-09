@@ -46,8 +46,16 @@ public class PedidoController extends HttpServlet {
         double totalPago = Double.parseDouble((String) request.getParameter("total-pago"));
         String codigoUnico = UUID.randomUUID().toString().replace("-","").substring(0, 10);
 
+        double subtotalPago = (metodoEnvio == 1) ? totalPago * 0.82 : (totalPago - 5.00) * 0.82;
+        double envioPago = (metodoEnvio == 1) ? 0.00 : 5.00;
+        double igvPago = (metodoEnvio == 1) ? totalPago * 0.18 : (totalPago - 5.00) * 0.18;
+
+        String reciboTipo = (String) request.getParameter("tipo-comprobante");
+        String ruc = (String) request.getParameter("numero-ruc");
+
         if(model.crearPedido(fechaPedido, usuarioId, metodoEnvio, direccionEntrega, fechaEntrega, horaEntrega,
-                responsableDocumento, responsableNombre, numeroTarjetaPago, totalPago, codigoUnico)) {
+                responsableDocumento, responsableNombre, reciboTipo, ruc, numeroTarjetaPago, subtotalPago,
+                envioPago, igvPago, totalPago, codigoUnico)) {
 
             int idPedido = model.obtenerIdPedido(codigoUnico);
 
@@ -63,7 +71,8 @@ public class PedidoController extends HttpServlet {
             request.getSession().removeAttribute("carrito");
 
             Pedido pedido = new Pedido(idPedido, fechaPedido, usuarioId, metodoEnvio, direccionEntrega, fechaEntrega,
-                    horaEntrega, responsableDocumento, responsableNombre, numeroTarjetaPago, totalPago, codigoUnico);
+                    horaEntrega, responsableDocumento, responsableNombre, reciboTipo, ruc, numeroTarjetaPago,
+                    subtotalPago, envioPago, igvPago, totalPago, codigoUnico);
 
             session.setAttribute("pedido", pedido);
 

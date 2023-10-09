@@ -68,8 +68,10 @@
                             </div>
                             <div class="tarjeta info-resumen">
                                 <b>RESUMEN</b>
-                                <p class="no-bold">Subtotal <span>S/ <span><%=(pedido.getMetodoEnvio() == 1) ? String.format("%.2f", pedido.getTotalPago()) : String.format("%.2f", pedido.getTotalPago() - 5)%></span></span></p>
-                                <p class="no-bold">Envío <span>S/ <span><%=(pedido.getMetodoEnvio() == 1) ? "0.00" : "5.00"%></span></span></p>
+<%--                                <p class="no-bold">Subtotal <span>S/ <span><%=(pedido.getMetodoEnvio() == 1) ? String.format("%.2f", pedido.getTotalPago()) : String.format("%.2f", pedido.getTotalPago() - 5)%></span></span></p>--%>
+                                <p class="no-bold">Subtotal <span>S/ <span><%=String.format("%.2f", pedido.getSubTotalPago())%></span></span></p>
+                                <p class="no-bold">IGV (18%) <span>S/ <span><%=String.format("%.2f", pedido.getIgvPago())%></span></span></p>
+                                <p class="no-bold">Envío <span>S/ <span><%=String.format("%.2f", pedido.getEnvioPago())%></span></span></p>
                                 <p class="no-bold tarjeta-total">Total <span>S/ <span><%=String.format("%.2f", pedido.getTotalPago())%></span></span></p>
                             </div>
                         </div>
