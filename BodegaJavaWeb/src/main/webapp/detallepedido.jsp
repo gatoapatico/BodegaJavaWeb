@@ -36,11 +36,11 @@
                 <a href="">LIMPIEZA</a>
             </nav>
             <h1>DETALLE PEDIDO</h1>
-            <div class="paneles">
-
+            <div class="paneles" id="paneles">
                 <div class="panel panel1">
                     <div class="info">
-                        <p class="tarjeta-pedido">Código de pedido: <span class="bold"><%=pedido.getCodigoUnico()%></span></p>
+                        <p class="comprobante-titulo">BODEGA MARISOL - COMPROBANTE DE PAGO</p>
+                        <p class="tarjeta-pedido">Código de pedido: <span class="bold" id="comprobante-codigo-unico"><%=pedido.getCodigoUnico()%></span></p>
                         <p class="tarjeta-pedido">Medio de Pago: <span class="bold">Visa</span></p>
                         <p class="tarjeta-pedido">Pago total: <span>S/ <span class="bold"><%=String.format("%.2f", pedido.getTotalPago())%></span></span></p>
                     </div>
@@ -82,32 +82,13 @@
                                     <td class="tabla-precio">S/ 5.00</td>
                                 </tr>
                             <% } %>
-                            <%--<tr>
-                                <td><img src="assets/img/productos/bisteck.png" alt="bisteck"></td>
-                                <td>Bisteck de tapa x Kg.</td>
-                                <td class="tabla-precio">S/ 13.90</td>
-                                <td class="tabla-cantidad"><div class="cuadro-cantidad">1</div></td>
-                                <td class="tabla-precio">S/ 13.90</td>
-                            </tr>
-                            <tr>
-                                <td><img src="assets/img/productos/crema_leche.png" alt="crema"></td>
-                                <td>Crema de Leche</td>
-                                <td class="tabla-precio">S/ 8.90</td>
-                                <td class="tabla-cantidad"><div class="cuadro-cantidad">1</div></td>
-                                <td class="tabla-precio">S/ 8.90</td>
-                            </tr>
-                            <tr>
-                                <td><img src="assets/img/productos/queso_fresco.png" alt="queso"></td>
-                                <td>Queso Fresco</td>
-                                <td class="tabla-precio">S/ 34.50</td>
-                                <td class="tabla-cantidad"><div class="cuadro-cantidad">1</div></td>
-                                <td class="tabla-precio">S/ 34.50</td>
-                            </tr>--%>
                         </tbody>
                     </table>
                 </div>
-                <a href="perfil.jsp" class="btn-volver-perfil"><i class="bi bi-arrow-left"></i>VOLVER AL PERFIL</a>
             </div>
+            <button class="btn-descargar-comprobante" data-crearpdfdetalle="crearpdfdetalle">DESCARGAR COMPROBANTE</button>
+            <a href="perfil.jsp" class="btn-volver-perfil"><i class="bi bi-arrow-left"></i>VOLVER AL PERFIL</a>
         </main>
-
+<script type="text/javascript" src="jspdf.min.js"></script>
+<script type="text/javascript" src="html2canvas.min.js"></script>
 <%@include file="_footer.jsp" %>
