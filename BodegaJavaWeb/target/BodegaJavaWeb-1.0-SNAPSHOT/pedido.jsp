@@ -190,6 +190,29 @@
                             <div class="contenido1 hidden">
                                 <div class="secciones">
                                     <div class="metodo">
+                                        <p>Tipo de recibo</p>
+                                        <div class="icono">
+                                            <i class="bi bi-file-earmark-text-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="botones-comprobantes-tipo">
+                                            <button type="button" class="btn-comprobante btn-activo" id="comprobante-boleta" data-comprobante="boleta">BOLETA</button>
+                                            <button type="button" class="btn-comprobante btn-pasivo" id="comprobante-factura" data-comprobante="factura">FACTURA</button>
+                                            <div class="dato-input">
+                                                <input class="hidden" type="text" name="tipo-comprobante" id="tipo-comprobante" value="BOLETA" required>
+                                                <b class="campo-fail hidden">*Es obligatorio este campo</b>
+                                            </div>
+                                            <div class="dato-input">
+                                                <label for="numero">Número RUC</label>
+                                                <input disabled type="text" pattern="[0-9]{11}" name="numero-ruc" id="numero-ruc" required>
+                                                <b class="campo-fail hidden"></b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="secciones">
+                                    <div class="metodo">
                                         <p>Tarjeta de crédito</p>
                                         <div class="icono">
                                             <i class="bi bi-credit-card-2-back-fill"></i>
@@ -198,7 +221,7 @@
                                     <div class="info">
                                         <div class="dato-input">
                                             <label for="numero">Número</label>
-                                            <input type="text" name="numero-tarjeta-pago" pattern="[0-9]+" id="numero" required>
+                                            <input type="text" name="numero-tarjeta-pago" pattern="[0-9]{16}" id="numero" required>
                                             <b class="campo-fail hidden">*Es obligatorio este campo</b>
                                         </div>
                                         <div class="dato-input">
@@ -291,7 +314,8 @@
                             <% } %>
                         </div>
                         <div class="total-resumen">
-                            <p>Subtotal<span>S/ <span id="subtotal-monto-pedido"><%=String.format("%.2f", precioTotal)%></span></span></p>
+                            <p>Subtotal<span>S/ <span id="subtotal-monto-pedido"><%=String.format("%.2f", precioTotal * 0.82)%></span></span></p>
+                            <p>IGV (18%)<span>S/ <span id="igv-monto-pedido"><%=String.format("%.2f", precioTotal * 0.18)%></span></span></p>
                             <p>Costo de envío<span class="color">S/ <span id="costo-monto-pedido">0.00</span></span></p>
                             <p class="total">Total<span>S/ <span id="total-monto-pedido"><%=String.format("%.2f", precioTotal)%></span></span></p>
                         </div>
