@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2023 at 11:58 PM
+-- Generation Time: Oct 09, 2023 at 11:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,38 @@ CREATE TABLE `detallepedido` (
   `precio` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `detallepedido`
+--
+
+INSERT INTO `detallepedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `precio`, `subtotal`) VALUES
+(1, 1, 7, 1, 5.00, 5.00),
+(2, 1, 8, 3, 3.00, 9.00),
+(3, 1, 9, 1, 6.50, 6.50),
+(4, 1, 12, 1, 4.00, 4.00),
+(5, 2, 11, 1, 21.50, 21.50),
+(6, 3, 15, 1, 3.50, 3.50),
+(7, 3, 16, 1, 15.90, 15.90),
+(8, 4, 9, 1, 6.50, 6.50),
+(9, 4, 10, 4, 5.00, 20.00),
+(10, 5, 14, 1, 20.50, 20.50),
+(11, 5, 13, 1, 11.40, 11.40),
+(12, 6, 1, 1, 7.90, 7.90),
+(13, 6, 2, 2, 16.90, 33.80),
+(14, 6, 11, 2, 21.50, 43.00),
+(15, 6, 16, 1, 15.90, 15.90),
+(16, 7, 1, 3, 7.90, 23.70),
+(17, 7, 2, 1, 16.90, 16.90),
+(18, 7, 11, 1, 21.50, 21.50),
+(19, 8, 3, 1, 6.50, 6.50),
+(20, 8, 4, 1, 6.50, 6.50),
+(21, 9, 15, 1, 3.50, 3.50),
+(22, 9, 16, 1, 15.90, 15.90),
+(23, 9, 7, 1, 5.00, 5.00),
+(24, 10, 6, 1, 34.50, 34.50),
+(25, 10, 9, 2, 6.50, 13.00),
+(26, 11, 16, 10, 15.90, 159.00);
 
 -- --------------------------------------------------------
 
@@ -90,10 +122,32 @@ CREATE TABLE `pedido` (
   `hora_entrega` time NOT NULL,
   `responsable_dni` varchar(255) NOT NULL,
   `responsable_nombre` varchar(255) NOT NULL,
+  `recibo_tipo` varchar(255) NOT NULL,
+  `ruc` varchar(255) DEFAULT NULL,
   `numero_tarjeta_pago` varchar(255) NOT NULL,
+  `subtotal_pago` decimal(10,2) NOT NULL,
+  `envio_pago` decimal(10,2) NOT NULL,
+  `igv_pago` decimal(10,2) NOT NULL,
   `total_pago` decimal(10,2) NOT NULL,
   `codigo_recojo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `fecha_pedido`, `usuario_id`, `metodoenvio_id`, `direccion_entrega`, `fecha_entrega`, `hora_entrega`, `responsable_dni`, `responsable_nombre`, `recibo_tipo`, `ruc`, `numero_tarjeta_pago`, `subtotal_pago`, `envio_pago`, `igv_pago`, `total_pago`, `codigo_recojo`) VALUES
+(1, '2023-10-07 14:42:14', 1, 2, 'La planicie Mz O Lote 5, Punta Hermosa', '2023-10-08', '14:00:00', '48527293', 'Alvaro Fernandez', '', NULL, '1234567891234567', 0.00, 0.00, 0.00, 29.50, 'f10070e94b'),
+(2, '2023-10-07 17:13:39', 5, 1, 'bodega Marisol, Calle García Rada 341', '2023-10-08', '12:00:00', '14725836', 'Ian Chicmana', '', NULL, '1234567894561234', 0.00, 0.00, 0.00, 21.50, '1fe500e97b'),
+(3, '2023-10-07 18:15:54', 5, 1, 'bodega Marisol, Calle García Rada 341', '2023-10-09', '17:00:00', '14725836', 'Ian Chicmana', '', NULL, '1234567894561236', 0.00, 0.00, 0.00, 19.40, '5bb0cfdd86'),
+(4, '2023-10-07 18:48:11', 1, 2, 'La planicie Mz O Lote 5, Punta Hermosa', '2023-10-07', '15:00:00', '48527293', 'Alvaro Fernandez', '', NULL, '12345678912345', 0.00, 0.00, 0.00, 31.50, 'e530a95689'),
+(5, '2023-10-07 19:01:30', 6, 1, 'bodega Marisol, Calle García Rada 341', '2023-10-10', '16:00:00', '96385214', 'Jim Prado', '', NULL, '12345678904321', 0.00, 0.00, 0.00, 31.90, 'e0dd5c01fc'),
+(6, '2023-10-07 22:59:58', 5, 2, 'Calle Begonias 123', '2023-10-09', '21:00:00', '33322211', 'Pedro Suarez', '', NULL, '7418529632587412', 0.00, 0.00, 0.00, 105.60, '49409d069d'),
+(7, '2023-10-08 23:10:59', 1, 1, 'bodega Marisol, Calle García Rada 341', '2023-10-09', '19:00:00', '48527293', 'Alvaro Fernandez', '', NULL, '1234567894561235', 0.00, 0.00, 0.00, 62.10, 'e13c4c9f2f'),
+(8, '2023-10-09 12:01:40', 1, 2, 'La planicie Mz O Lote 5, Punta Hermosa', '2023-10-09', '12:00:00', '06883249', 'Carmen', '', NULL, '4632567744555599', 10.66, 5.00, 2.34, 18.00, '1169519652'),
+(9, '2023-10-09 12:10:57', 1, 1, 'bodega Marisol, Calle García Rada 341', '2023-10-10', '12:00:00', '48527293', 'Alvaro Fernandez', '', NULL, '3216549871234568', 20.01, 0.00, 4.39, 24.40, 'e0b2bfbb03'),
+(10, '2023-10-09 13:42:09', 1, 1, 'bodega Marisol, Calle García Rada 341', '2023-10-09', '14:00:00', '48527293', 'Alvaro Fernandez', 'BOLETA', NULL, '4563258741254569', 38.95, 0.00, 8.55, 47.50, 'fbf4a00ba0'),
+(11, '2023-10-09 13:46:10', 1, 1, 'bodega Marisol, Calle García Rada 341', '2023-10-10', '10:00:00', '77436951', 'Ivan', 'FACTURA', '20654987541', '4567896541236547', 130.38, 0.00, 28.62, 159.00, 'fc4195b604');
 
 -- --------------------------------------------------------
 
@@ -145,6 +199,7 @@ INSERT INTO `productos` (`id`, `nombre`, `categoria`, `imagen`, `descripcion`, `
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
+  `usuario_tipo` varchar(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
   `correo` varchar(255) NOT NULL,
@@ -158,12 +213,14 @@ CREATE TABLE `usuarios` (
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `correo`, `password`, `documento_tipo`, `documento_numero`, `telefono`) VALUES
-(1, 'Alvaro', 'Fernandez', 'afernandez@gmail.com', '12345', NULL, NULL, NULL),
-(2, 'Admin', 'Admin', 'admin@gmail.com', 'admin', NULL, NULL, NULL),
-(3, 'Juan', 'Perez', 'juan@gmail.com', 'juan', NULL, NULL, NULL),
-(4, 'Janitza', 'Caballero', 'janitza@gmail.com', 'jani', NULL, NULL, NULL),
-(5, 'Ian', 'Chicmana', 'ian@gmail.com', 'ian123', NULL, NULL, NULL);
+INSERT INTO `usuarios` (`id`, `usuario_tipo`, `nombre`, `apellido`, `correo`, `password`, `documento_tipo`, `documento_numero`, `telefono`) VALUES
+(1, 'CLIENTE', 'Alvaro', 'Fernandez', 'afernandez@gmail.com', '173447602773428053556316684567667297915', 1, '48527293', '943802609'),
+(2, 'ADMINISTRADOR', 'Admin', 'Admin', 'admin@gmail.com', '44047210810420107506624974438055026627', NULL, NULL, NULL),
+(3, 'CLIENTE', 'Juan', 'Perez', 'juan@gmail.com', '326260511379103132140818804997939496758', NULL, NULL, NULL),
+(4, 'CLIENTE', 'Janitza', 'Caballero', 'janitza@gmail.com', '306387474783060387382343745935520905632', NULL, NULL, NULL),
+(5, 'CLIENTE', 'Ian', 'Chicmana', 'ian@gmail.com', '48316165893442913050172005982394327687', 1, '14725836', '999888777'),
+(6, 'CLIENTE', 'Jim', 'Prado', 'jim@gmail.com', '184008528852772597018332091953643476493', 1, '96385214', '77755533'),
+(7, 'CLIENTE', 'Manolo', 'Zapata', 'manolo@gmail.com', '278851755765719044219632047181386581949', 1, NULL, '3314578');
 
 --
 -- Indexes for dumped tables
@@ -218,13 +275,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `detallepedido`
 --
 ALTER TABLE `detallepedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `productos`
@@ -236,7 +293,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
