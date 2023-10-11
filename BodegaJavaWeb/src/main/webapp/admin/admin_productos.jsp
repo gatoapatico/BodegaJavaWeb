@@ -32,7 +32,7 @@
                 <div class="col-md-12 rounded p-3" style="background: rgba(255,255,255, 0.85);backdrop-filter: blur(5px)">
                     <h2 class="text-center">Tabla de Productos</h2>
                     <div class="pb-3">
-                        <a href="admin_productos_agregar.jsp" class="btn btn-primary">Agregar nuevo producto</a>
+                        <a href="/BodegaJavaWeb/admin/admin_productos_agregar.jsp" class="btn btn-primary">Agregar nuevo producto</a>
                     </div>
 
                     <table class="table container-fluid mt-2 table-striped">
@@ -63,7 +63,7 @@
                                     <td>S/ <%=String.format("%.2f", producto.getPrecio())%></td>
                                     <td><%=producto.getStock()%></td>
                                     <td>
-                                        <a href="admin_productos_editar.jsp" class="btn btn-success mb-1" style="margin-top: -3px; margin-bottom: -3px">Editar</a>
+                                        <a href="/BodegaJavaWeb/admin/admin_productos_editar.jsp?productoid=<%=producto.getId()%>" class="btn btn-success mb-1" style="margin-top: -3px; margin-bottom: -3px">Editar</a>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%=producto.getId()%>">
                                             Eliminar
@@ -90,7 +90,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger">Eliminar producto</button>
+                            <a href="/BodegaJavaWeb/ProductoController?action=delete&productoid=<%=producto.getId()%>" type="button" class="btn btn-danger">Eliminar producto</a>
                         </div>
                     </div>
                 </div>

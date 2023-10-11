@@ -17,7 +17,7 @@
                 <div class="titles">
                     <h1>LOS MEJORES PRODUCTOS<br>MÁS CERCA DE TI</h1>
                     <p>Olvídate de las colas y disfruta de adquirir todo lo que necesitas<br>desde la tranquilidad de tu hogar</p>
-                    <a href="ProductoController"><button class="btn-comprar">Comprar Ahora</button></a>
+                    <a href="ProductoController?action=load"><button class="btn-comprar">Comprar Ahora</button></a>
                 </div>
                 <img class="señora-imagen" src="assets/img/señora_alpha.png" alt="señora">
                 <div class="banner">

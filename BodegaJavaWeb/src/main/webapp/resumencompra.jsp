@@ -115,7 +115,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="ProductoController" class="btn-seguir-comprando"><i class="bi bi-arrow-left"></i>SEGUIR COMPRANDO<i class="bi bi-cart-fill"></i></a>
+                <a href="ProductoController?action=load" class="btn-seguir-comprando"><i class="bi bi-arrow-left"></i>SEGUIR COMPRANDO<i class="bi bi-cart-fill"></i></a>
             </div>
         </main>
 <script type="text/javascript" src="jspdf.min.js"></script>

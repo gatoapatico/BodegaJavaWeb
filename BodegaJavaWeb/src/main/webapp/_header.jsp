@@ -7,7 +7,7 @@
         <div class="logo-contenedor">
             <a href="index.jsp" id="logo-header"><img src="assets/img/Marisol_Logo.png" alt="logo Marisol"></a>
         </div>
-        <a href="ProductoController" id="productos-header">Productos<i class="bi bi-caret-down-fill"></i></a>
+        <a href="ProductoController?action=load" id="productos-header">Productos<i class="bi bi-caret-down-fill"></i></a>
         <% if(usuario != null) {%>
             <% if(usuario.getUsuarioTipo().equals("ADMINISTRADOR")) {%>
                 <a href="admin/admin_home.jsp">Ir a pagina de Administracion</a>

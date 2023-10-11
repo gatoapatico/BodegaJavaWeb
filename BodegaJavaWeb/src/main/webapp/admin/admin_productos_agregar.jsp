@@ -31,23 +31,23 @@
                                 <div>
                                     <div class="mb-3 me-4">
                                         <label for="txtNameProd" class="form-label">Nombre del Producto:</label>
-                                        <input type="text" name="txtNameProd" required
+                                        <input type="text" name="producto-nombre" required
                                                class="form-control border-secondary-subtle" id="txtNameProd">
                                     </div>
                                     <div class="mb-3 me-4">
                                         <label for="txtImgProd" class="form-label">Imagen del Producto:</label>
-                                        <input type="file" name="txtImgProd"
-                                               class="form-control border-secondary-subtle" id="txtImgProd">
+                                        <input type="file" name="producto-imagenFile"
+                                               class="form-control border-secondary-subtle" id="txtImgProd" accept=".png, .jpg, image/png, image/jpeg">
                                     </div>
                                     <div class="mb-3 me-4">
                                         <label for="txtDescProd" class="form-label">Descripción del Producto:</label>
-                                        <input type="text" name="txtDescProd" required
+                                        <input type="text" name="producto-descripcion" required
                                                class="form-control border-secondary-subtle" id="txtDescProd">
                                     </div>
                                     <div class="mb-3 me-4">
                                         <label for="txtCateProd" class="form-label">Categoría del Producto:</label>
                                         <select class="form-select" aria-label="Default select example" id="txtCateProd"
-                                                name="txtCateProd">
+                                                name="producto-categoria">
                                             <option selected value="CARNES, AVES Y PESCADOS">CARNES, AVES Y PESCADOS</option>
                                             <option value="CONGELADOS">CONGELADOS</option>
                                             <option value="BEBIDAS">BEBIDAS</option>
@@ -62,17 +62,17 @@
                                 <div>
                                     <div class="mb-3 ms-4">
                                         <label for="txtProvProd" class="form-label">Proveedor:</label>
-                                        <input type="text" name="txtProvProd" required class="form-control border-secondary-subtle"
+                                        <input type="text" name="producto-proveedor" required class="form-control border-secondary-subtle"
                                                id="txtProvProd">
                                     </div>
                                     <div class="mb-3 ms-4">
                                         <label for="txtCostProd" class="form-label">Precio del Producto:</label>
-                                        <input type="text" name="txtCostProd" required class="form-control border-secondary-subtle"
+                                        <input type="text" name="producto-precio" required class="form-control border-secondary-subtle"
                                                pattern="[0-9]+(\.[0-9]+)?" id="txtCostProd">
                                     </div>
                                     <div class="ms-4 mb-3">
                                         <label for="txtCantProd" class="form-label">Stock:</label>
-                                        <input type="number" name="txtCantProd" required class="form-control border-secondary-subtle"
+                                        <input type="number" name="producto-stock" required class="form-control border-secondary-subtle"
                                                min="0" max="100" id="txtCantProd">
                                     </div>
                                     <div class="ms-4" style="margin-top: 44px;">
