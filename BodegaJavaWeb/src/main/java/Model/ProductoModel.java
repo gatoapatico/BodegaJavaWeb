@@ -86,17 +86,18 @@ public class ProductoModel {
             return null;
         }
     }
-    
-    public void updateProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock, String imagen) throws SQLException {
-    String sql = "UPDATE productos SET nombre = ?, descripcion = ?, proveedor = ?, precio = ?, categoria = ?, stock = ?";
+
+  public void updateProducto(int id, String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock) throws SQLException {
+    String sql = "UPDATE productos SET nombre = ?, descripcion = ?, proveedor = ?, precio = ?, categoria = ?, stock = ? WHERE id = ?";
     PreparedStatement statement = connection.prepareStatement(sql);
+    statement.setInt(7, id);
     statement.setString(1, nombre);
     statement.setString(2, descripcion);
     statement.setString(3, proveedor);
     statement.setDouble(4, precio);
     statement.setString(5, categoria);
     statement.setInt(6, stock);
-    statement.setString(7, imagen);
     statement.executeUpdate();
 }
+
 }

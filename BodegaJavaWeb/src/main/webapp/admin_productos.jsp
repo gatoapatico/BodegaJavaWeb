@@ -69,7 +69,7 @@
                     <div class="flex-btn">
 
                         <form action="EditarProductoController" method="GET">
-                            <input hidden type="text" name="action" value="editar">
+                            <input hidden type="text" name="actionGet" value="editar">
                             <input hidden type="text" name="id" value="<%=producto.getId()%>">
                             <button type="submit" class="option-btn">Editar</button>
                         </form>

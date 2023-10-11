@@ -1,25 +1,25 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@page import="Entity.Producto"%>
 
 <%
     // Get the product from the request.
     Producto producto = (Producto) request.getAttribute("producto");
 %>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Editar Producto</title>
     <link href="admin_style.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
-
+<div class="box">
     <section class="add-products">
 
         <h1 class="heading">Editar Producto</h1>
 
+        
         <form action="AdminController" method="POST" enctype="multipart/form-data">
             <input hidden type="text" name="action" value="update">
             <div class="imagen">
@@ -29,8 +29,8 @@
             <input type="text" class="box"  placeholder="Ingresa el nombre del producto" name="nombre" value="<%=producto.getNombre()%>">
             <input type="text" class="box"  placeholder="Ingresa la descripcion del producto" name="descripcion" value="<%=producto.getDescripcion()%>">
             <input type="text" class="box"  placeholder="Ingresa el proovedor del producto" name="proveedor" value="<%=producto.getProveedor()%>">
-            <input type="number" class="box" placeholder="Ingresa el precio del producto" name="precio" value="<%=producto.getPrecio()%>">
-            <select name="categoria" class="box">
+            <input type="number" class="box" step="0.1"  name="precio" value="<%=producto.getPrecio()%>">
+            <select name="categoria" class="box" value="<%=producto.getCategoria()%>">
                 <option value="">Selecciona la categoria</option>
                 <option value="CARNES, AVES Y PESCADOS">CARNES, AVES Y PESCADOS</option>
                 <option value="CONGELADOS">CONGELADOS</option>
@@ -45,7 +45,8 @@
             <input type="file" name="imagen" class="box">
             <input type="submit" value="Guardar producto" class="btn" name="save_product">
         </form>
+           
     </section>
-
+ </div>
 </body>
 </html>

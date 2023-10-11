@@ -32,12 +32,32 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         List<Producto> listaProductos = model.obtenerProductos();
         HttpSession misesion = request.getSession();
         misesion.setAttribute("listaProductos", listaProductos);
         request.getRequestDispatcher("admin_productos.jsp").forward(request, response);
+        String actionGet = request.getParameter("actionGet");
 
-        int id = Integer.parseInt(request.getParameter("id"));
+        switch (actionGet) {
+            case "editar":
+                int id = Integer.parseInt(request.getParameter("id"));
+                HttpSession session = request.getSession();
+                session.setAttribute("id", id);
+
+                Producto producto;
+                try {
+                    producto = model.getProductoById(id);
+                    id = producto.getId();
+                    request.setAttribute("producto", producto);
+                    request.setAttribute("id", id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.getRequestDispatcher("admin_productos_editar.jsp").forward(request, response);
+                break;
+        }
+
     }
 
     @Override
@@ -46,6 +66,7 @@ public class AdminController extends HttpServlet {
         String action = request.getParameter("action");
         List<Producto> productos = model.obtenerProductos();
         HttpSession session = request.getSession();
+        Producto producto = (Producto) session.getAttribute("producto");
 
         switch (action) {
             case "create":
@@ -69,12 +90,12 @@ public class AdminController extends HttpServlet {
                     // Add the new product to the database
                     model.addProducto(nombre, descripcion, proveedor, precio, categoria, stock, imagen);
                     session.setAttribute("productos", productos);
-                    response.setHeader("Refresh", "1.5");
+                    response.setHeader("Refresh", "2.0");
                     request.getRequestDispatcher("admin_productos.jsp").forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+            break;
             case "delete":
                 
                 try {
@@ -88,22 +109,32 @@ public class AdminController extends HttpServlet {
             }
             break;
             case "update": {
-                file = request.getPart("imagen");
+
+                int id = (int) session.getAttribute("id");
+                System.out.println("id: " + id);
                 nombre = request.getParameter("nombre");
+                System.out.println("nombre: "+nombre);
                 descripcion = request.getParameter("descripcion");
+                System.out.println("descripcion: "+descripcion);
                 proveedor = request.getParameter("proveedor");
-                precio = Integer.parseInt(request.getParameter("precio"));
+                System.out.println("proveedor: "+proveedor);
+                precio = Double.parseDouble(request.getParameter("precio"));
+                System.out.println("precio: "+precio);
                 categoria = request.getParameter("categoria");
+                System.out.println("categoria: "+categoria);
                 stock = Integer.parseInt(request.getParameter("stock"));
+                System.out.println("stock: "+stock);
+                file = request.getPart("imagen");
                 imagen = file.getSubmittedFileName();
-                try {
-                    model.addProducto(nombre, descripcion, proveedor, precio, categoria, stock, imagen);
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    model.deleteProducto(id);
-                    request.getRequestDispatcher("admin_productos.jsp").forward(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                System.out.println("imagen: "+imagen);
+            try {
+                model.updateProducto(id,nombre, descripcion, proveedor, precio, categoria, stock);
+                response.setHeader("Refresh", "0.5");
+                request.getRequestDispatcher("admin_productos.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             }
 
             break;
