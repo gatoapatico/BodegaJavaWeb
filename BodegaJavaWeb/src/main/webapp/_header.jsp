@@ -19,8 +19,8 @@
     </div>
     <div class="header-right">
         <div class="buscador">
-            <a href=""><i class="bi bi-search"></i></a>
-            <input type="text" name="buscador-txt" placeholder="Buscar productos...">
+            <button data-buscarproducto="buscarproducto"><i class="bi bi-search" data-buscarproducto="buscarproducto"></i></button>
+            <input type="text" name="buscador-txt" id="producto-buscado" placeholder="Buscar productos...">
         </div>
         <% if(usuario != null) {%>
             <a href="carrito.jsp" class="carrito" id="carrito-header" ><i class="bi bi-cart2"></i></a>

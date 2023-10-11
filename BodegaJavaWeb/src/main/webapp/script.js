@@ -10,6 +10,14 @@ document.addEventListener('click', function(e){
         document.getElementById('popup-login').classList.toggle('hidden');
         document.getElementById('popup-registrate').classList.toggle('hidden');
     }
+    else if(e.target.dataset.buscarproducto) {
+
+        const productoBuscado = document.getElementById('producto-buscado').value;
+        console.log(productoBuscado);
+        window.location.href = `productos.jsp?buscar=${productoBuscado}`;
+
+
+    }
     else if(e.target.dataset.agregar){
 
         const idProducto = e.target.dataset.productoid;
@@ -489,4 +497,26 @@ if(document.getElementById('main-pedido')){
         event.returnValue = mensaje;
         return mensaje;
     });
+}
+
+if(document.getElementById('main-productos')) {
+    const productoBuscado = document.getElementById('producto-buscado-id').textContent;
+    filtrarPorBusqueda(productoBuscado);
+
+}
+
+function filtrarPorBusqueda(producto) {
+    const productoBuscado = producto.toLowerCase();
+    const productos = document.getElementsByClassName('producto');
+
+    for(let i = 0; i < productos.length; i++){
+        if(productos[i].querySelector('#categoria').textContent.toLowerCase().includes(productoBuscado) ||
+            productos[i].querySelector('#nombre-producto').textContent.toLowerCase().includes(productoBuscado) ||
+            productos[i].querySelector('#marca-producto').textContent.toLowerCase().includes(productoBuscado)){
+            productos[i].classList.remove('hidden');
+        }
+        else {
+            productos[i].classList.add('hidden');
+        }
+    }
 }
