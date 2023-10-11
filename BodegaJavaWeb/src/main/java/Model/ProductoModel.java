@@ -67,19 +67,26 @@ public class ProductoModel {
         return null;
     }
 
-    public void addProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock, String imagen) 
-            throws SQLException {
+    public boolean agregarProducto(String nombre, String categoria, String rutaImagen, String descripcion,
+                                   String proveedor, double precio, int stock) {
 
-        String sql = "INSERT INTO productos (nombre, descripcion, proveedor, precio, categoria, stock, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, nombre);
-        statement.setString(2, descripcion);
-        statement.setString(3, proveedor);
-        statement.setDouble(4, precio);
-        statement.setString(5, categoria);
-        statement.setInt(6, stock);
-        statement.setString(7, imagen);
-        statement.executeUpdate();
-
+        String sql = "INSERT INTO productos VALUES(null, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nombre);
+            statement.setString(2, categoria);
+            statement.setString(3, rutaImagen);
+            statement.setString(4, descripcion);
+            statement.setString(5, proveedor);
+            statement.setDouble(6, precio);
+            statement.setInt(7, stock);
+            return statement.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
+
 }

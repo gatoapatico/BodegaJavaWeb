@@ -19,6 +19,7 @@ public class Pedido {
     private double igvPago;
     private double totalPago;
     private String codigoUnico;
+    private String estado;
 
     public Pedido() {
 
@@ -27,7 +28,7 @@ public class Pedido {
     public Pedido(int id, String fecha, int usuarioId, int metodoEnvio, String direccionEntrega,
                   String fechaEntrega, String horaEntrega, String responsableDni, String responsableNombre,
                   String reciboTipo, String ruc, String numeroTarjetaPago, double subTotalPago,
-                  double envioPago, double igvPago, double totalPago, String codigoUnico) {
+                  double envioPago, double igvPago, double totalPago, String codigoUnico, String estado) {
 
         this.id = id;
         this.fecha = fecha;
@@ -46,6 +47,7 @@ public class Pedido {
         this.igvPago = igvPago;
         this.totalPago = totalPago;
         this.codigoUnico = codigoUnico;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -182,5 +184,13 @@ public class Pedido {
 
     public void setCodigoUnico(String codigoUnico) {
         this.codigoUnico = codigoUnico;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

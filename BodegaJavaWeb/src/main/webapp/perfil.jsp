@@ -77,7 +77,7 @@
                             <td><%=pedidos.get(i).getFecha().split(" ")[1]%></td>
                             <td><%=pedidos.get(i).getCodigoUnico()%></td>
                             <td>S/ <%=String.format("%.2f", pedidos.get(i).getTotalPago())%></td>
-                            <td>ENTREGADO</td>
+                            <td><%=pedidos.get(i).getEstado()%></td>
                             <td><a href="PedidoController?pedidoid=<%=pedidos.get(i).getId()%>"><i class="bi bi-arrow-right-square-fill"></i>Ver</a></td>
                         </tr>
                     <% } %>

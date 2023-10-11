@@ -34,6 +34,7 @@
             </nav>
             <h1>PROCESO DE PEDIDO</h1>
             <form action="PedidoController" method="POST">
+                <input hidden="hidden" type="text" name="action" value="realizar-pedido">
                 <input class="hidden" type="text" name="usuario-id" id="usuario-id" value="<%=usuario.getId()%>" readonly>
                 <input class="hidden" type="text" id="usuario-password" value="<%=usuario.getPassword()%>" readonly>
                 <div class="paneles">

@@ -6,6 +6,7 @@ import Model.UsuarioModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,12 +30,21 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
         
         String action = (String)request.getParameter("action");
+        String usuarioId = request.getParameter("usuarioid");
         
         switch(action){
             case "logout":
                 request.getSession().removeAttribute("usuario");
                 request.getSession().removeAttribute("carrito");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
+            case "delete":
+                if(model.eliminarUsuario(Integer.parseInt(usuarioId))) {
+                    request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
+                }
+                else {
+                    request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
+                }
                 break;
         }
     }
@@ -46,6 +56,9 @@ public class UsuarioController extends HttpServlet {
         String action = request.getParameter("action");
 
         String id = request.getParameter("id");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String usuarioTipo = (request.getParameter("usuario-tipo") != null) ? (request.getParameter("usuario-tipo")) : "CLIENTE";
         String correo = request.getParameter("correo");
         String pass = request.getParameter("password");
         String passEncode = "";
@@ -53,7 +66,9 @@ public class UsuarioController extends HttpServlet {
         String telefono = request.getParameter("telefono");
 
         try {
-            passEncode = encryptor.encryptString(pass);
+            if(pass != null){
+                passEncode = encryptor.encryptString(pass);
+            }
         }
         catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -74,13 +89,13 @@ public class UsuarioController extends HttpServlet {
                 }
                 break;
             case "register":
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                if(model.registrar("CLIENTE", nombre, apellido, correo, passEncode)){
+                if(model.registrar(usuarioTipo, nombre, apellido, correo, passEncode, 1, documento, telefono)){
+                    Usuario usuarioRegister = model.login(correo, passEncode);
+                    misesion.setAttribute("usuario", usuarioRegister);
                     request.getRequestDispatcher("productos.jsp").forward(request, response);
                 }
                 else{
-                    request.getRequestDispatcher("productos.jsp").forward(request, response);
+                    request.getRequestDispatcher("productos.jsp?register=fail").forward(request, response);
                 }
                 break;
             case "editar-datos":
@@ -96,7 +111,31 @@ public class UsuarioController extends HttpServlet {
                     response.getWriter().write("fail");
                 }
                 break;
+            case "register-admin":
+                if(model.registrar(usuarioTipo, nombre, apellido, correo, passEncode, 1, documento, telefono)){
+                    request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
+                }
+                else{
+                    request.getRequestDispatcher("admin/admin_usuarios_agregar.jsp?invalid=true").forward(request, response);
+                }
+                break;
+            case "editar-admin":
+                if(model.editarUsuario(Integer.parseInt(id), nombre, apellido, correo, documento, telefono)){
+                    request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
+                }
+                else{
+                    request.getRequestDispatcher("admin/admin_usuarios_editar.jsp?usuarioid="+id).forward(request, response);
+                }
+                break;
         }
+    }
+
+    public Usuario obtenerUsuario(int id) {
+        return model.obtenerUsuario(id);
+    }
+
+    public List<Usuario> obtenerUsuarios() {
+        return model.obtenerUsuarios();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.Producto;
+import Entity.Usuario;
 import Model.ProductoModel;
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +34,13 @@ public class ProductoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String action = request.getParameter("action");
+
+        switch (action) {
+            case "agregar-producto":
+                break;
+        }
     }
 
     @Override
@@ -43,5 +50,9 @@ public class ProductoController extends HttpServlet {
 
     public Producto obtenerProducto(int id) {
         return (model.obtenerProducto(id) != null) ? model.obtenerProducto(id) : null;
+    }
+
+    public List<Producto> obtenerProductos() {
+        return model.obtenerProductos();
     }
 }
