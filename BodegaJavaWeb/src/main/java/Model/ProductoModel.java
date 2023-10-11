@@ -87,7 +87,7 @@ public class ProductoModel {
         }
     }
     
-    public void updateProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock) throws SQLException {
+    public void updateProducto(String nombre, String descripcion, String proveedor, Double precio, String categoria, Integer stock, String imagen) throws SQLException {
     String sql = "UPDATE productos SET nombre = ?, descripcion = ?, proveedor = ?, precio = ?, categoria = ?, stock = ?";
     PreparedStatement statement = connection.prepareStatement(sql);
     statement.setString(1, nombre);
@@ -96,6 +96,7 @@ public class ProductoModel {
     statement.setDouble(4, precio);
     statement.setString(5, categoria);
     statement.setInt(6, stock);
+    statement.setString(7, imagen);
     statement.executeUpdate();
 }
 }

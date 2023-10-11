@@ -281,7 +281,9 @@ body{
     border:var(--border);
     padding-top: 1.5rem;
 }
-
+.imagen img {
+  max-width: 100%;
+}
 .update-product form .box{
     width: 100%;
     padding:1.4rem;

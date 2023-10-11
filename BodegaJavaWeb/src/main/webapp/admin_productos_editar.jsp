@@ -20,13 +20,17 @@
 
         <h1 class="heading">Editar Producto</h1>
 
-        <form action="EditarProductoController" method="POST" enctype="multipart/form-data">
+        <form action="AdminController" method="POST" enctype="multipart/form-data">
+            <input hidden type="text" name="action" value="update">
+            <div class="imagen">
+                        <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
+                    </div>
             <input hidden type="text" name="id" value="<%=producto.getId()%>">
-            <input type="text" class="box" required maxlength="100" placeholder="Ingresa el nombre del producto" name="nombreEdit" value="<%=producto.getNombre()%>">
-            <input type="text" class="box" required maxlength="100" placeholder="Ingresa la descripcion del producto" name="descripcionEdit" value="<%=producto.getDescripcion()%>">
-            <input type="text" class="box" required maxlength="100" placeholder="Ingresa el proovedor del producto" name="proveedorEdit" value="<%=producto.getProveedor()%>">
-            <input type="number" class="box" placeholder="Ingresa el precio del producto" name="precioEdit" value="<%=producto.getPrecio()%>">
-            <select name="categoriaEdit" class="box">
+            <input type="text" class="box"  placeholder="Ingresa el nombre del producto" name="nombre" value="<%=producto.getNombre()%>">
+            <input type="text" class="box"  placeholder="Ingresa la descripcion del producto" name="descripcion" value="<%=producto.getDescripcion()%>">
+            <input type="text" class="box"  placeholder="Ingresa el proovedor del producto" name="proveedor" value="<%=producto.getProveedor()%>">
+            <input type="number" class="box" placeholder="Ingresa el precio del producto" name="precio" value="<%=producto.getPrecio()%>">
+            <select name="categoria" class="box">
                 <option value="">Selecciona la categoria</option>
                 <option value="CARNES, AVES Y PESCADOS">CARNES, AVES Y PESCADOS</option>
                 <option value="CONGELADOS">CONGELADOS</option>
@@ -37,8 +41,8 @@
                 <option value="CUIDADO PERSONAL">CUIDADO PERSONAL</option>
                 <option value="LIMPIEZA">LIMPIEZA</option>
             </select>
-            <input type="number" min="0" class="box" required max="9999999999" placeholder="Cantidad" name="stockEdit" value="<%=producto.getStock()%>">
-            <input type="file" name="imagenEdit" class="box">
+            <input type="number" class="box" placeholder="Cantidad" name="stock" value="<%=producto.getStock()%>">
+            <input type="file" name="imagen" class="box">
             <input type="submit" value="Guardar producto" class="btn" name="save_product">
         </form>
     </section>
