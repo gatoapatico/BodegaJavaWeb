@@ -42,7 +42,9 @@ public class UsuarioModel {
         return usuario;
     }
     
-    public boolean registrar(String usuarioTipo, String nombre, String apellido, String correo, String password) {
+    public boolean registrar(String usuarioTipo, String nombre, String apellido, String correo, String password,
+                             int documentoTipo, String documentoNumero, String telefono) {
+
         String sqlValidation = "SELECT * FROM usuarios WHERE correo = ? LIMIT 1";
         try {
             PreparedStatement validacion = connection.prepareStatement(sqlValidation);
@@ -51,13 +53,16 @@ public class UsuarioModel {
             if (validationResult.next()) {
                 return false;
             } else {
-                String sql = "INSERT INTO usuarios VALUES (null, ?, ?, ?, ?, ?, null, null, null)";
+                String sql = "INSERT INTO usuarios VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, usuarioTipo);
                 statement.setString(2, nombre);
                 statement.setString(3, apellido);
                 statement.setString(4, correo);
                 statement.setString(5, password);
+                statement.setInt(6, documentoTipo);
+                statement.setString(7, documentoNumero);
+                statement.setString(8, telefono);
                 return statement.executeUpdate() > 0;
             }
         } catch (SQLException e) {
@@ -96,6 +101,32 @@ public class UsuarioModel {
             return false;
         }
     }
+
+    public Usuario obtenerUsuario(int id) {
+        String sql = "SELECT * FROM usuarios WHERE id = ?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                Usuario usuario = new Usuario();
+                usuario.setId(resultSet.getInt("id"));
+                usuario.setUsuarioTipo(resultSet.getString("usuario_tipo"));
+                usuario.setNombre(resultSet.getString("nombre"));
+                usuario.setApellido(resultSet.getString("apellido"));
+                usuario.setCorreo(resultSet.getString("correo"));
+                usuario.setPassword(resultSet.getString("password"));
+                usuario.setDocumentoTipo(resultSet.getInt("documento_tipo"));
+                usuario.setDocumentoNumero(resultSet.getString("documento_numero"));
+                usuario.setTelefono(resultSet.getString("telefono"));
+                return usuario;
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public List<Usuario> obtenerUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
@@ -122,5 +153,36 @@ public class UsuarioModel {
             e.printStackTrace();
         }
         return usuarios;
+    }
+
+    public boolean editarUsuario(int id, String nombre, String apellido, String correo, String documento, String telefono) {
+        String sql = "UPDATE usuarios SET nombre = ?, apellido = ?, correo = ?, documento_numero = ?, telefono = ? WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nombre);
+            statement.setString(2, apellido);
+            statement.setString(3, correo);
+            statement.setString(4, documento);
+            statement.setString(5, telefono);
+            statement.setInt(6, id);
+            return statement.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean eliminarUsuario(int id) {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            return statement.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

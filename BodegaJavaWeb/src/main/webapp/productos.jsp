@@ -55,6 +55,10 @@
                 <div class="popup-login-fail">
                     <p>El usuario ingresado <span>no existe!</span></p>
                 </div>
+            <% } else if(request.getParameter("register") != null) { %>
+                <div class="popup-login-fail">
+                    <p>El correo ingresado ya no está disponible</p>
+                </div>
             <% } %>
             
         </div>
