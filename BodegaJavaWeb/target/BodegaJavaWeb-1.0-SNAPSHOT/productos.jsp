@@ -1,8 +1,10 @@
 
 <%@page import="Entity.Producto"%>
 <%@page import="java.util.List"%>
+<%@ page import="Controller.ProductoController" %>
 <%
-    List<Producto> productos = (List<Producto>) request.getSession().getAttribute("listaProductos");
+    ProductoController cProducto = new ProductoController();
+    List<Producto> productos = cProducto.obtenerProductos();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +20,10 @@
     </head>
     <body>
         <%@include file="_header.jsp" %>
-        <main class="main-productos">
+        <% if(request.getParameter("buscar") != null) { %>
+            <p class="hidden" id="producto-buscado-id"><%=request.getParameter("buscar")%></p>
+        <% } %>
+        <main class="main-productos" id="main-productos">
             <nav class="categorias">
                 <button data-categoria="CARNES, AVES Y PESCADOS">CARNES, AVES Y PESCADOS</button>
                 <button data-categoria="CONGELADOS">CONGELADOS</button>
@@ -37,8 +42,8 @@
                             <img src="assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
                         </div>
                         <p class="hidden" id="categoria"><%=producto.getCategoria()%></p>
-                        <p class="nombre"><%=producto.getNombre()%></p>
-                        <p class="marca"><%=producto.getProveedor()%></p>
+                        <p class="nombre" id="nombre-producto"><%=producto.getNombre()%></p>
+                        <p class="marca" id="marca-producto"><%=producto.getProveedor()%></p>
                         <p class="precio">S/<%=String.format("%.2f", producto.getPrecio())%></p>
                         <%if(usuario != null) {%>
                             <button class="btn-agregar" data-agregar="agregar" data-productoid="<%=producto.getId()%>">AGREGAR</button>
@@ -86,5 +91,6 @@
                 <button>REGISTRATE</button>
             </form>
         </div>
+
             
 <%@include file="_footer.jsp" %>

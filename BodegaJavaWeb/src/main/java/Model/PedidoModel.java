@@ -168,7 +168,16 @@ public class PedidoModel {
             statement.setInt(3, cantidad);
             statement.setDouble(4, precio);
             statement.setDouble(5, subtotal);
-            return statement.executeUpdate() > 0;
+            if(statement.executeUpdate() > 0) {
+                String sqlDisminuir = "UPDATE productos SET stock = stock - ? WHERE id = ?";
+                PreparedStatement disminuirStatement = connection.prepareStatement(sqlDisminuir);
+                disminuirStatement.setInt(1, cantidad);
+                disminuirStatement.setInt(2, productoId);
+                return disminuirStatement.executeUpdate() > 0;
+            }
+            else {
+                return false;
+            }
         }
         catch (SQLException e) {
             e.printStackTrace();

@@ -4,12 +4,16 @@
 <%@ page import="Entity.DetallePedido" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Entity.Producto" %>
+<%@ page import="Controller.UsuarioController" %>
+<%@ page import="Entity.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
     PedidoController cPedido = new PedidoController();
     ProductoController cProducto = new ProductoController();
     List<DetallePedido> detallesPedido = cPedido.obtenerDetalles(pedido.getId());
+    UsuarioController cUsuario = new UsuarioController();
+    Usuario usuario = cUsuario.obtenerUsuario(pedido.getUsuarioId());
 
 %>
 <html>
@@ -80,7 +84,7 @@
                                 </div>
                                 <div class="mb-3 me-4">
                                     <label for="txtUsuario" class="form-label">Usuario correo:</label>
-                                    <input type="text" id="txtUsuario" disabled value="1" class="form-control" >
+                                    <input type="text" id="txtUsuario" disabled value="<%=usuario.getCorreo()%>" class="form-control" >
                                 </div>
                                 <div class="mb-3 me-4">
                                     <label for="txtMetodoEnvio" class="form-label">Metodo de Envio:</label>
