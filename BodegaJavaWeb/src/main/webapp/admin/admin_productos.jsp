@@ -90,7 +90,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <a href="/BodegaJavaWeb/ProductoController?action=delete&productoid=<%=producto.getId()%>" type="button" class="btn btn-danger">Eliminar producto</a>
+                            <a href="/BodegaJavaWeb/ProductoController?action=delete&productoid=<%=producto.getId()%>&imagenruta=<%=producto.getImagen()%>" type="button" class="btn btn-danger">Eliminar producto</a>
                         </div>
                     </div>
                 </div>

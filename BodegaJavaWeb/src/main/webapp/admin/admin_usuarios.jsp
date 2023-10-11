@@ -32,7 +32,7 @@
                 <div class="col-md-12 rounded p-3" style="background: rgba(255,255,255, 0.85);backdrop-filter: blur(5px)">
                     <h2 class="text-center">Tabla de Usuarios</h2>
                     <div class="pb-3">
-                        <a href="admin_usuarios_agregar.jsp" class="btn btn-primary">Agregar nuevo usuario</a>
+                        <a href="/BodegaJavaWeb/admin/admin_usuarios_agregar.jsp" class="btn btn-primary">Agregar nuevo usuario</a>
                     </div>
 
                     <table class="table container-fluid mt-2 table-striped">

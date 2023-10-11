@@ -111,6 +111,19 @@ public class UsuarioController extends HttpServlet {
                     response.getWriter().write("fail");
                 }
                 break;
+            case "editar-datos-identificacion":
+                response.setContentType("text/plain");
+                if (model.passValidation(Integer.parseInt(id), pass)) {
+                    response.getWriter().write("success");
+                    if(model.editarDatosPerfil(Integer.parseInt(id), documento, telefono, pass)) {
+                        Usuario usuarioEditar = model.login(correo, pass);
+                        misesion.setAttribute("usuario", usuarioEditar);
+                    }
+                }
+                else {
+                    response.getWriter().write("fail");
+                }
+                break;
             case "register-admin":
                 if(model.registrar(usuarioTipo, nombre, apellido, correo, passEncode, 1, documento, telefono)){
                     request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
