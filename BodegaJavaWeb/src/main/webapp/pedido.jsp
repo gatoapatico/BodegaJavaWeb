@@ -85,7 +85,7 @@
                                 <button type="button" data-envio="envio">IR A MÉTODO DE ENTREGA</button>
                             </div>
                             <div class="contenido2 hidden">
-                                <p class="correo"><span id="correo-resumen">afernandez@gmail.com</span><span class="btn-cerrar"> - no soy yo, cerrar sesión</span></p>
+                                <p class="correo"><span id="correo-resumen">afernandez@gmail.com</span><a href="UsuarioController?action=logout" class="btn-cerrar"> - no soy yo, cerrar sesión</a></p>
                                 <p class="nombre-completo"><span id="nombre-resumen">Álvaro</span> <span id="apellidos-resumen">Fernández</span></p>
                                 <p class="documento-telefono"><span id="documento-resumen">48527293</span> - <span id="telefono-resumen">943802609</span></p>
                             </div>

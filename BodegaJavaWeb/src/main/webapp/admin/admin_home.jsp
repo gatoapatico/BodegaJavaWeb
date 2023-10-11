@@ -30,23 +30,23 @@
                     <hr>
                     <small class="text-justify">Gestiona de manera efectiva los datos de tus clientes y administradores en la bodega MARISOL</small>
                     <br>
-                    <a href="admin_usuarios.jsp" class="btn btn-primary mt-3">Revisar Tabla de Usuarios</a> <br>
-                    <a href="admin_usuarios_agregar.jsp" class="btn btn-success m-3">Agregar nuevo usuario</a>
+                    <a href="/BodegaJavaWeb/admin/admin_usuarios.jsp" class="btn btn-primary mt-3">Revisar Tabla de Usuarios</a> <br>
+                    <a href="/BodegaJavaWeb/admin/admin_usuarios_agregar.jsp" class="btn btn-success m-3">Agregar nuevo usuario</a>
                 </div>
                 <div class="col p-3 text-light" style="background: #614BC3">
                     <h5>Administrar Productos</h5>
                     <hr>
                     <small class="text-justify">Verifica el inventario de tus productos y agrega nuevos al catálogo de la bodega MARISOL</small>
                     <br>
-                    <a href="admin_productos.jsp" class="btn btn-primary mt-3">Revisar Tabla de Productos</a> <br>
-                    <a href="admin_productos_agregar.jsp" class="btn btn-success m-3">Agregar nuevo Producto</a>
+                    <a href="/BodegaJavaWeb/admin/admin_productos.jsp" class="btn btn-primary mt-3">Revisar Tabla de Productos</a> <br>
+                    <a href="/BodegaJavaWeb/admin/admin_productos_agregar.jsp" class="btn btn-success m-3">Agregar nuevo Producto</a>
                 </div>
                 <div class="col text-bg-danger p-3" style="border-top-right-radius: 1rem; border-bottom-right-radius: 1rem;">
                     <h5>Administrar Pedidos</h5>
                     <hr>
                     <small class="text-justify">Confirma el estado de un pedido y permítele a tus clientes hacer seguimiento de sus compras</small>
                     <br>
-                    <a href="admin_pedidos.jsp" class="btn btn-primary" style="margin-top: 2.70rem; margin-bottom: 2.70rem">Revisar Tabla de Pedidos</a>
+                    <a href="/BodegaJavaWeb/admin/admin_pedidos.jsp" class="btn btn-primary" style="margin-top: 2.70rem; margin-bottom: 2.70rem">Revisar Tabla de Pedidos</a>
                 </div>
             </div>
         </div>

@@ -165,7 +165,7 @@ document.addEventListener('click', function(e){
             $.ajax({
                 url: 'UsuarioController',
                 type: 'POST',
-                data: { action:"editar-datos", id: id, correo: correo, documento: documento, telefono: telefono, password: password},
+                data: { action:"editar-datos-identificacion", id: id, correo: correo, documento: documento, telefono: telefono, password: password},
                 success: function(response) {
                     switch (response) {
                         case "success":

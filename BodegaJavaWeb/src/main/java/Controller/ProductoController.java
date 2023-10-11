@@ -35,6 +35,11 @@ public class ProductoController extends HttpServlet {
 
         String action = (String)request.getParameter("action");
         String productoid = request.getParameter("productoid");
+        String imagenRuta = "";
+
+        if(request.getParameter("imagenruta") != null) {
+            imagenRuta = request.getParameter("imagenruta");
+        }
 
         switch(action) {
             case "load":
@@ -45,6 +50,7 @@ public class ProductoController extends HttpServlet {
                 break;
             case "delete":
                 if(model.eliminarProducto(Integer.parseInt(productoid))) {
+                    eliminarImagen(imagenRuta);
                     request.getRequestDispatcher("admin/admin_productos.jsp").forward(request, response);
                 }
                 else {
