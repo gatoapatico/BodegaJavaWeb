@@ -88,5 +88,41 @@ public class ProductoModel {
         }
     }
 
+    public boolean editarProducto(int id, String nombre, String categoria, String imagen,
+                                  String descripcion, String proveedor, double precio, int stock) {
+
+        String sql = "UPDATE productos SET nombre = ?, categoria = ?, imagen = ?, descripcion = ?," +
+                "proveedor = ?, precio = ?, stock = ? WHERE id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nombre);
+            statement.setString(2, categoria);
+            statement.setString(3, imagen);
+            statement.setString(4, descripcion);
+            statement.setString(5, proveedor);
+            statement.setDouble(6, precio);
+            statement.setInt(7, stock);
+            statement.setInt(8, id);
+            return statement.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean eliminarProducto(int id) {
+        String sql = "DELETE FROM productos WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            return statement.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

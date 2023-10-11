@@ -1,4 +1,10 @@
+<%@ page import="Controller.ProductoController" %>
+<%@ page import="Entity.Producto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    ProductoController cProducto = new ProductoController();
+    Producto producto = cProducto.obtenerProducto(Integer.parseInt(request.getParameter("productoid")));
+%>
 <html>
     <head>
         <meta charset="utf-8">
@@ -26,78 +32,85 @@
                     <div class="text-center mb-3">
                         <h2 class="mb-3">Modificando Registro</h2>
                         <!-- CAMBIAR RUTA DE IMAGEN DE PRODUCTO -->
-                        <img width="180" src="/Web_Proyect/assets/images/<?= $producto['imagen']?>" alt="">
+                        <img width="180" src="/BodegaJavaWeb/assets/img/productos/<%=producto.getImagen()%>" alt="<%=producto.getDescripcion()%>">
                     </div>
-                    <form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+                    <form action="/BodegaJavaWeb/ProductoController" method="POST" autocomplete="off" enctype="multipart/form-data">
+                        <input hidden="hidden" type="text" name="action" value="editar-producto">
                         <div class="mb-3 row">
                             <label for="txtId" class="col-sm-2 col-form-label">ID</label>
                             <div class="col-sm-10">
-                                <input type="text" name="txtId" readonly class="form-control-plaintext" id="txtId"
-                                       value="">
+                                <input type="text" name="producto-id" readonly class="form-control-plaintext" id="txtId"
+                                       value="<%=producto.getId()%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtNameProd" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input type="text" name="txtNameProd" class="form-control" id="txtNameProd"
-                                       value="">
+                                <input type="text" name="producto-nombre" class="form-control" id="txtNameProd"
+                                       value="<%=producto.getNombre()%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtImgProd" class="col-sm-2 col-form-label">Imagen</label>
                             <div class="col-sm-10">
-                                <input type="file" name="txtImgProd" class="form-control" id="txtImgProd">
-                                <input type="hidden" name="imagenRuta" value="">
+                                <input type="file" name="producto-imagenFile" class="form-control" id="txtImgProd" accept=".png, .jpg, image/png, image/jpeg">
+                                <input type="hidden" name="producto-imagenRuta" value="<%=producto.getImagen()%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtDescProd" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
-                                <input type="text" name="txtDescProd" required class="form-control" id="txtDescProd"
-                                       value="">
+                                <input type="text" name="producto-descripcion" required class="form-control" id="txtDescProd"
+                                       value="<%=producto.getDescripcion()%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtCateProd" class="col-sm-2 col-form-label">Categoría</label>
                             <div class="col-sm-10">
-                                <select class="form-select" aria-label="Default select example" id="txtCateProd" name="txtCateProd">
-                                    <?php
-                                    $categorias = array(
-                                    'BEBIDAS', 'CARNES, AVES Y PESCADOS', 'CONGELADOS', 'CUIDADO PERSONAL',
-                                    'FRUTAS Y VERDURAS', 'LACTEOS', 'LIMPIEZA', 'PANADERIA Y PASTELERIA');
-
-                                    foreach ($categorias as $categoria) {
-                                        $selected = ($producto['categoria'] == $categoria) ? 'selected' : '';
-                                        echo "<option value='$categoria' $selected>$categoria</option>";
-                                    }
-                                    ?>
+                                <select class="form-select" aria-label="Default select example" id="txtCateProd" name="producto-categoria">
+                                    <%
+                                        String[] categorias = {
+                                                "BEBIDAS",
+                                                "CARNES, AVES Y PESCADOS",
+                                                "CONGELADOS",
+                                                "CUIDADO PERSONAL",
+                                                "FRUTAS Y VERDURAS",
+                                                "LACTEOS",
+                                                "LIMPIEZA",
+                                                "PANADERIA Y PASTELERIA"
+                                        };
+                                    %>
+                                    <% for(String categoria : categorias) { %>
+                                    <% String selected = (producto.getCategoria().equals(categoria)) ? "selected" : "";%>
+                                    <option <%=selected%> value="<%=categoria%>"><%=categoria%></option>
+                                    <% } %>
                                 </select>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtProvProd" class="col-sm-2 col-form-label">Proveedor</label>
                             <div class="col-sm-10">
-                                <input type="text" name="txtProvProd" class="form-control" id="txtProvProd"
-                                       value="">
+                                <input type="text" name="producto-proveedor" class="form-control" id="txtProvProd"
+                                       value="<%=producto.getProveedor()%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtCostProd" class="col-sm-2 col-form-label">Precio</label>
                             <div class="col-sm-10">
-                                <input type="text" name="txtCostProd" class="form-control" id="txtCostProd"
-                                       pattern="[0-9]+(\.[0-9]+)?" value="">
+                                <input type="text" name="producto-precio" class="form-control" id="txtCostProd"
+                                       pattern="[0-9]+(\.[0-9]+)?" value="<%=String.format("%.2f", producto.getPrecio())%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtCantProd" class="col-sm-2 col-form-label">Stock</label>
                             <div class="col-sm-10">
-                                <input type="number" name="txtCantProd" class="form-control" id="txtCantProd"
-                                       min="0" max="100" value="">
+                                <input type="number" name="producto-stock" class="form-control" id="txtCantProd"
+                                       min="0" max="100" value="<%=producto.getStock()%>">
                             </div>
                         </div>
                         <div>
                             <input type="submit" class="btn btn-success mt-3" value="Modificar">
-                            <a class="btn btn-secondary ms-2 mt-3" href="admin_productos.jsp">Cancelar</a>
+                            <a class="btn btn-secondary ms-2 mt-3" href="/BodegaJavaWeb/admin/admin_productos.jsp">Cancelar</a>
                         </div>
                     </form>
                 </div>
